@@ -7,7 +7,7 @@ Stable tag: 1.0
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
 
-Customize or Edit Home page contact for Tally Themes 
+Customize or Edit Home page Content for Tally Themes 
 
 == Description ==
 
