@@ -1,0 +1,92 @@
+.post-type-tally_builder_c #minor-publishing-actions,
+.post-type-tally_builder_c #misc-publishing-actions,
+.post-type-tally_builder_c #delete-action,
+.post-type-tally_builder_c #edit-slug-box,
+.post-type-tally_builder_c .page-title-action{
+	display:none;
+}
+.post-type-tally_builder_c #publish{
+	font-size: 18px;
+    font-weight: bold;
+    height: 40px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.tallybuilder-wrap{
+	margin: 15px 20px 0 2px;
+    margin-bottom: -15px;
+}
+.tallybuilder-wrap h1{
+    font-size: 20px;
+    font-weight: 400;
+    margin: 0;
+    padding: 9px 8px 4px 0;
+    line-height: 25px;	
+}
+.post-type-tally_builder_c .wrap h1:first-child{
+	display:none;	
+}
+
+.post-type-tally_builder_c .tallybuilder-wrap .page-title-action{
+	display:inline-block;
+	margin-left: 20px;
+    padding: 4px 8px;
+    position: relative;
+    top: -3px;
+    text-decoration: none;
+    border: none;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    background: #e0e0e0;
+    text-shadow: none;
+    font-weight: 600;
+    font-size: 13px;
+}
+
+
+/*
+	Metabox
+-----------------------------*/
+.tallybuilder_mb_tab .ui-state-active a{
+	background:#fff;
+}
+.tallybuilder_mb_tab .nav-tab-wrapper{
+    margin-bottom: 0;
+    border-bottom: solid 1px #CCCCCC;
+}
+.tallybuilder_mb_tab .ui-widget-content{
+    padding: 15px
+}
+
+
+.tallybuilder_mb_item{	
+	margin-bottom: 15px;
+    padding: 15px;
+    border: 1px solid #CCC;
+    background-color: #F7F7F7;
+}
+.tallybuilder_mb_item label{
+	font-weight:bold;
+	clear:both;
+	display:block;
+	margin-bottom:7px;
+	font-size:16px;
+}
+.tallybuilder_mb_item input[type="text"]{
+	width:100%;
+}
+
+.tallybuilder_mb_oneforth{
+    width: 23%;
+    float: left;
+    margin-left: 1%;
+    margin-right: 1%;
+}
+.tallybuilder_mb_oneforth label{
+	font-weight:normal;
+	clear:both;
+	display:block;
+	margin-bottom:3px;
+	font-size:13px;
+}
