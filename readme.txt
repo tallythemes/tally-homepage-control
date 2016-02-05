@@ -3,7 +3,7 @@ Contributors: tallythemes, sazzadh
 Tags: tallythemes, pagebuilder, content change, Home content changes
 Requires at least: 4.4
 Tested up to: 4.4
-Stable tag: 1.0
+Stable tag: 1.1
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
 
@@ -12,6 +12,11 @@ Customize or Edit Home page Content for Tally Themes
 == Description ==
 
 This plugin will enable home page content Control option. It will allow you to customize/edit predefined home page content for Tally Themes
+
+Please Note that this plugin will only work with supported theme. To get the supported theme please visit [TallyThemes.com](http://tallythemes.com/ "Download Free WordPress Themes")
+
+More Helpfull links: [Download Free Themes](http://tallythemes.com/product-category/free-wordpress-themes/ "Download Free WordPress Themes") | [Github](https://github.com/tallythemes/tally-homepage-control "")
+
 
 == Installation ==
 
@@ -22,7 +27,7 @@ This plugin will enable home page content Control option. It will allow you to c
 
 == Frequently Asked Questions ==
 
-= What does Tally Theme Setup do? =
+= What does Tally Homepage Control do? =
 It will allow you to customize/edit predefined home page content for Tally Themes
 
 = Will it work on any theme? =
@@ -33,6 +38,8 @@ You need to edit home page content of our theme.
 
 
 == Changelog ==
+= 1.1 =
+Editing the code and readme.txt
 
 = 1.0 =
 Initial release.
