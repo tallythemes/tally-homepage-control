@@ -20,9 +20,8 @@ function tallybuilder_html($this_page_id){
 	
 	if ( $tpost_query->have_posts() ){
 		 while ( $tpost_query->have_posts() ){ $tpost_query->the_post();
-			$section_function = 'tallytbs_'.get_post_meta(get_the_ID(), 'section_type', true).'_html';
-			if(function_exists($section_function)){
-				$section_function();
+			if(function_exists('tallybuilder_single_section_html')){
+				tallybuilder_single_section_html(get_post_meta(get_the_ID(), 'section_type', true));
 			}
 		 }
 	}
@@ -50,13 +49,8 @@ function tallybuilder_css($this_page_id){
 	
 	if ( $tpost_query->have_posts() ){
 		 while ( $tpost_query->have_posts() ){ $tpost_query->the_post();
-			$section_function = 'tallytbs_'.get_post_meta(get_the_ID(), 'section_type', true).'_css';
-			if(function_exists($section_function)){
-				$section_function();
-			}
-			 
+			tallybuilder_single_section_css(get_post_meta(get_the_ID(), 'section_type', true));
 		 }
-		
 	}
 	wp_reset_postdata();
 }

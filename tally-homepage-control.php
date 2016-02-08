@@ -35,9 +35,7 @@ if ( !function_exists( 'add_action' ) ) {
 	echo 'Hi there!  I\'m just a plugin, not much I can do when called directly.';
 	exit;
 }
-if(in_array( 'tally-builder/tally-builder',apply_filters( 'active_plugins', get_option( 'active_plugins' )) ) ){
-	return;
-}else{
+
 	if(!defined('TALLYBUILDER__VERSION'))define( 'TALLYBUILDER__VERSION', '1.0' );
 	if(!defined('TALLYBUILDER__MINIMUM_WP_VERSION'))define( 'TALLYBUILDER__MINIMUM_WP_VERSION', '4.0' );
 	if(!defined('TALLYBUILDER__PLUGIN_URL'))define( 'TALLYBUILDER__PLUGIN_URL', plugin_dir_url( __FILE__ ) );
@@ -51,6 +49,5 @@ if(in_array( 'tally-builder/tally-builder',apply_filters( 'active_plugins', get_
 	require_once(TALLYBUILDER__PLUGIN_DIR . 'metabox-help.php');
 	require_once(TALLYBUILDER__PLUGIN_DIR . 'metabox.php');
 	require_once(TALLYBUILDER__PLUGIN_DIR . 'script-loader.php');
-	require_once(TALLYBUILDER__PLUGIN_DIR . 'sections/sections.php');
+	require_once(TALLYBUILDER__PLUGIN_DIR . 'sections.php');
 	require_once(TALLYBUILDER__PLUGIN_DIR . 'frontend.php');
-}

@@ -65,7 +65,7 @@ function tallybuilder_decode( $value ) {
 }
 
 
-function tallybuilder_get_section_file($file){
+function tallybuilder_get_section_file($file, $alt_file = NULL ){
 	$child = get_stylesheet_directory().'/inc/tallybuilder/sections//'.$file;
 	$parent = get_template_directory().'/inc/tallybuilder/sections/'.$file;
 	$plugin = TALLYBUILDER__SECTIONS_DIR.$file;
@@ -76,6 +76,8 @@ function tallybuilder_get_section_file($file){
 		return $parent;
 	}elseif(file_exists($plugin)){
 		return $plugin;	
+	}else{
+		return $alt_file;
 	}
 }
 
