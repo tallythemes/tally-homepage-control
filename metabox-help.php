@@ -3,7 +3,7 @@ function tallybuilder_metabox_form_text($meta_id, $data, $key, $title, $value = 
 	
 	if ( isset ( $data[$key] ) ) { $value = $data[$key]; }
 	if($sanitize == 'wp_kses'){
-       $value = $sanitize($value, NULL);
+       $value = $sanitize($value, wp_kses_allowed_html('post'));
 	}else{
 		$value = $sanitize($value);
 	}
@@ -21,7 +21,7 @@ function tallybuilder_metabox_form_editor($meta_id, $data, $key, $title, $value 
 	if ( isset ( $data[$key] ) ) { $value = $data[$key]; }
 	
 	if($sanitize == 'wp_kses'){
-       $value = $sanitize($value, NULL);
+       $value = $sanitize($value, wp_kses_allowed_html('post'));
 	}else{
 		$value = $sanitize($value);
 	}
@@ -31,14 +31,14 @@ function tallybuilder_metabox_form_editor($meta_id, $data, $key, $title, $value 
 	
 	echo '<div class="tallybuilder_mb_item">';
 		echo '<label for="'. $name.'">'.$title.'</label>';
-		 wp_editor( $value, $div_id, array('textarea_name' => $name) );
+		 wp_editor( $value, $div_id, array('textarea_name' => $name, 'wpautop' => false) );
 	echo '</div>';
 }
 function tallybuilder_metabox_form_select($meta_id, $data, $key, $title, $value = '', $items, $sanitize = 'sanitize_text_field'){
 
 	if ( isset ( $data[$key] ) ) { $value = $data[$key]; }
 	if($sanitize == 'wp_kses'){
-       $value = $sanitize($value, NULL);
+       $value = $sanitize($value, wp_kses_allowed_html('post'));
 	}else{
 		$value = $sanitize($value);
 	}
@@ -60,7 +60,7 @@ function tallybuilder_metabox_form_select($meta_id, $data, $key, $title, $value 
 function tallybuilder_metabox_form_color($meta_id, $data, $key, $title, $value = '', $sanitize = 'sanitize_text_field'){
 	if ( isset ( $data[$key] ) ) { $value = $data[$key]; }
 	if($sanitize == 'wp_kses'){
-       $value = $sanitize($value, NULL);
+       $value = $sanitize($value, wp_kses_allowed_html('post'));
 	}else{
 		$value = $sanitize($value);
 	}
@@ -77,7 +77,7 @@ function tallybuilder_metabox_form_image($meta_id, $data, $key, $title, $value =
 	
 	if ( isset ( $data[$key] ) ) { $value = $data[$key]; }
 	if($sanitize == 'wp_kses'){
-       $value = $sanitize($value, NULL);
+       $value = $sanitize($value, wp_kses_allowed_html('post'));
 	}else{
 		$value = $sanitize($value);
 	}
@@ -128,7 +128,7 @@ function tallybuilder_metabox_form_4text($meta_id, $data, $base_key, $title, $va
 				$name = $meta_id.'['.$base_key.'_'.$field['key'].']';
 				
 				if ( isset ( $data[$base_key.'_'.$field['key']] ) ) { $value = $data[$base_key.'_'.$field['key']]; }
-				if($sanitize == 'wp_kses'){ $value = $sanitize($value, NULL); }else{ $value = $sanitize($value); }
+				if($sanitize == 'wp_kses'){ $value = $sanitize($value, wp_kses_allowed_html('post')); }else{ $value = $sanitize($value); }
 				echo '<div class="tallybuilder_mb_oneforth">';
 					echo '<label for="'.$name.'">'.$field['title'].'</label>';
 					echo '<input type="text" name="'.$name.'" id="'.$div_id.'" value="'. $value.'"/>';
@@ -149,7 +149,7 @@ function tallybuilder_metabox_form_animation($meta_id, $data, $base_key, $title,
 			$div_id = $meta_id.'__'.$base_key.'_type';
 			$name = $meta_id.'['.$base_key.'_type]';
 			if ( isset ( $data[$base_key.'_type'] ) ) { $value = $data[$base_key.'_type']; }
-			if($sanitize == 'wp_kses'){ $value = $sanitize($value, NULL); }else{ $value = $sanitize($value); }
+			if($sanitize == 'wp_kses'){ $value = $sanitize($value, wp_kses_allowed_html('post')); }else{ $value = $sanitize($value); }
 			echo '<div class="tallybuilder_mb_oneforth">';
 				echo '<label for="'.$name.'">Type</label>';
 				echo '<select name="'. $name.'" id="'. $div_id.'" />';
@@ -163,7 +163,7 @@ function tallybuilder_metabox_form_animation($meta_id, $data, $base_key, $title,
 			$div_id = $meta_id.'__'.$base_key.'_duration';
 			$name = $meta_id.'['.$base_key.'_duration]';
 			if ( isset ( $data[$base_key.'_duration'] ) ) { $value = $data[$base_key.'_duration']; }
-			if($sanitize == 'wp_kses'){ $value = $sanitize($value, NULL); }else{ $value = $sanitize($value); }
+			if($sanitize == 'wp_kses'){ $value = $sanitize($value, wp_kses_allowed_html('post')); }else{ $value = $sanitize($value); }
 			echo '<div class="tallybuilder_mb_oneforth">';
 				echo '<label for="'.$name.'">Duration</label>';
 				echo '<input type="text" name="'.$name.'" id="'.$div_id.'" value="'. $value.'"/>';
@@ -172,7 +172,7 @@ function tallybuilder_metabox_form_animation($meta_id, $data, $base_key, $title,
 			$div_id = $meta_id.'__'.$base_key.'_delay';
 			$name = $meta_id.'['.$base_key.'_delay]';
 			if ( isset ( $data[$base_key.'_delay'] ) ) { $value = $data[$base_key.'_delay']; }
-			if($sanitize == 'wp_kses'){ $value = $sanitize($value, NULL); }else{ $value = $sanitize($value); }
+			if($sanitize == 'wp_kses'){ $value = $sanitize($value, wp_kses_allowed_html('post')); }else{ $value = $sanitize($value); }
 			echo '<div class="tallybuilder_mb_oneforth">';
 				echo '<label for="'.$name.'">Delay</label>';
 				echo '<input type="text" name="'.$name.'" id="'.$div_id.'" value="'. $value.'"/>';
@@ -187,7 +187,7 @@ function tallybuilder_metabox_form_save($post_id, $meta_id, $sanitize = 'wp_kses
 	if( isset( $_POST[ $meta_id ] ) ) {
 		
 		if($sanitize == 'wp_kses'){
-        	update_post_meta( $post_id, $meta_id, $sanitize( $_POST[ $meta_id ], NULL ) );
+        	update_post_meta( $post_id, $meta_id, $sanitize( $_POST[ $meta_id ], wp_kses_allowed_html('post') ) );
 		}else{
 			update_post_meta( $post_id, $meta_id, $sanitize( $_POST[ $meta_id ] ) );
 		}
@@ -205,7 +205,7 @@ function tallybuilder_meta($meta_id, $key, $post_id = NULL, $sanitize = 'wp_kses
 	if(isset($data[$key])){ $data = $data[$key]; }else{ $data = NULL; }
 	
 	if($sanitize == 'wp_kses'){
-		return $sanitize($data, NULL );
+		return $sanitize($data, wp_kses_allowed_html('post') );
 	}else{
 		return $sanitize($data);
 	}

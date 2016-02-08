@@ -1,4 +1,10 @@
 <?php
+function tallybuilder_css_style($selector, $option, $style){
+	if($option != ''){
+		echo $selector.'{'.str_replace("%s%", $option, $style).'}'."\n";
+	}
+}
+
 /*
 	Get Post SLUG by a post ID
 -----------------------------------------------------------*/
