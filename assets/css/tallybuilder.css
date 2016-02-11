@@ -4,6 +4,9 @@
 .tbs_text{
 	position:relative;	
 }
+.tbs_text.no-bg{
+	background:none !important;	
+}
 .tbs_text:before {
     content: " ";
     position: absolute;
@@ -53,6 +56,9 @@
 .tbs_text .tb_title h3{
 	line-height:1.3;
 	margin-bottom:10px;
+}
+.tbs_text .tb_title{
+	margin-top:20px;
 }
 .tbs_text .tb_content{
 	line-height:1.5;

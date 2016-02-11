@@ -117,6 +117,48 @@ function tallybuilder_metabox_form_image($meta_id, $data, $key, $title, $value =
         <?php
 	echo '</div>';
 }
+function tallybuilder_metabox_form_upload($meta_id, $data, $key, $title, $value = '', $sanitize = 'sanitize_text_field'){
+	
+	if ( isset ( $data[$key] ) ) { $value = $data[$key]; }
+	if($sanitize == 'wp_kses'){
+       $value = $sanitize($value, wp_kses_allowed_html('post'));
+	}else{
+		$value = $sanitize($value);
+	}
+		
+	$div_id = $meta_id.'__'.$key;
+	$name = $meta_id.'['.$key.']';
+	
+	echo '<div class="tallybuilder_mb_item">';
+		echo '<label for="'. $name.'">'.$title.'</label>';
+		echo '<input type="text" name="'. $name.'" id="'. $div_id.'" value="'. $value.'" />';
+		echo '<input type="button" name="upload-btn" id="'. $div_id.'-upload-btn" class="button-primary" value="Upload">';
+		?>
+        <script type="text/javascript">
+			jQuery(document).ready(function($){
+				$('#<?php echo $div_id; ?>-upload-btn').click(function(e) {
+					e.preventDefault();
+					var image = wp.media({ 
+						title: 'Upload',
+						// mutiple: true if you want to upload multiple files at once
+						multiple: false
+					}).open()
+					.on('select', function(e){
+						// This will return the selected image from the Media Uploader, the result is an object
+						var uploaded_image = image.state().get('selection').first();
+						// We convert uploaded_image to a JSON object to make accessing it easier
+						// Output to the console uploaded_image
+						console.log(uploaded_image);
+						var image_url = uploaded_image.toJSON().url;
+						// Let's assign the url value to the input field
+						$('#<?php echo $div_id; ?>').val(image_url);
+					});
+				});
+			});
+		</script>
+        <?php
+	echo '</div>';
+}
 function tallybuilder_metabox_form_4text($meta_id, $data, $base_key, $title, $value = '', $sanitize = 'sanitize_text_field', $fields = array()){
 
 	echo '<div class="tallybuilder_mb_item">';

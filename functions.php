@@ -40,6 +40,16 @@ function tallybuilder_post_id_by_slug($slug, $post_type) {
 }
 
 
+/*
+	Get menu_order by post ID
+-----------------------------------------------------------*/
+function tallybuilder_get_menu_order_by_id($id) {
+	global $wpdb;
+    $menu_o = $wpdb->get_var( "SELECT menu_order FROM $wpdb->posts WHERE ID=" . $id  );
+	return $menu_o;
+}
+
+
 /**
  * Helper function to return encoded strings
  *
@@ -118,7 +128,8 @@ function tallybuilder_import_page_from_array($page_data){
 			'post_title' => wp_strip_all_tags($page_data['title']),
 			'post_content' => $page_data['content'],
 			'post_status' => 'publish',
-			'post_type' => 'tally_builder'
+			'post_type' => 'tally_builder',
+			
 		);
 		$insert_page = wp_insert_post($data);
 		$page_slug = tallybuilder_post_slug($insert_page);
@@ -129,7 +140,8 @@ function tallybuilder_import_page_from_array($page_data){
 					'post_title' => wp_strip_all_tags($section['title']),
 					'post_content' => $section['content'],
 					'post_status' => 'publish',
-					'post_type' => 'tally_builder_c'
+					'post_type' => 'tally_builder_c',
+					'menu_order' => (int)$section['menu_order']
 				);
 				$insert_section = wp_insert_post($data);
 				
@@ -190,6 +202,7 @@ function tallybuilder_get_page_array_by_id($page_id){
 	$sections_db = $wpdb->get_results( 'SELECT * FROM '.$wpdb->postmeta.' WHERE `meta_key` = "tallybuilder_parent_page" AND `meta_value`="'.$page_slug.'"', ARRAY_A  );
 	
 	if ( is_array($sections_db) ){
+		$menu_order = 1;
 		foreach($sections_db as $section_db){
 			$section_id = $section_db['post_id'];
 			$section_type = get_post_meta( $section_id, 'section_type', true );
@@ -197,9 +210,12 @@ function tallybuilder_get_page_array_by_id($page_id){
 				'title' => get_the_title($section_id),
 				'content' => get_the_content($section_id),
 				'section_type' => $section_type,
+				'menu_order' => $menu_order,
 				'meta' => get_post_meta( $section_id, 'tbsf_'.$section_type, true ),
 			);
 			$page_data['sections'][] = $section_array;
+			
+			$menu_order++;
 		}
 	}
 	
@@ -230,11 +246,13 @@ function tallybuilder_get_page_text_array($page_id){
 		$output .= "\t" . "'content' => '".str_replace("'","\'",$page_content)."'," . "\n";
 		$output .= "\t" . "'sections' => array(". "\n";
 				if ( is_array($sections_db) ):
+					$menu_order = 1;
 					 foreach($sections_db as $section_db):
 					 	$section_id = $section_db['post_id'];
 					 	$output .= "\t" . "\t" .'array('. "\n";
 						$output .= "\t" . "\t" . "\t" . "'title' => '".str_replace("'","\'",get_the_title($section_id))."'," . "\n";
 						$output .= "\t" . "\t" . "\t" . "'content' => '".str_replace("'","\'",get_the_content($section_id))."'," . "\n";
+						$output .= "\t" . "\t" . "\t" . "'menu_order' => '".str_replace("'","\'",$menu_order)."'," . "\n";
 						$output .= "\t" . "\t" . "\t" . "'section_type' => '".get_post_meta( $section_id, 'section_type', true )."'," . "\n";
 						$output .= "\t" . "\t" . "\t" . "'meta' => array(" . "\n";
 							$section_type = get_post_meta( $section_id, 'section_type', true );
@@ -254,6 +272,7 @@ function tallybuilder_get_page_text_array($page_id){
 							}
 						$output .= "\t" . "\t" . "\t" . ")," . "\n";
 						$output .= "\t" . "\t" .")," . "\n";
+						$menu_order++;
 					 endforeach;
 				 endif;
 		$output .= "\t" . ")," . "\n";

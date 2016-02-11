@@ -37,6 +37,9 @@ function tallybuilder_css($this_page_id){
 	$page_slug = get_post_meta($this_page_id, 'tallybuilder', true);
 	$tpost_query_args = array(
 		'post_type' => 'tally_builder_c',
+		'posts_per_page' => -1,
+		'orderby' => 'menu_order',
+		'order' => 'ASC',
 		'meta_query' => array(
 			array(
 				'key'     => 'tallybuilder_parent_page',
@@ -48,6 +51,7 @@ function tallybuilder_css($this_page_id){
 	$tpost_query = new WP_Query( $tpost_query_args );	
 	
 	if ( $tpost_query->have_posts() ){
+		
 		 while ( $tpost_query->have_posts() ){ $tpost_query->the_post();
 			tallybuilder_single_section_css(get_post_meta(get_the_ID(), 'section_type', true));
 		 }
