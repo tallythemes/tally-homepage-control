@@ -56,8 +56,19 @@
 }
 .tbs_text .tb_content{
 	line-height:1.5;
-	margin-top:20px;
-	margin-bottom:20px;	
+}
+.tbs_text .tb_1st_con{
+	padding-left:0;
+	padding-right:0;
+}
+.tbs_text .tb_1st_con .col-md-6,
+.tbs_text .tb_1st_con .col-md-12{
+	padding-left:0;
+	padding-right:0;
+}
+.tbs_text .tb_1st_row{
+	margin-right: 0;
+    margin-left: 0;	
 }
 
 /*~ Image Position ~*/

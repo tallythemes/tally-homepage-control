@@ -31,7 +31,7 @@ function tallybuilder_metabox_form_editor($meta_id, $data, $key, $title, $value 
 	
 	echo '<div class="tallybuilder_mb_item">';
 		echo '<label for="'. $name.'">'.$title.'</label>';
-		 wp_editor( $value, $div_id, array('textarea_name' => $name, 'wpautop' => false) );
+		 wp_editor( $value, $div_id, array('textarea_name' => $name, 'wpautop' => true) );
 	echo '</div>';
 }
 function tallybuilder_metabox_form_select($meta_id, $data, $key, $title, $value = '', $items, $sanitize = 'sanitize_text_field'){
