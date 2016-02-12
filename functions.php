@@ -252,7 +252,7 @@ function tallybuilder_get_page_text_array($page_id){
 					 	$output .= "\t" . "\t" .'array('. "\n";
 						$output .= "\t" . "\t" . "\t" . "'title' => '".str_replace("'","\'",get_the_title($section_id))."'," . "\n";
 						$output .= "\t" . "\t" . "\t" . "'content' => '".str_replace("'","\'",get_the_content($section_id))."'," . "\n";
-						$output .= "\t" . "\t" . "\t" . "'menu_order' => '".str_replace("'","\'",$menu_order)."'," . "\n";
+						$output .= "\t" . "\t" . "\t" . "'menu_order' => '".tallybuilder_get_menu_order_by_id($section_id)."'," . "\n";
 						$output .= "\t" . "\t" . "\t" . "'section_type' => '".get_post_meta( $section_id, 'section_type', true )."'," . "\n";
 						$output .= "\t" . "\t" . "\t" . "'meta' => array(" . "\n";
 							$section_type = get_post_meta( $section_id, 'section_type', true );
