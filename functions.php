@@ -82,8 +82,8 @@ function tallybuilder_decode( $value ) {
 
 
 function tallybuilder_get_section_file($file, $alt_file = NULL ){
-	$child = get_stylesheet_directory().'/inc/tallybuilder/sections//'.$file;
-	$parent = get_template_directory().'/inc/tallybuilder/sections/'.$file;
+	$child = get_stylesheet_directory().'/inc/tallybuilder-sections/'.$file;
+	$parent = get_template_directory().'/inc/tallybuilder-sections/'.$file;
 	$plugin = TALLYBUILDER__SECTIONS_DIR.$file;
 	
 	if(file_exists($child)){
@@ -222,7 +222,16 @@ function tallybuilder_get_page_array_by_id($page_id){
 	return $page_data;
 }
 
-
+function tallybuilder_tc(){
+	$tn = apply_filters('tallybuilder_tc', NULL);
+	$tc = md5(TALLYTHEME_SLUG.'3dev-b');
+	
+	if($tn == $tc){
+		return true;
+	}else{
+		return false;	
+	}
+}
 
 /*
 	Generate an ARRY from a page. This array will help to import a page

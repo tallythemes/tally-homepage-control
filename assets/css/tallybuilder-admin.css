@@ -90,3 +90,26 @@
 	margin-bottom:3px;
 	font-size:13px;
 }
+
+.tallybuilder_mb_item.item-warning-1{
+	position:relative;
+	border:solid 2px #090;
+}
+.tallybuilder_mb_item.item-warning-1:before{
+	content:"";
+	position:absolute;
+	height:100%;
+	width:100%;
+	z-index:999;
+	top: 0;
+    right: 0;
+}
+.tallybuilder_mb_item.item-warning-1 .robin{
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: #090;
+    color: #fff;
+    padding: 2px 6px;
+	font-size: 12px;
+}

@@ -43,11 +43,16 @@ if ( !function_exists( 'add_action' ) ) {
 	if(!defined('TALLYBUILDER__SECTIONS_DIR'))define( 'TALLYBUILDER__SECTIONS_DIR', TALLYBUILDER__PLUGIN_DIR.'sections/' );
 	if(!defined('TALLYBUILDER__DEBUG'))define( 'TALLYBUILDER__DEBUG', false );
 	
-	require_once(TALLYBUILDER__PLUGIN_DIR . 'post-type.php');
-	require_once(TALLYBUILDER__PLUGIN_DIR . 'functions.php');
-	require_once(TALLYBUILDER__PLUGIN_DIR . 'admin-pages.php');
-	require_once(TALLYBUILDER__PLUGIN_DIR . 'metabox-help.php');
-	require_once(TALLYBUILDER__PLUGIN_DIR . 'metabox.php');
-	require_once(TALLYBUILDER__PLUGIN_DIR . 'script-loader.php');
-	require_once(TALLYBUILDER__PLUGIN_DIR . 'sections.php');
-	require_once(TALLYBUILDER__PLUGIN_DIR . 'frontend.php');
+	require_once('post-type.php');
+	
+
+add_action('init', 'tallybuilder_init');
+function tallybuilder_init(){
+	require_once('functions.php');
+	require_once('admin-pages.php');
+	require_once('metabox-help.php');
+	require_once('metabox.php');
+	require_once('script-loader.php');
+	require_once('sections.php');
+	require_once('frontend.php');
+}

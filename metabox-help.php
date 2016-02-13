@@ -1,5 +1,15 @@
 <?php
-function tallybuilder_metabox_form_text($meta_id, $data, $key, $title, $value = '', $sanitize = 'sanitize_text_field'){
+function tallybuilder_metabox_form_text($settings = array()){
+	extract( array_merge( array(
+		'meta_id' => '',
+		'data' => '',
+		'key' => '',
+		'title' => '',
+		'value' => '',
+		'sanitize' => 'sanitize_text_field',
+		'p' => 'n',
+	), $settings ));
+		
 	
 	if ( isset ( $data[$key] ) ) { $value = $data[$key]; }
 	if($sanitize == 'wp_kses'){
@@ -7,16 +17,35 @@ function tallybuilder_metabox_form_text($meta_id, $data, $key, $title, $value = 
 	}else{
 		$value = $sanitize($value);
 	}
+	$pp = false; if(($p == 'y') && !tallybuilder_tc()){ $pp = true; }
 	
 	$div_id = $meta_id.'__'.$key;
 	$name = $meta_id.'['.$key.']';
 	
-	echo '<div class="tallybuilder_mb_item">';
+	$pp = false; if(($p == 'y') && !tallybuilder_tc()){ $pp = true; }
+	
+	echo '<div class="tallybuilder_mb_item item-warning-'.$pp.'">';
 		echo '<label for="'. $name.'">'.$title.'</label>';
-		echo '<input type="text" name="'. $name.'" id="'. $div_id.'" value="'. $value.'"  />';
+		if($pp){
+			echo '<input type="hidden" name="'. $name.'" id="'. $div_id.'" value="'. $value.'"  />';
+			echo '<input type="text" placeholder="'. $value.'" disabled="disabled"/>';
+			echo '<span class="robin">Available on Pro Version Only Only</span>';
+		}else{
+			echo '<input type="text" name="'. $name.'" id="'. $div_id.'" value="'. $value.'"  />';
+			
+		}
 	echo '</div>';
 }
-function tallybuilder_metabox_form_editor($meta_id, $data, $key, $title, $value = '', $sanitize = 'wp_kses'){
+function tallybuilder_metabox_form_editor($settings = array()){
+	extract( array_merge( array(
+		'meta_id' => '',
+		'data' => '',
+		'key' => '',
+		'title' => '',
+		'value' => '',
+		'sanitize' => 'wp_kses',
+		'p' => 'n',
+	), $settings ));
 
 	if ( isset ( $data[$key] ) ) { $value = $data[$key]; }
 	
@@ -34,7 +63,17 @@ function tallybuilder_metabox_form_editor($meta_id, $data, $key, $title, $value 
 		 wp_editor( $value, $div_id, array('textarea_name' => $name, 'wpautop' => true) );
 	echo '</div>';
 }
-function tallybuilder_metabox_form_select($meta_id, $data, $key, $title, $value = '', $items, $sanitize = 'sanitize_text_field'){
+
+function tallybuilder_metabox_form_select($settings = array()){
+	extract( array_merge( array(
+		'meta_id' => '',
+		'data' => '',
+		'key' => '',
+		'title' => '',
+		'value' => '',
+		'sanitize' => 'sanitize_text_field',
+		'p' => 'n',
+	), $settings ));
 
 	if ( isset ( $data[$key] ) ) { $value = $data[$key]; }
 	if($sanitize == 'wp_kses'){
@@ -46,18 +85,50 @@ function tallybuilder_metabox_form_select($meta_id, $data, $key, $title, $value 
 	$div_id = $meta_id.'__'.$key;
 	$name = $meta_id.'['.$key.']';
 	
+	$pp = false; if(($p == 'y') && !tallybuilder_tc()){ $pp = true; }
+	
+	echo '<div class="tallybuilder_mb_item item-warning-'.$pp.'">';
+		echo '<label for="'. $name.'">'.$title.'</label>';
+		if($pp){
+			echo '<input type="hidden" name="'. $name.'" id="'. $div_id.'" value="'. $value.'"  />';
+			echo '<input type="text" placeholder="'. $value.'" disabled="disabled"/>';
+			echo '<span class="robin">Available on Pro Version Only Only</span>';
+		}else{
+			echo '<input type="text" name="'. $name.'" id="'. $div_id.'" value="'. $value.'"  />';
+			
+		}
+	echo '</div>';
+	
 	if(is_array($items)){
-		echo '<div class="tallybuilder_mb_item">';
+		echo '<div class="tallybuilder_mb_item item-warning-'.$pp.'">';
 			echo '<label for="'. $name.'">'.$title.'</label>';
-			echo '<select name="'. $name.'" id="'. $div_id.'" />';
-				foreach($items as $item){
-					echo '<option value="'.$item['value'].'" '.selected( $value, $item['value'], false ).'>'.$item['title'].'</option>';
-				}
-			echo '</select>';
+			if($pp){
+				echo '<input type="hidden" name="'. $name.'" id="'. $div_id.'" value="'. $value.'"  />';
+				echo '<span class="robin">Available on Pro Version Only Only</span>';
+				echo '<select disabled="disabled">';
+					echo '<option>'.$value.'</option>';
+				echo '</select>';
+			}else{
+				echo '<select name="'. $name.'" id="'. $div_id.'" >';
+					foreach($items as $item){
+						echo '<option value="'.$item['value'].'" '.selected( $value, $item['value'], false ).'>'.$item['title'].'</option>';
+					}
+				echo '</select>';
+			}
 		echo '</div>';
 	}
 }
-function tallybuilder_metabox_form_color($meta_id, $data, $key, $title, $value = '', $sanitize = 'sanitize_text_field'){
+function tallybuilder_metabox_form_color($settings = array()){
+	extract( array_merge( array(
+		'meta_id' => '',
+		'data' => '',
+		'key' => '',
+		'title' => '',
+		'value' => '',
+		'sanitize' => 'sanitize_text_field',
+		'p' => 'n',
+	), $settings ));
+	
 	if ( isset ( $data[$key] ) ) { $value = $data[$key]; }
 	if($sanitize == 'wp_kses'){
        $value = $sanitize($value, wp_kses_allowed_html('post'));
@@ -73,7 +144,16 @@ function tallybuilder_metabox_form_color($meta_id, $data, $key, $title, $value =
 		echo '<input type="text" name="'. $name.'" id="'. $div_id.'" value="'. $value.'" class="tallybuilder_mb_color" />';
 	echo '</div>';
 }
-function tallybuilder_metabox_form_image($meta_id, $data, $key, $title, $value = '', $sanitize = 'sanitize_text_field'){
+function tallybuilder_metabox_form_image($settings = array()){
+	extract( array_merge( array(
+		'meta_id' => '',
+		'data' => '',
+		'key' => '',
+		'title' => '',
+		'value' => '',
+		'sanitize' => 'sanitize_text_field',
+		'p' => 'n',
+	), $settings ));
 	
 	if ( isset ( $data[$key] ) ) { $value = $data[$key]; }
 	if($sanitize == 'wp_kses'){
@@ -117,7 +197,16 @@ function tallybuilder_metabox_form_image($meta_id, $data, $key, $title, $value =
         <?php
 	echo '</div>';
 }
-function tallybuilder_metabox_form_upload($meta_id, $data, $key, $title, $value = '', $sanitize = 'sanitize_text_field'){
+function tallybuilder_metabox_form_upload($settings = array()){
+	extract( array_merge( array(
+		'meta_id' => '',
+		'data' => '',
+		'key' => '',
+		'title' => '',
+		'value' => '',
+		'sanitize' => 'sanitize_text_field',
+		'p' => 'n',
+	), $settings ));
 	
 	if ( isset ( $data[$key] ) ) { $value = $data[$key]; }
 	if($sanitize == 'wp_kses'){
@@ -159,7 +248,17 @@ function tallybuilder_metabox_form_upload($meta_id, $data, $key, $title, $value 
         <?php
 	echo '</div>';
 }
-function tallybuilder_metabox_form_4text($meta_id, $data, $base_key, $title, $value = '', $sanitize = 'sanitize_text_field', $fields = array()){
+function tallybuilder_metabox_form_4text($settings = array()){
+	extract( array_merge( array(
+		'meta_id' => '',
+		'data' => '',
+		'key' => '',
+		'title' => '',
+		'value' => '',
+		'sanitize' => 'sanitize_text_field',
+		'p' => 'n',
+		'fields' => array(),
+	), $settings ));
 
 	echo '<div class="tallybuilder_mb_item">';
 		echo '<label>'.$title.'</label>';
@@ -182,7 +281,16 @@ function tallybuilder_metabox_form_4text($meta_id, $data, $base_key, $title, $va
 }
 
 
-function tallybuilder_metabox_form_animation($meta_id, $data, $base_key, $title, $value = '', $items, $sanitize = 'sanitize_text_field'){
+function tallybuilder_metabox_form_animation($settings = array()){
+	extract( array_merge( array(
+		'meta_id' => '',
+		'data' => '',
+		'key' => '',
+		'title' => '',
+		'value' => '',
+		'sanitize' => 'sanitize_text_field',
+		'p' => 'n',
+	), $settings ));
 	
 	echo '<div class="tallybuilder_mb_item">';
 		echo '<label>'.$title.'</label>';
