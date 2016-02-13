@@ -73,7 +73,10 @@ function tallybuilder_metabox_form_select($settings = array()){
 		'value' => '',
 		'sanitize' => 'sanitize_text_field',
 		'p' => 'n',
+		'select_items' => '',
 	), $settings ));
+	
+	$items = $select_items;
 
 	if ( isset ( $data[$key] ) ) { $value = $data[$key]; }
 	if($sanitize == 'wp_kses'){
@@ -85,19 +88,8 @@ function tallybuilder_metabox_form_select($settings = array()){
 	$div_id = $meta_id.'__'.$key;
 	$name = $meta_id.'['.$key.']';
 	
-	$pp = false; if(($p == 'y') && !tallybuilder_tc()){ $pp = true; }
 	
-	echo '<div class="tallybuilder_mb_item item-warning-'.$pp.'">';
-		echo '<label for="'. $name.'">'.$title.'</label>';
-		if($pp){
-			echo '<input type="hidden" name="'. $name.'" id="'. $div_id.'" value="'. $value.'"  />';
-			echo '<input type="text" placeholder="'. $value.'" disabled="disabled"/>';
-			echo '<span class="robin">Available on Pro Version Only Only</span>';
-		}else{
-			echo '<input type="text" name="'. $name.'" id="'. $div_id.'" value="'. $value.'"  />';
-			
-		}
-	echo '</div>';
+	$pp = false; if(($p == 'y') && !tallybuilder_tc()){ $pp = true; }
 	
 	if(is_array($items)){
 		echo '<div class="tallybuilder_mb_item item-warning-'.$pp.'">';
@@ -139,10 +131,20 @@ function tallybuilder_metabox_form_color($settings = array()){
 	$div_id = $meta_id.'__'.$key;
 	$name = $meta_id.'['.$key.']';
 	
-	echo '<div class="tallybuilder_mb_item">';
+	$pp = false; if(($p == 'y') && !tallybuilder_tc()){ $pp = true; }
+	
+	echo '<div class="tallybuilder_mb_item item-warning-'.$pp.'">';
 		echo '<label for="'. $name.'">'.$title.'</label>';
-		echo '<input type="text" name="'. $name.'" id="'. $div_id.'" value="'. $value.'" class="tallybuilder_mb_color" />';
+		if($pp){
+			echo '<input type="hidden" name="'. $name.'" id="'. $div_id.'" value="'. $value.'"  />';
+			echo '<input type="text" placeholder="'. $value.'" disabled="disabled" class="tallybuilder_mb_color"/>';
+			echo '<span class="robin">Available on Pro Version Only Only</span>';
+		}else{
+			echo '<input type="text" name="'. $name.'" id="'. $div_id.'" value="'. $value.'" class="tallybuilder_mb_color" />';
+			
+		}
 	echo '</div>';
+	
 }
 function tallybuilder_metabox_form_image($settings = array()){
 	extract( array_merge( array(
@@ -218,34 +220,44 @@ function tallybuilder_metabox_form_upload($settings = array()){
 	$div_id = $meta_id.'__'.$key;
 	$name = $meta_id.'['.$key.']';
 	
-	echo '<div class="tallybuilder_mb_item">';
+	$pp = false; if(($p == 'y') && !tallybuilder_tc()){ $pp = true; }
+		
+	echo '<div class="tallybuilder_mb_item item-warning-'.$pp.'">';
 		echo '<label for="'. $name.'">'.$title.'</label>';
-		echo '<input type="text" name="'. $name.'" id="'. $div_id.'" value="'. $value.'" />';
-		echo '<input type="button" name="upload-btn" id="'. $div_id.'-upload-btn" class="button-primary" value="Upload">';
-		?>
-        <script type="text/javascript">
-			jQuery(document).ready(function($){
-				$('#<?php echo $div_id; ?>-upload-btn').click(function(e) {
-					e.preventDefault();
-					var image = wp.media({ 
-						title: 'Upload',
-						// mutiple: true if you want to upload multiple files at once
-						multiple: false
-					}).open()
-					.on('select', function(e){
-						// This will return the selected image from the Media Uploader, the result is an object
-						var uploaded_image = image.state().get('selection').first();
-						// We convert uploaded_image to a JSON object to make accessing it easier
-						// Output to the console uploaded_image
-						console.log(uploaded_image);
-						var image_url = uploaded_image.toJSON().url;
-						// Let's assign the url value to the input field
-						$('#<?php echo $div_id; ?>').val(image_url);
+		
+		if($pp){
+			echo '<input type="hidden" name="'. $name.'" id="'. $div_id.'" value="'. $value.'"  />';
+			echo '<input type="text" placeholder="'. $value.'" disabled="disabled" />';
+			echo '<input type="button" class="button-primary" value="Upload" disabled="disabled">';
+			echo '<span class="robin">Available on Pro Version Only Only</span>';
+		}else{
+			echo '<input type="text" name="'. $name.'" id="'. $div_id.'" value="'. $value.'" />';
+			echo '<input type="button" name="upload-btn" id="'. $div_id.'-upload-btn" class="button-primary" value="Upload">';
+			?>
+			<script type="text/javascript">
+				jQuery(document).ready(function($){
+					$('#<?php echo $div_id; ?>-upload-btn').click(function(e) {
+						e.preventDefault();
+						var image = wp.media({ 
+							title: 'Upload',
+							// mutiple: true if you want to upload multiple files at once
+							multiple: false
+						}).open()
+						.on('select', function(e){
+							// This will return the selected image from the Media Uploader, the result is an object
+							var uploaded_image = image.state().get('selection').first();
+							// We convert uploaded_image to a JSON object to make accessing it easier
+							// Output to the console uploaded_image
+							console.log(uploaded_image);
+							var image_url = uploaded_image.toJSON().url;
+							// Let's assign the url value to the input field
+							$('#<?php echo $div_id; ?>').val(image_url);
+						});
 					});
 				});
-			});
-		</script>
-        <?php
+			</script>
+			<?php
+		}
 	echo '</div>';
 }
 function tallybuilder_metabox_form_4text($settings = array()){
@@ -259,8 +271,12 @@ function tallybuilder_metabox_form_4text($settings = array()){
 		'p' => 'n',
 		'fields' => array(),
 	), $settings ));
+	
+	$base_key = $key;
+	
+	$pp = false; if(($p == 'y') && !tallybuilder_tc()){ $pp = true; }
 
-	echo '<div class="tallybuilder_mb_item">';
+	echo '<div class="tallybuilder_mb_item item-warning-'.$pp.'">';
 		echo '<label>'.$title.'</label>';
 		if(is_array($fields)){
 			foreach($fields as $field){
@@ -270,10 +286,20 @@ function tallybuilder_metabox_form_4text($settings = array()){
 				
 				if ( isset ( $data[$base_key.'_'.$field['key']] ) ) { $value = $data[$base_key.'_'.$field['key']]; }
 				if($sanitize == 'wp_kses'){ $value = $sanitize($value, wp_kses_allowed_html('post')); }else{ $value = $sanitize($value); }
-				echo '<div class="tallybuilder_mb_oneforth">';
-					echo '<label for="'.$name.'">'.$field['title'].'</label>';
-					echo '<input type="text" name="'.$name.'" id="'.$div_id.'" value="'. $value.'"/>';
-				echo '</div>';
+				
+				if($pp){
+					echo '<div class="tallybuilder_mb_oneforth">';
+						echo '<label>'.$field['title'].'</label>';
+						echo '<input type="hidden" name="'.$name.'" id="'.$div_id.'" value="'. $value.'"/>';
+						echo '<input type="text" placeholder="'. $value.'" disabled="disabled" />';
+						echo '<span class="robin">Available on Pro Version Only Only</span>';
+					echo '</div>';
+				}else{
+					echo '<div class="tallybuilder_mb_oneforth">';
+						echo '<label for="'.$name.'">'.$field['title'].'</label>';
+						echo '<input type="text" name="'.$name.'" id="'.$div_id.'" value="'. $value.'"/>';
+					echo '</div>';
+				}
 			}
 		}
 		echo '<div class="clear clearfix"></div>';
@@ -290,24 +316,37 @@ function tallybuilder_metabox_form_animation($settings = array()){
 		'value' => '',
 		'sanitize' => 'sanitize_text_field',
 		'p' => 'n',
+		'animation_items' => ''
 	), $settings ));
 	
-	echo '<div class="tallybuilder_mb_item">';
+	$items = $animation_items;
+	$base_key = $key;
+	$pp = false; if(($p == 'y') && !tallybuilder_tc()){ $pp = true; }
+	
+	echo '<div class="tallybuilder_mb_item item-warning-'.$pp.'">';
+		if($pp){ echo '<span class="robin">Available on Pro Version Only Only</span>';}
 		echo '<label>'.$title.'</label>';
 		echo '<div class="clear clearfix"></div>';
-		if(is_array($items)){				
+		if(is_array($items)){	
+				
 			$div_id = $meta_id.'__'.$base_key.'_type';
 			$name = $meta_id.'['.$base_key.'_type]';
 			if ( isset ( $data[$base_key.'_type'] ) ) { $value = $data[$base_key.'_type']; }
 			if($sanitize == 'wp_kses'){ $value = $sanitize($value, wp_kses_allowed_html('post')); }else{ $value = $sanitize($value); }
 			echo '<div class="tallybuilder_mb_oneforth">';
 				echo '<label for="'.$name.'">Type</label>';
-				echo '<select name="'. $name.'" id="'. $div_id.'" />';
-					foreach($items as $item){
-						echo '<option value="'.$item['value'].'" '.selected( $value, $item['value'], false ).'>'.$item['title'].'</option>';
-					}
-				echo '</select>';
-				//echo $value.'s'.$data[$base_key.'_type'];
+				if($pp){
+					echo '<input type="hidden" name="'.$name.'" id="'.$div_id.'" value="'. $value.'"/>';
+					echo '<select name="'. $name.'" id="'. $div_id.'" disabled="disabled" />';
+						echo '<option selected="selected">'.$value.'</option>';
+					echo '</select>';
+				}else{
+					echo '<select name="'. $name.'" id="'. $div_id.'" />';
+						foreach($items as $item){
+							echo '<option value="'.$item['value'].'" '.selected( $value, $item['value'], false ).'>'.$item['title'].'</option>';
+						}
+					echo '</select>';
+				}
 			echo '</div>';
 			
 			$div_id = $meta_id.'__'.$base_key.'_duration';
@@ -316,7 +355,12 @@ function tallybuilder_metabox_form_animation($settings = array()){
 			if($sanitize == 'wp_kses'){ $value = $sanitize($value, wp_kses_allowed_html('post')); }else{ $value = $sanitize($value); }
 			echo '<div class="tallybuilder_mb_oneforth">';
 				echo '<label for="'.$name.'">Duration</label>';
-				echo '<input type="text" name="'.$name.'" id="'.$div_id.'" value="'. $value.'"/>';
+				if($pp){
+					echo '<input type="hidden" name="'.$name.'" id="'.$div_id.'" value="'. $value.'"/>';
+					echo '<input type="text" placeholder="'. $value.'" disabled="disabled"/>';
+				}else{
+					echo '<input type="text" name="'.$name.'" id="'.$div_id.'" value="'. $value.'"/>';
+				}
 			echo '</div>';
 			
 			$div_id = $meta_id.'__'.$base_key.'_delay';
@@ -325,7 +369,12 @@ function tallybuilder_metabox_form_animation($settings = array()){
 			if($sanitize == 'wp_kses'){ $value = $sanitize($value, wp_kses_allowed_html('post')); }else{ $value = $sanitize($value); }
 			echo '<div class="tallybuilder_mb_oneforth">';
 				echo '<label for="'.$name.'">Delay</label>';
-				echo '<input type="text" name="'.$name.'" id="'.$div_id.'" value="'. $value.'"/>';
+				if($pp){
+					echo '<input type="hidden" name="'.$name.'" id="'.$div_id.'" value="'. $value.'"/>';
+					echo '<input type="text" placeholder="'. $value.'" disabled="disabled"/>';
+				}else{
+					echo '<input type="text" name="'.$name.'" id="'.$div_id.'" value="'. $value.'"/>';
+				}
 			echo '</div>';
 		}
 		echo '<div class="clear clearfix"></div>';
