@@ -19,21 +19,16 @@ function tallybuilder_section_common_metaBox_html( $post ) {
 		if ( isset ( $smdata[$id_name] ) ) { $value = $smdata[$id_name][0]; }
 		$active_it = apply_filters('tallybuilder_active_meta_section_type', false);
 		$disabled = ($active_it ? NULL : 'disabled');
+		
+		$section_items = apply_filters('tallybuilder_sections_list', NULL);
 		?>
         <label style="min-width:150px;display:inline-block; font-weight:bold;vertical-align: top;" for="<?php echo $id_name; ?>"><?php _e('Section Type', 'tally-builder'); ?></label>
         <select name="<?php echo $id_name; ?>" id="<?php echo $id_name; ?>" <?php echo $disabled; ?>>
-        	<option value="callout" <?php selected( $value, 'callout' ); ?>>Callout</option>
-            <option value="contact" <?php selected( $value, 'contact' ); ?>>Contact</option>
-            <option value="counters" <?php selected( $value, 'counters' ); ?>>Counters</option>
-            <option value="hero" <?php selected( $value, 'hero' ); ?>>Hero</option>
-            <option value="imageCarousel" <?php selected( $value, 'imageCarousel' ); ?>>Image Carousel</option>
-            <option value="infoBoxes" <?php selected( $value, 'infoBoxes' ); ?>>Info Boxes</option>
-            <option value="portfolios" <?php selected( $value, 'portfolios' ); ?>>Portfolios</option>
-            <option value="pricing" <?php selected( $value, 'pricing' ); ?>>Pricing</option>
-            <option value="quoteSlider" <?php selected( $value, 'quoteSlider' ); ?>>Quote Slider</option>
-            <option value="slider" <?php selected( $value, 'slider' ); ?>>Slider</option>
-            <option value="teams" <?php selected( $value, 'teams' ); ?>>Teams</option>
-            <option value="text" <?php selected( $value, 'text' ); ?>>Text</option>
+        	<?php if(is_array($section_items)): ?>
+            	<?php foreach($section_items as $section_name => $section_location): ?>
+            		<option value="text" <?php selected( $value, $section_name ); ?>><?php echo $section_name; ?></option>
+                <?php endforeach; ?>
+            <?php endif; ?>
         </select>
     </p>
     <p>

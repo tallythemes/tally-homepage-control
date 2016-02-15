@@ -3,7 +3,7 @@ Contributors: tallythemes, sazzadh
 Tags: tallythemes, pagebuilder, content change, Home content changes
 Requires at least: 4.4
 Tested up to: 4.4
-Stable tag: 1.2
+Stable tag: 1.3
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
 
@@ -38,6 +38,13 @@ You need to edit home page content of our theme.
 
 
 == Changelog ==
+= 1.3 =
+- Improve the Custom CSS handling 
+- fix CSS issue
+- Improved Metabox help functions
+- Fixed small Bug
+- Improve wp_kses allowed tags
+
 = 1.2 =
 Added add-ons support
 
