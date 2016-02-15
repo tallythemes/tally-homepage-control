@@ -44,6 +44,7 @@ You need to edit home page content of our theme.
 - Improved Metabox help functions
 - Fixed small Bug
 - Improve wp_kses allowed tags
+- Improve Metabox
 
 = 1.2 =
 Added add-ons support
