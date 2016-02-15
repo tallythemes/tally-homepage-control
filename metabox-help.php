@@ -1,4 +1,20 @@
 <?php
+function tallybuilder_wp_kses_allowed_html(){
+	global $allowedposttags;
+	
+	$tags = $allowedposttags;
+	
+	$tags['iframe'] = array(
+		'src' => true,
+		'width' => true,
+		'height' => true,
+		'frameborder' => true,
+		'style' => true,
+		'allowfullscreen' => true,
+	);
+	
+	return $tags;
+}
 function tallybuilder_metabox_form_text($settings = array()){
 	extract( array_merge( array(
 		'meta_id' => '',
@@ -13,7 +29,7 @@ function tallybuilder_metabox_form_text($settings = array()){
 	
 	if ( isset ( $data[$key] ) ) { $value = $data[$key]; }
 	if($sanitize == 'wp_kses'){
-       $value = $sanitize($value, wp_kses_allowed_html('post'));
+       $value = $sanitize($value, tallybuilder_wp_kses_allowed_html());
 	}else{
 		$value = $sanitize($value);
 	}
@@ -50,7 +66,7 @@ function tallybuilder_metabox_form_editor($settings = array()){
 	if ( isset ( $data[$key] ) ) { $value = $data[$key]; }
 	
 	if($sanitize == 'wp_kses'){
-       $value = $sanitize($value, wp_kses_allowed_html('post'));
+       $value = $sanitize($value, tallybuilder_wp_kses_allowed_html());
 	}else{
 		$value = $sanitize($value);
 	}
@@ -80,7 +96,7 @@ function tallybuilder_metabox_form_select($settings = array()){
 
 	if ( isset ( $data[$key] ) ) { $value = $data[$key]; }
 	if($sanitize == 'wp_kses'){
-       $value = $sanitize($value, wp_kses_allowed_html('post'));
+       $value = $sanitize($value, tallybuilder_wp_kses_allowed_html());
 	}else{
 		$value = $sanitize($value);
 	}
@@ -123,7 +139,7 @@ function tallybuilder_metabox_form_color($settings = array()){
 	
 	if ( isset ( $data[$key] ) ) { $value = $data[$key]; }
 	if($sanitize == 'wp_kses'){
-       $value = $sanitize($value, wp_kses_allowed_html('post'));
+       $value = $sanitize($value, tallybuilder_wp_kses_allowed_html());
 	}else{
 		$value = $sanitize($value);
 	}
@@ -159,7 +175,7 @@ function tallybuilder_metabox_form_image($settings = array()){
 	
 	if ( isset ( $data[$key] ) ) { $value = $data[$key]; }
 	if($sanitize == 'wp_kses'){
-       $value = $sanitize($value, wp_kses_allowed_html('post'));
+       $value = $sanitize($value, tallybuilder_wp_kses_allowed_html());
 	}else{
 		$value = $sanitize($value);
 	}
@@ -212,7 +228,7 @@ function tallybuilder_metabox_form_upload($settings = array()){
 	
 	if ( isset ( $data[$key] ) ) { $value = $data[$key]; }
 	if($sanitize == 'wp_kses'){
-       $value = $sanitize($value, wp_kses_allowed_html('post'));
+       $value = $sanitize($value, tallybuilder_wp_kses_allowed_html());
 	}else{
 		$value = $sanitize($value);
 	}
@@ -285,7 +301,7 @@ function tallybuilder_metabox_form_4text($settings = array()){
 				$name = $meta_id.'['.$base_key.'_'.$field['key'].']';
 				
 				if ( isset ( $data[$base_key.'_'.$field['key']] ) ) { $value = $data[$base_key.'_'.$field['key']]; }
-				if($sanitize == 'wp_kses'){ $value = $sanitize($value, wp_kses_allowed_html('post')); }else{ $value = $sanitize($value); }
+				if($sanitize == 'wp_kses'){ $value = $sanitize($value, tallybuilder_wp_kses_allowed_html()); }else{ $value = $sanitize($value); }
 				
 				if($pp){
 					echo '<div class="tallybuilder_mb_oneforth">';
@@ -332,7 +348,7 @@ function tallybuilder_metabox_form_animation($settings = array()){
 			$div_id = $meta_id.'__'.$base_key.'_type';
 			$name = $meta_id.'['.$base_key.'_type]';
 			if ( isset ( $data[$base_key.'_type'] ) ) { $value = $data[$base_key.'_type']; }
-			if($sanitize == 'wp_kses'){ $value = $sanitize($value, wp_kses_allowed_html('post')); }else{ $value = $sanitize($value); }
+			if($sanitize == 'wp_kses'){ $value = $sanitize($value, tallybuilder_wp_kses_allowed_html()); }else{ $value = $sanitize($value); }
 			echo '<div class="tallybuilder_mb_oneforth">';
 				echo '<label for="'.$name.'">Type</label>';
 				if($pp){
@@ -352,7 +368,7 @@ function tallybuilder_metabox_form_animation($settings = array()){
 			$div_id = $meta_id.'__'.$base_key.'_duration';
 			$name = $meta_id.'['.$base_key.'_duration]';
 			if ( isset ( $data[$base_key.'_duration'] ) ) { $value = $data[$base_key.'_duration']; }
-			if($sanitize == 'wp_kses'){ $value = $sanitize($value, wp_kses_allowed_html('post')); }else{ $value = $sanitize($value); }
+			if($sanitize == 'wp_kses'){ $value = $sanitize($value, tallybuilder_wp_kses_allowed_html()); }else{ $value = $sanitize($value); }
 			echo '<div class="tallybuilder_mb_oneforth">';
 				echo '<label for="'.$name.'">Duration</label>';
 				if($pp){
@@ -366,7 +382,7 @@ function tallybuilder_metabox_form_animation($settings = array()){
 			$div_id = $meta_id.'__'.$base_key.'_delay';
 			$name = $meta_id.'['.$base_key.'_delay]';
 			if ( isset ( $data[$base_key.'_delay'] ) ) { $value = $data[$base_key.'_delay']; }
-			if($sanitize == 'wp_kses'){ $value = $sanitize($value, wp_kses_allowed_html('post')); }else{ $value = $sanitize($value); }
+			if($sanitize == 'wp_kses'){ $value = $sanitize($value, tallybuilder_wp_kses_allowed_html()); }else{ $value = $sanitize($value); }
 			echo '<div class="tallybuilder_mb_oneforth">';
 				echo '<label for="'.$name.'">Delay</label>';
 				if($pp){
@@ -386,7 +402,7 @@ function tallybuilder_metabox_form_save($post_id, $meta_id, $sanitize = 'wp_kses
 	if( isset( $_POST[ $meta_id ] ) ) {
 		
 		if($sanitize == 'wp_kses'){
-        	update_post_meta( $post_id, $meta_id, $sanitize( $_POST[ $meta_id ], wp_kses_allowed_html('post') ) );
+        	update_post_meta( $post_id, $meta_id, $sanitize( $_POST[ $meta_id ], tallybuilder_wp_kses_allowed_html() ) );
 		}else{
 			update_post_meta( $post_id, $meta_id, $sanitize( $_POST[ $meta_id ] ) );
 		}
@@ -404,7 +420,7 @@ function tallybuilder_meta($meta_id, $key, $post_id = NULL, $sanitize = 'wp_kses
 	if(isset($data[$key])){ $data = $data[$key]; }else{ $data = NULL; }
 	
 	if($sanitize == 'wp_kses'){
-		return $sanitize($data, wp_kses_allowed_html('post') );
+		return $sanitize($data, tallybuilder_wp_kses_allowed_html() );
 	}else{
 		return $sanitize($data);
 	}
