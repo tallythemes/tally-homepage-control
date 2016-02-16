@@ -11,6 +11,8 @@ function tallybuilder_wp_kses_allowed_html(){
 		'frameborder' => true,
 		'style' => true,
 		'allowfullscreen' => true,
+		'class' => true,
+		'id' => true,
 	);
 	
 	return $tags;
