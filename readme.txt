@@ -3,7 +3,7 @@ Contributors: tallythemes, sazzadh
 Tags: tallythemes, pagebuilder, content change, Home content changes
 Requires at least: 4.4
 Tested up to: 4.4
-Stable tag: 1.3.1
+Stable tag: 1.4
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
 
@@ -38,6 +38,12 @@ You need to edit home page content of our theme.
 
 
 == Changelog ==
+= 1.4 =
+- Add Class and ID attribute support for iframe tag on `tallybuilder_wp_kses_allowed_html`
+
+= 1.3.1 =
+- Fixed a version issue
+
 = 1.3 =
 - Improve the Custom CSS handling 
 - fix CSS issue
