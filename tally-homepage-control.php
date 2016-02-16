@@ -6,7 +6,7 @@
 Plugin Name: Tally Homepage Control
 Plugin URI: http://tallythemes.com/
 Description: Home Page content builder for Tally Themes.
-Version: 1.2
+Version: 1.3.1
 Author: TallyThemes
 Author URI: http://tallythemes.com/tally-homepage-control/
 License: GPLv2 or later
@@ -36,8 +36,6 @@ if ( !function_exists( 'add_action' ) ) {
 	exit;
 }
 
-	if(!defined('TALLYBUILDER__VERSION'))define( 'TALLYBUILDER__VERSION', '1.0' );
-	if(!defined('TALLYBUILDER__MINIMUM_WP_VERSION'))define( 'TALLYBUILDER__MINIMUM_WP_VERSION', '4.0' );
 	if(!defined('TALLYBUILDER__PLUGIN_URL'))define( 'TALLYBUILDER__PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 	if(!defined('TALLYBUILDER__PLUGIN_DIR'))define( 'TALLYBUILDER__PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 	if(!defined('TALLYBUILDER__SECTIONS_DIR'))define( 'TALLYBUILDER__SECTIONS_DIR', TALLYBUILDER__PLUGIN_DIR.'sections/' );
