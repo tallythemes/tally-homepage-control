@@ -495,7 +495,7 @@ function tallybuilder_admin_action_deletePage(){
 					array(
 						'key'     => 'tallybuilder_parent_page',
 						'value'   => $tallybuilder_page_slug,
-						'compare' => 'LIKE',
+						'compare' => '=',
 					),
 				),
 			);

@@ -1,6 +1,6 @@
 <?php
 function tallybuilder_html($this_page_id){
-	//echo '<textarea style="height:400px;">'.tallybuilder_get_page_in_array(86).'</textarea>';
+
 	wp_reset_postdata();
 	$page_slug = get_post_meta($this_page_id, 'tallybuilder', true);
 	$tpost_query_args = array(
@@ -12,7 +12,7 @@ function tallybuilder_html($this_page_id){
 			array(
 				'key'     => 'tallybuilder_parent_page',
 				'value'   => $page_slug,
-				'compare' => 'LIKE',
+				'compare' => '=',
 			),
 		),
 	);
@@ -44,7 +44,7 @@ function tallybuilder_css($this_page_id){
 			array(
 				'key'     => 'tallybuilder_parent_page',
 				'value'   => $page_slug,
-				'compare' => 'LIKE',
+				'compare' => '=',
 			),
 		),
 	);
