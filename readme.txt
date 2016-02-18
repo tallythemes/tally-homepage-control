@@ -3,7 +3,7 @@ Contributors: tallythemes, sazzadh
 Tags: tallythemes, pagebuilder, content change, Home content changes
 Requires at least: 4.4
 Tested up to: 4.4
-Stable tag: 1.5
+Stable tag: 1.6
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
 
@@ -38,6 +38,9 @@ You need to edit home page content of our theme.
 
 
 == Changelog ==
+= 1.5 =
+- Remove The Debug code
+
 = 1.5 =
 - Fixed a query bug
 
