@@ -1,4 +1,7 @@
 <?php
+/*
+	Render HTML of a page by ID. This will use in theme file
+-----------------------------------------------------------*/
 function tallybuilder_html($this_page_id){
 
 	wp_reset_postdata();
@@ -31,6 +34,10 @@ function tallybuilder_html($this_page_id){
 }
 
 
+
+/*
+	Render CSS of a page by ID. This will use wp_head action
+-----------------------------------------------------------*/
 function tallybuilder_css($this_page_id){
 	
 	wp_reset_postdata();
@@ -60,7 +67,9 @@ function tallybuilder_css($this_page_id){
 }
 
 
-
+/*
+	Add the CSS output in wp_head
+-----------------------------------------------------------*/
 add_action('wp_head', 'tallybuilder_css_on_head');
 function tallybuilder_css_on_head(){
 	echo '<style type="text/css">';	
