@@ -142,3 +142,32 @@ function tallybuilder_css_margin_padding($option, $m_or_p, $operator = '/', $amo
 		}
 	}
 }
+
+
+
+
+/* Output Content Nav
+-------------------------------------------------*/
+function tallybuilder_paginate($query = NULL){
+	global $wp_query; 
+	
+	if($query == NULL){
+		$query = $wp_query;
+	}
+	
+	$output = null;
+	
+	if ($query->max_num_pages > 1) {
+		$output .= '<div class="tb_pagenav">';
+			$big = 999999999; // need an unlikely integer		
+			$output .= paginate_links( array(
+				'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
+				'format' => '?paged=%#%',
+				'current' => max( 1, get_query_var('paged') ),
+				'total' => $query->max_num_pages
+			));
+		$output .= '</div>';
+	}
+	
+	return $output;
+}
