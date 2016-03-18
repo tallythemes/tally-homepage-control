@@ -11,7 +11,16 @@ function tallybuilder_get_RAW_file($file, $alt_file = NULL ){
 	}elseif(file_exists($plugin)){
 		return $plugin;	
 	}else{
-		return $alt_file;
+		return $alt_file.$file;
+	}
+}
+
+
+function tallybuilder_raw_alt_file_dri($name){
+	$files = apply_filters('tallybuilder_raw_alt_file_dri', NULL);
+	
+	if(isset($files[$name])){
+		return $files[$name];
 	}
 }
 
@@ -36,7 +45,7 @@ function tallybuilder_raw_button($atts , $content = NULL){
 		'css' => '', //inline css style
 	), $atts );
 	
-	$file_path = tallybuilder_get_RAW_file('button.php');
+	$file_path = tallybuilder_get_RAW_file('button.php', tallybuilder_raw_alt_file_dri('button'));
 	if(file_exists($file_path)){
 		ob_start();
 			include($file_path);
@@ -65,7 +74,7 @@ function tallybuilder_raw_alert($atts , $content = NULL){
 		$args['content'] = $content;
 	}
 	
-	$file_path = tallybuilder_get_RAW_file('alert.php');
+	$file_path = tallybuilder_get_RAW_file('alert.php', tallybuilder_raw_alt_file_dri('alert'));
 	if(file_exists($file_path)){
 		ob_start();
 			include($file_path);
@@ -96,10 +105,34 @@ function tallybuilder_raw_progress_bar($atts , $content = NULL){
 		$args['content'] = $content;
 	}
 	
-	$file_path = tallybuilder_get_RAW_file('progress_bar.php');
+	$file_path = tallybuilder_get_RAW_file('progress_bar.php', tallybuilder_raw_alt_file_dri('progress_bar'));
 	if(file_exists($file_path)){
 		ob_start();
 			include($file_path);
 		return ob_get_clean();
+	}
+}
+
+
+
+
+/*	Grid
+-----------------------------------*/
+add_shortcode('tb_grid', 'tallybuilder_raw_grid');
+function tallybuilder_raw_grid($atts , $content = NULL){
+	$args = shortcode_atts(array(
+		'slug' => '', 
+	), $atts );
+	
+	$post_id = tallybuilder_post_id_by_slug($args['slug'], 'tt_grid');
+	$style_type = get_post_meta($post_id, 'type_tt', true);
+	
+	$file_path = tallybuilder_get_RAW_file('grid-'.$style_type.'.php', tallybuilder_raw_alt_file_dri('grid_'.$style_type) ); 
+	if(file_exists($file_path)){
+		ob_start();
+			include($file_path);
+		return ob_get_clean();
+	}else{
+		return $style_type.' only available in PRO version';	
 	}
 }
