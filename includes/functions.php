@@ -104,11 +104,15 @@ function tallybuilder_slug_exists($post_name, $post_type = 'post', $parent = NUL
 
 
 function tallybuilder_tc(){
-	$tn = apply_filters('tallybuilder_tc', NULL);
-	$tc = md5(TALLYTHEME_SLUG.'3dev-b');
-	
-	if($tn == $tc){
-		return true;
+	if(defined('TALLYTHEME_SLUG')){
+		$tn = apply_filters('tallybuilder_tc', NULL);
+		$tc = md5(TALLYTHEME_SLUG.'3dev-b');
+		
+		if($tn == $tc){
+			return true;
+		}else{
+			return false;
+		}
 	}else{
 		return false;	
 	}
@@ -140,6 +144,15 @@ function tallybuilder_css_margin_padding($option, $m_or_p, $operator = '/', $amo
 			}
 			return $m_or_p.':'.$value.'px;';
 		}
+	}
+}
+
+
+function tallybuilder_ThemeCheck(){
+	if(defined('TALLYTHEME_SLUG')){
+		return true;	
+	}else{
+		return false;	
 	}
 }
 
