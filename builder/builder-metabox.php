@@ -26,7 +26,7 @@ function tallybuilder_section_common_metaBox_html( $post ) {
         <select name="<?php echo $id_name; ?>" id="<?php echo $id_name; ?>" <?php echo $disabled; ?>>
         	<?php if(is_array($section_items)): ?>
             	<?php foreach($section_items as $section_name => $section_location): ?>
-            		<option value="text" <?php selected( $value, $section_name ); ?>><?php echo $section_name; ?></option>
+            		<option value="<?php echo $section_name; ?>" <?php selected( $value, $section_name ); ?> rel="#tbSection_<?php echo $section_name; ?>_metabox"><?php echo $section_name; ?></option>
                 <?php endforeach; ?>
             <?php endif; ?>
         </select>

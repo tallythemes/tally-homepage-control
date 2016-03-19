@@ -370,3 +370,37 @@
 		margin-right:10px;
 	}
 }
+
+
+
+/*
+	GRID Section
+---------------------------------------------------------------*/
+.tbs_grid .tallybuilder_section_inner {
+    width: 90%;
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative;
+}
+
+
+/*~ Content Alignment ~*/
+.tbs_grid.tb_content_align_left .tb_1st_con{
+	float:left;
+}
+.tbs_grid.tb_content_align_right .tb_1st_con{
+	float:right;
+}
+
+/*~ Text Alignment ~*/
+.tbs_grid.tb_align_center .tb_1st_con{
+	text-align:center;
+}
+.tbs_grid.tb_align_right .tb_1st_con{
+	text-align:right;
+	display:inline-block;
+}
+.tbs_grid.tb_align_left .tb_1st_con{
+	text-align:left;
+	display:inline-block;
+}

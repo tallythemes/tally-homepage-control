@@ -113,3 +113,9 @@
     padding: 2px 6px;
 	font-size: 12px;
 }
+
+
+
+div[id*="tbSection_"]{
+	display:none;
+}

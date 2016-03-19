@@ -121,7 +121,8 @@ function tallybuilder_raw_progress_bar($atts , $content = NULL){
 add_shortcode('tb_grid', 'tallybuilder_raw_grid');
 function tallybuilder_raw_grid($atts , $content = NULL){
 	$args = shortcode_atts(array(
-		'slug' => '', 
+		'slug' => '',
+		'div_class' => '', 
 	), $atts );
 	
 	$post_id = tallybuilder_post_id_by_slug($args['slug'], 'tt_grid');

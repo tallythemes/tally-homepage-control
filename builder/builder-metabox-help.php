@@ -54,6 +54,42 @@ function tallybuilder_metabox_form_text($settings = array()){
 		}
 	echo '</div>';
 }
+function tallybuilder_metabox_form_textarea($settings = array()){
+	extract( array_merge( array(
+		'meta_id' => '',
+		'data' => '',
+		'key' => '',
+		'title' => '',
+		'value' => '',
+		'sanitize' => 'sanitize_text_field',
+		'p' => 'n',
+	), $settings ));
+		
+	
+	if ( isset ( $data[$key] ) ) { $value = $data[$key]; }
+	if($sanitize == 'wp_kses'){
+       $value = $sanitize($value, tallybuilder_wp_kses_allowed_html());
+	}else{
+		$value = $sanitize($value);
+	}
+	$pp = false; if(($p == 'y') && !tallybuilder_tc()){ $pp = true; }
+	
+	$div_id = $meta_id.'__'.$key;
+	$name = $meta_id.'['.$key.']';
+	
+	$pp = false; if(($p == 'y') && !tallybuilder_tc()){ $pp = true; }
+	
+	echo '<div class="tallybuilder_mb_item item-warning-'.$pp.'">';
+		echo '<label for="'. $name.'">'.$title.'</label>';
+		if($pp){
+			echo '<input type="hidden" name="'. $name.'" id="'. $div_id.'" value="'. $value.'"  />';
+			echo '<textarea placeholder="'. $value.'" disabled="disabled"></textarea>';
+			echo '<span class="robin">Available on Pro Version Only Only</span>';
+		}else{
+			echo '<textarea name="'. $name.'" id="'. $div_id.'" style="width:100%; height:70px;">'. $value.'</textarea>';			
+		}
+	echo '</div>';
+}
 function tallybuilder_metabox_form_editor($settings = array()){
 	extract( array_merge( array(
 		'meta_id' => '',
@@ -127,6 +163,56 @@ function tallybuilder_metabox_form_select($settings = array()){
 			}
 		echo '</div>';
 	}
+}
+function tallybuilder_metabox_form_post_select($settings = array()){
+	extract( array_merge( array(
+		'meta_id' => '',
+		'data' => '',
+		'key' => '',
+		'title' => '',
+		'value' => '',
+		'sanitize' => 'sanitize_text_field',
+		'p' => 'n',
+		'post_type' => '',
+	), $settings ));
+	
+
+	if ( isset ( $data[$key] ) ) { $value = $data[$key]; }
+	if($sanitize == 'wp_kses'){
+       $value = $sanitize($value, tallybuilder_wp_kses_allowed_html());
+	}else{
+		$value = $sanitize($value);
+	}
+		
+	$div_id = $meta_id.'__'.$key;
+	$name = $meta_id.'['.$key.']';
+	
+	
+	$pp = false; if(($p == 'y') && !tallybuilder_tc()){ $pp = true; }
+	
+	echo '<div class="tallybuilder_mb_item item-warning-'.$pp.'">';
+		echo '<label for="'. $name.'">'.$title.'</label>';
+		if($pp){
+			echo '<input type="hidden" name="'. $name.'" id="'. $div_id.'" value="'. $value.'"  />';
+			echo '<span class="robin">Available on Pro Version Only Only</span>';
+			echo '<select disabled="disabled">';
+				echo '<option>'.$value.'</option>';
+			echo '</select>';
+		}else{
+			echo '<select name="'. $name.'" id="'. $div_id.'" >';
+				$query_args = array(
+					'post_type' => $post_type,
+					'posts_per_page' => -1,
+				);
+				$the_query = new WP_Query( $query_args );
+				if ( $the_query->have_posts() ) {
+					while ( $the_query->have_posts()){ $the_query->the_post();
+						echo '<option value="'.tallybuilder_post_slug(get_the_ID()).'" '.selected( $value, $the_query->ID, false ).'>'.get_the_title().'</option>';
+					}
+				}
+			echo '</select>';
+		}
+	echo '</div>';
 }
 function tallybuilder_metabox_form_color($settings = array()){
 	extract( array_merge( array(
