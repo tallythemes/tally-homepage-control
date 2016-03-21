@@ -121,11 +121,50 @@ div[id*="tbSection_"]{
 }
 
 
+.tallybuilder_mb_item_bg h3{
+	margin-top:0;	
+}
 .tallybuilder_mb_item_bg > .tallybuilder_mb_item{
     float: left;
     width: 19%;
     margin-right: 1%;	
+	padding:1%;
 }
 .tallybuilder_mb_item_bg > .tallybuilder_mb_item img{
 	max-width:100%;	
+}
+.tallybuilder_mb_item_bg > .tallybuilder_mb_item label{
+	font-size:14px;
+	font-weight:normal;
+}
+
+.tallybuilder_mb_item_font h3{
+	margin-top:0;	
+}
+.tallybuilder_mb_item_font > .tallybuilder_mb_item{
+    float: left;
+    width: 19%;
+    margin-right: 1%;
+	padding:1%;	
+}
+.tallybuilder_mb_item_font > .tallybuilder_mb_item label{
+	font-size:14px;
+	font-weight:normal;
+}
+
+.tallybuilder_mb_item_videobg h3{
+	margin-top:0;	
+}
+.tallybuilder_mb_item_videobg > .tallybuilder_mb_item{
+    float: left;
+    width: 16.5%;
+    margin-right: 1%;	
+	padding:1%;
+}
+.tallybuilder_mb_item_videobg > .tallybuilder_mb_item img{
+	max-width:100%;	
+}
+.tallybuilder_mb_item_videobg > .tallybuilder_mb_item label{
+	font-size:14px;
+	font-weight:normal;
 }

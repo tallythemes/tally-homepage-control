@@ -602,6 +602,148 @@ function tallybuilder_metabox_form_background($bg = array()){
 	echo '</div>';
 }
 
+function tallybuilder_metabox_form_fontStyle($font = array()){	
+	$font = array_merge( array(
+		'bg_base' => '',
+		'data' => '',
+		'title' => 'Font Style',
+		'value' => '',
+		'meta_id' => '',
+	), $font );
+	
+	echo '<div class="tallybuilder_mb_item tallybuilder_mb_item_font">';
+	
+		echo '<h3>'.$font['title'].'</h3>';
+		echo '<div class="clear clearfix"></div>';
+
+		$settings = array(
+			'key' => $font['bg_base'].'_size',
+			'title' => 'Font Size',
+			'meta_id' => $font['meta_id'],
+			'data' => $font['data'],
+			'value' => '',
+			'sanitize' => 'sanitize_text_field',
+			'p' => 'y',
+		);
+		tallybuilder_metabox_form_text($settings);
+				
+		$settings = array(
+			'key' => $font['bg_base'].'_color',
+			'title' => 'Font Color',
+			'meta_id' => $font['meta_id'],
+			'data' => $font['data'],
+			'value' => '',
+			'sanitize' => 'sanitize_text_field',
+			'p' => 'y',
+		);
+		tallybuilder_metabox_form_color($settings);
+		
+		$settings = array(
+			'key' => $font['bg_base'].'_lineheight',
+			'title' => 'Line Height',
+			'meta_id' => $font['meta_id'],
+			'data' => $font['data'],
+			'value' => '',
+			'sanitize' => 'sanitize_text_field',
+			'p' => 'y',
+		);
+		tallybuilder_metabox_form_text($settings);
+				
+		$settings = array(
+			'title' => 'Font Weight',
+			'key' => $font['bg_base'].'_fontweight',
+			'meta_id' => $font['meta_id'],
+			'data' => $font['data'],
+			'value' => '',
+			'sanitize' => 'sanitize_text_field',
+			'p' => 'y',
+		);
+		tallybuilder_metabox_form_text($settings);
+		
+		
+		echo '<div class="clear clearfix"></div>';
+	echo '</div>';
+}
+
+
+function tallybuilder_metabox_form_videoBackground($font = array()){	
+	$font = array_merge( array(
+		'bg_base' => '',
+		'data' => '',
+		'title' => 'Video Background',
+		'value' => '',
+		'meta_id' => '',
+	), $font );
+	
+	echo '<div class="tallybuilder_mb_item tallybuilder_mb_item_videobg">';
+	
+		echo '<h3>'.$font['title'].'</h3>';
+		echo '<div class="clear clearfix"></div>';
+
+		$select_items = array(
+			array('title' => 'no', 'value' => 'no'),
+			array('title' => 'yes', 'value' => 'yes'),
+		);
+		$settings = array(
+			'key' => $font['bg_base'].'_enable',
+			'title' => 'Enable Video Background',
+			'meta_id' => $font['meta_id'],
+			'data' => $font['data'],
+			'value' => '',
+			'sanitize' => 'sanitize_text_field',
+			'p' => 'y',
+			'select_items' => $select_items,
+		);
+		tallybuilder_metabox_form_select($settings);
+		
+		$settings = array(
+			'title' => 'MP4 Video',
+			'key' => $font['bg_base'].'_mp4',
+			'meta_id' => $font['meta_id'],
+			'data' => $font['data'],
+			'value' => '',
+			'sanitize' => 'sanitize_text_field',
+			'p' => 'y',
+		);
+		tallybuilder_metabox_form_upload($settings);
+				
+		$settings = array(
+			'title' => 'WEBM Video',
+			'key' => $font['bg_base'].'_webm',
+			'meta_id' => $font['meta_id'],
+			'data' => $font['data'],
+			'value' => '',
+			'sanitize' => 'sanitize_text_field',
+			'p' => 'y',
+		);
+		tallybuilder_metabox_form_upload($settings);
+				
+		$settings = array(
+			'title' => 'OGV Video',
+			'key' => $font['bg_base'].'_ogv',
+			'meta_id' => $font['meta_id'],
+			'data' => $font['data'],
+			'value' => '',
+			'sanitize' => 'sanitize_text_field',
+			'p' => 'y',
+		);
+		tallybuilder_metabox_form_upload($settings);
+		
+		$settings = array(
+			'title' => 'Video Poster Image',
+			'key' => $font['bg_base'].'_poster',
+			'meta_id' => $font['meta_id'],
+			'data' => $font['data'],
+			'value' => '',
+			'sanitize' => 'sanitize_text_field',
+			'p' => 'y',
+		);
+		tallybuilder_metabox_form_image($settings);
+		
+		
+		echo '<div class="clear clearfix"></div>';
+	echo '</div>';
+}
 
 function tallybuilder_metabox_form_save($post_id, $meta_id, $sanitize = 'wp_kses'){
 	if( isset( $_POST[ $meta_id ] ) ) {
