@@ -119,3 +119,13 @@
 div[id*="tbSection_"]{
 	display:none;
 }
+
+
+.tallybuilder_mb_item_bg > .tallybuilder_mb_item{
+    float: left;
+    width: 19%;
+    margin-right: 1%;	
+}
+.tallybuilder_mb_item_bg > .tallybuilder_mb_item img{
+	max-width:100%;	
+}

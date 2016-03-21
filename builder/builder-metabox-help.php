@@ -485,6 +485,123 @@ function tallybuilder_metabox_form_animation($settings = array()){
 	echo '</div>';
 }
 
+function tallybuilder_metabox_form_background($bg = array()){	
+	$bg = array_merge( array(
+		'bg_base' => '',
+		'data' => '',
+		'title' => 'Background',
+		'value' => '',
+		'meta_id' => '',
+	), $bg );
+	
+	echo '<div class="tallybuilder_mb_item tallybuilder_mb_item_bg">';
+	
+		echo '<h3>'.$bg['title'].'</h3>';
+		echo '<div class="clear clearfix"></div>';
+
+		$settings = array(
+			'key' => $bg['bg_base'].'_image',
+			'title' => 'Image',
+			'meta_id' => $bg['meta_id'],
+			'data' => $bg['data'],
+			'value' => '',
+			'sanitize' => 'sanitize_text_field',
+			'p' => 'y',
+		);
+		tallybuilder_metabox_form_image($settings);
+				
+		$settings = array(
+			'key' => $bg['bg_base'].'_color',
+			'title' => 'Color',
+			'meta_id' => $bg['meta_id'],
+			'data' => $bg['data'],
+			'value' => '',
+			'sanitize' => 'sanitize_text_field',
+			'p' => 'n',
+		);
+		tallybuilder_metabox_form_color($settings);
+		
+		$select_items = array(
+			array('title' => 'repeat', 'value' => 'repeat'),
+			array('title' => 'no-repeat', 'value' => 'no-repeat'),
+			array('title' => 'repeat-x', 'value' => 'repeat-x'),
+			array('title' => 'repeat-y', 'value' => 'repeat-y'),
+		);
+		$settings = array(
+			'key' => $bg['bg_base'].'_repeat',
+			'title' => 'Repeat',
+			'meta_id' => $bg['meta_id'],
+			'data' => $bg['data'],
+			'value' => '',
+			'sanitize' => 'sanitize_text_field',
+			'p' => 'n',
+			'select_items' => $select_items,
+		);
+		tallybuilder_metabox_form_select($settings);
+				
+		$select_items = array(
+			array('title' => 'scroll', 'value' => 'scroll'),
+			array('title' => 'fixed', 'value' => 'fixed'),
+			array('title' => 'initial', 'value' => 'initial'),
+		);
+		$settings = array(
+			'title' => 'Attachment',
+			'key' => $bg['bg_base'].'_attachment',
+			'meta_id' => $bg['meta_id'],
+			'data' => $bg['data'],
+			'value' => '',
+			'sanitize' => 'sanitize_text_field',
+			'p' => 'y',
+			'select_items' => $select_items,
+		);
+		tallybuilder_metabox_form_select($settings);
+				
+		$select_items = array(
+			array('title' => 'left top', 'value' => 'left top'),
+			array('title' => 'left center', 'value' => 'left center'),
+			array('title' => 'left bottom', 'value' => 'left bottom'),
+			array('title' => 'right top', 'value' => 'right top'),
+			array('title' => 'right center', 'value' => 'right center'),
+			array('title' => 'right bottom', 'value' => 'right bottom'),
+			array('title' => 'center top', 'value' => 'center top'),
+			array('title' => 'center center', 'value' => 'center center'),
+			array('title' => 'center bottom', 'value' => 'center bottom'),
+			array('title' => 'initial', 'value' => 'initial'),
+		);
+		$settings = array(
+			'title' => 'Repeat',
+			'key' => $bg['bg_base'].'_repeat',
+			'meta_id' => $bg['meta_id'],
+			'data' => $bg['data'],
+			'value' => '',
+			'sanitize' => 'sanitize_text_field',
+			'p' => 'y',
+			'select_items' => $select_items,
+		);
+		tallybuilder_metabox_form_select($settings);
+		
+		$select_items = array(
+			array('title' => 'cover', 'value' => 'cover'),
+			array('title' => 'contain', 'value' => 'contain'),
+			array('title' => 'initial', 'value' => 'initial'),
+		);
+		$settings = array(
+			'title' => 'Background Size',
+			'title' => 'Size',
+			'key' => $bg['bg_base'].'_size',
+			'meta_id' => $bg['meta_id'],
+			'data' => $bg['data'],
+			'value' => '',
+			'sanitize' => 'sanitize_text_field',
+			'p' => 'y',
+			'select_items' => $select_items,
+		);
+		tallybuilder_metabox_form_select($settings);
+		
+		echo '<div class="clear clearfix"></div>';
+	echo '</div>';
+}
+
 
 function tallybuilder_metabox_form_save($post_id, $meta_id, $sanitize = 'wp_kses'){
 	if( isset( $_POST[ $meta_id ] ) ) {
