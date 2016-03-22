@@ -745,6 +745,287 @@ function tallybuilder_metabox_form_videoBackground($font = array()){
 	echo '</div>';
 }
 
+function tallybuilder_metabox_form_animation2($ani = array()){	
+	$ani = array_merge( array(
+		'bg_base' => '',
+		'data' => '',
+		'title' => 'Animation',
+		'value' => '',
+		'meta_id' => '',
+	), $ani );
+	
+	echo '<div class="tallybuilder_mb_item tallybuilder_mb_item_animation">';
+	
+		echo '<h3>'.$ani['title'].'</h3>';
+		echo '<div class="clear clearfix"></div>';
+
+		$select_items = array(
+			array('title' => 'None', 'value' => ''),
+			array('title' => 'lightSpeedIn', 'value' => 'wow lightSpeedIn'),
+			array('title' => 'bounceIn', 'value' => 'wow bounceIn'),
+			array('title' => 'bounceInUp', 'value' => 'wow bounceInUp'),
+			array('title' => 'bounceInDown', 'value' => 'wow bounceInDown'),
+			array('title' => 'bounceInLeft', 'value' => 'wow bounceInLeft'),
+			array('title' => 'bounceInRight', 'value' => 'wow bounceInRight'),
+			array('title' => 'fadeIn', 'value' => 'wow fadeIn'),
+			array('title' => 'fadeInDown', 'value' => 'wow fadeInDown'),
+			array('title' => 'fadeInDownBig', 'value' => 'wow fadeInDownBig'),
+			array('title' => 'fadeInLeft', 'value' => 'wow fadeInLeft'),
+			array('title' => 'fadeInLeftBig', 'value' => 'wow fadeInLeftBig'),
+			array('title' => 'fadeInRight', 'value' => 'wow fadeInRight'),
+			array('title' => 'fadeInRightBig', 'value' => 'wow fadeInRightBig'),
+			array('title' => 'fadeInUp', 'value' => 'wow fadeInUp'),
+			array('title' => 'fadeInUpBig', 'value' => 'wow fadeInUpBig'),
+			array('title' => 'flip', 'value' => 'wow flip'),
+			array('title' => 'flipInX', 'value' => 'wow flipInX'),
+			array('title' => 'rotateIn', 'value' => 'wow rotateIn'),
+			array('title' => 'rotateInDownLeft', 'value' => 'wow rotateInDownLeft'),
+			array('title' => 'rotateInDownRight', 'value' => 'wow rotateInDownRight'),
+			array('title' => 'rotateInUpLeft', 'value' => 'wow rotateInUpLeft'),
+			array('title' => 'rotateInUpRight', 'value' => 'wow rotateInUpRight'),
+			array('title' => 'slideInUp', 'value' => 'wow slideInUp'),
+			array('title' => 'slideInDown', 'value' => 'wow slideInDown'),
+			array('title' => 'slideInLeft', 'value' => 'wow slideInLeft'),
+			array('title' => 'slideInRight', 'value' => 'wow slideInRight'),
+			array('title' => 'zoomIn', 'value' => 'wow zoomIn'),
+			array('title' => 'zoomInDown', 'value' => 'wow zoomInDown'),
+			array('title' => 'zoomInLeft', 'value' => 'wow zoomInLeft'),
+			array('title' => 'zoomInRight', 'value' => 'wow zoomInRight'),
+			array('title' => 'zoomInUp', 'value' => 'wow zoomInUp'),
+			array('title' => 'rollIn', 'value' => 'wow rollIn'),
+		);
+		$settings = array(
+			'key' => $ani['bg_base'].'_type',
+			'title' => 'Type',
+			'meta_id' => $ani['meta_id'],
+			'data' => $ani['data'],
+			'value' => '',
+			'sanitize' => 'sanitize_text_field',
+			'p' => 'y',
+			'select_items' => $select_items,
+		);
+		tallybuilder_metabox_form_select($settings);
+		
+		$select_items = array(
+			array('title' => 'None', 'value' => ''),
+			array('title' => '0.5s', 'value' => '0.5s'),
+			array('title' => '1.5s', 'value' => '1.5s'),
+			array('title' => '2s', 'value' => '2s'),
+			array('title' => '2.5s', 'value' => '2.5s'),
+			array('title' => '3s', 'value' => '3s'),
+			array('title' => '3.5s', 'value' => '3.5s'),
+			array('title' => '4s', 'value' => '4s'),
+			array('title' => '4.5s', 'value' => '4.5s'),
+			array('title' => '5s', 'value' => '5s'),
+		);
+		$settings = array(
+			'title' => 'Duration',
+			'key' => $ani['bg_base'].'_duration',
+			'meta_id' => $ani['meta_id'],
+			'data' => $ani['data'],
+			'value' => '',
+			'sanitize' => 'sanitize_text_field',
+			'p' => 'y',
+			'select_items' => $select_items,
+		);
+		tallybuilder_metabox_form_select($settings);
+				
+		$select_items = array(
+			array('title' => 'None', 'value' => ''),
+			array('title' => '0.5s', 'value' => '0.5s'),
+			array('title' => '1.5s', 'value' => '1.5s'),
+			array('title' => '2s', 'value' => '2s'),
+			array('title' => '2.5s', 'value' => '2.5s'),
+			array('title' => '3s', 'value' => '3s'),
+			array('title' => '3.5s', 'value' => '3.5s'),
+			array('title' => '4s', 'value' => '4s'),
+			array('title' => '4.5s', 'value' => '4.5s'),
+			array('title' => '5s', 'value' => '5s'),
+		);
+		$settings = array(
+			'title' => 'Delay',
+			'key' => $ani['bg_base'].'_delay',
+			'meta_id' => $ani['meta_id'],
+			'data' => $ani['data'],
+			'value' => '',
+			'sanitize' => 'sanitize_text_field',
+			'p' => 'y',
+			'select_items' => $select_items,
+		);
+		tallybuilder_metabox_form_select($settings);
+		
+		echo '<div class="clear clearfix"></div>';
+	echo '</div>';
+}
+
+
+function tallybuilder_metabox_form_padding($ani = array()){	
+	$ani = array_merge( array(
+		'bg_base' => '',
+		'data' => '',
+		'title' => 'Padding',
+		'value' => '',
+		'meta_id' => '',
+	), $ani );
+	
+	echo '<div class="tallybuilder_mb_item tallybuilder_mb_item_padding">';
+	
+		echo '<h3>'.$ani['title'].'</h3>';
+		echo '<div class="clear clearfix"></div>';
+
+		$settings = array(
+			'key' => $ani['bg_base'].'_top',
+			'title' => 'Top Padding',
+			'meta_id' => $ani['meta_id'],
+			'data' => $ani['data'],
+			'value' => '',
+			'sanitize' => 'sanitize_text_field',
+			'p' => 'y',
+		);
+		tallybuilder_metabox_form_text($settings);
+		
+		$settings = array(
+			'title' => 'Right Padding',
+			'key' => $ani['bg_base'].'_right',
+			'meta_id' => $ani['meta_id'],
+			'data' => $ani['data'],
+			'value' => '',
+			'sanitize' => 'sanitize_text_field',
+			'p' => 'y',
+		);
+		tallybuilder_metabox_form_text($settings);
+				
+		$settings = array(
+			'title' => 'Bottom Padding',
+			'key' => $ani['bg_base'].'_bottom',
+			'meta_id' => $ani['meta_id'],
+			'data' => $ani['data'],
+			'value' => '',
+			'sanitize' => 'sanitize_text_field',
+			'p' => 'y',
+		);
+		tallybuilder_metabox_form_text($settings);
+		
+		$settings = array(
+			'title' => 'Left Padding',
+			'key' => $ani['bg_base'].'_left',
+			'meta_id' => $ani['meta_id'],
+			'data' => $ani['data'],
+			'value' => '',
+			'sanitize' => 'sanitize_text_field',
+			'p' => 'y',
+		);
+		tallybuilder_metabox_form_text($settings);
+		
+		echo '<div class="clear clearfix"></div>';
+	echo '</div>';
+}
+
+
+function tallybuilder_metabox_form_margin($ani = array()){	
+	$ani = array_merge( array(
+		'bg_base' => '',
+		'data' => '',
+		'title' => 'Padding',
+		'value' => '',
+		'meta_id' => '',
+	), $ani );
+	
+	echo '<div class="tallybuilder_mb_item tallybuilder_mb_item_margin">';
+	
+		echo '<h3>'.$ani['title'].'</h3>';
+		echo '<div class="clear clearfix"></div>';
+
+		$settings = array(
+			'key' => $ani['bg_base'].'_top',
+			'title' => 'Top Margin',
+			'meta_id' => $ani['meta_id'],
+			'data' => $ani['data'],
+			'value' => '',
+			'sanitize' => 'sanitize_text_field',
+			'p' => 'y',
+		);
+		tallybuilder_metabox_form_text($settings);
+		
+		$settings = array(
+			'title' => 'Right Margin',
+			'key' => $ani['bg_base'].'_right',
+			'meta_id' => $ani['meta_id'],
+			'data' => $ani['data'],
+			'value' => '',
+			'sanitize' => 'sanitize_text_field',
+			'p' => 'y',
+		);
+		tallybuilder_metabox_form_text($settings);
+				
+		$settings = array(
+			'title' => 'Bottom Margin',
+			'key' => $ani['bg_base'].'_bottom',
+			'meta_id' => $ani['meta_id'],
+			'data' => $ani['data'],
+			'value' => '',
+			'sanitize' => 'sanitize_text_field',
+			'p' => 'y',
+		);
+		tallybuilder_metabox_form_text($settings);
+		
+		$settings = array(
+			'title' => 'Left Margin',
+			'key' => $ani['bg_base'].'_left',
+			'meta_id' => $ani['meta_id'],
+			'data' => $ani['data'],
+			'value' => '',
+			'sanitize' => 'sanitize_text_field',
+			'p' => 'y',
+		);
+		tallybuilder_metabox_form_text($settings);
+		
+		echo '<div class="clear clearfix"></div>';
+	echo '</div>';
+}
+
+
+function tallybuilder_metabox_form_linkColor($ani = array()){	
+	$ani = array_merge( array(
+		'bg_base' => '',
+		'data' => '',
+		'title' => 'Link Colors',
+		'value' => '',
+		'meta_id' => '',
+	), $ani );
+	
+	echo '<div class="tallybuilder_mb_item tallybuilder_mb_item_linkcolor">';
+	
+		echo '<h3>'.$ani['title'].'</h3>';
+		echo '<div class="clear clearfix"></div>';
+
+		$settings = array(
+			'key' => $ani['bg_base'].'_link',
+			'title' => 'Link Color',
+			'meta_id' => $ani['meta_id'],
+			'data' => $ani['data'],
+			'value' => '',
+			'sanitize' => 'sanitize_text_field',
+			'p' => 'y',
+		);
+		tallybuilder_metabox_form_color($settings);
+		
+		$settings = array(
+			'title' => 'Hover Color',
+			'key' => $ani['bg_base'].'_hover',
+			'meta_id' => $ani['meta_id'],
+			'data' => $ani['data'],
+			'value' => '',
+			'sanitize' => 'sanitize_text_field',
+			'p' => 'y',
+		);
+		tallybuilder_metabox_form_color($settings);
+				
+		
+		echo '<div class="clear clearfix"></div>';
+	echo '</div>';
+}
+
 function tallybuilder_metabox_form_save($post_id, $meta_id, $sanitize = 'wp_kses'){
 	if( isset( $_POST[ $meta_id ] ) ) {
 		
@@ -770,5 +1051,215 @@ function tallybuilder_meta($meta_id, $key, $post_id = NULL, $sanitize = 'wp_kses
 		return $sanitize($data, tallybuilder_wp_kses_allowed_html() );
 	}else{
 		return $sanitize($data);
+	}
+}
+
+
+function tallybuilder_meta_background_css($css_selector, $meta_id, $key, $post_id = NULL, $sanitize = 'wp_kses'){
+	if($post_id == NULL){
+		$post_id = get_the_ID();
+	}
+	
+	$data = get_post_meta($post_id, $meta_id, true);
+	
+	$output = '';
+	
+	if(isset($data[$key.'_color'])){
+		$output .= ($data[$key.'_color'] == '' ? '' : 'background-color:'.$data[$key.'_color'].';' ); 
+	}
+	if(isset($data[$key.'_image'])){
+		$output .= ($data[$key.'_image'] == '' ? '' : 'background-image:url('.$data[$key.'_image'].');' );
+	}
+	if(isset($data[$key.'_repeat'])){
+		$output .= ($data[$key.'_repeat'] == '' ? '' : 'background-repeat:'.$data[$key.'_repeat'].';' );
+	}
+	if(isset($data[$key.'_attachment'])){
+		$output .= ($data[$key.'_attachment'] == '' ? '' : 'background-attachment:'.$data[$key.'_attachment'].';' );
+	}
+	if(isset($data[$key.'_position'])){
+		$output .= ($data[$key.'_position'] == '' ? '' : 'background-position:'.$data[$key.'_position'].';' );
+	}
+	if(isset($data[$key.'_size'])){
+		$output .= ($data[$key.'_size'] == '' ? '' : 'background-size:'.$data[$key.'_size'].';' );
+	}
+	if($output != ''){
+		$css =  $css_selector.'{ '.$output.' }';
+		
+		return $css;
+	}
+}
+
+function tallybuilder_meta_padding_css($css_selector, $meta_id, $key, $post_id = NULL, $sanitize = 'wp_kses'){
+	if($post_id == NULL){
+		$post_id = get_the_ID();
+	}
+	
+	$data = get_post_meta($post_id, $meta_id, true);
+	
+	$output = '';
+	
+	if(isset($data[$key.'_top'])){
+		$output .= ($data[$key.'_top'] == '' ? '' : 'padding-top:'.$data[$key.'_top'].';' ); 
+	}
+	if(isset($data[$key.'_right'])){
+		$output .= ($data[$key.'_right'] == '' ? '' : 'padding-right:'.$data[$key.'_right'].';' );
+	}
+	if(isset($data[$key.'_bottom'])){
+		$output .= ($data[$key.'_bottom'] == '' ? '' : 'padding-bottom:'.$data[$key.'_bottom'].';' );
+	}
+	if(isset($data[$key.'_left'])){
+		$output .= ($data[$key.'_left'] == '' ? '' : 'padding-left:'.$data[$key.'_left'].';' );
+	}
+	if($output != ''){
+		$css =  $css_selector.'{ '.$output.' }';
+		
+		return $css;
+	}
+}
+
+
+function tallybuilder_meta_margin_css($css_selector, $meta_id, $key, $post_id = NULL, $sanitize = 'wp_kses'){
+	if($post_id == NULL){
+		$post_id = get_the_ID();
+	}
+	
+	$data = get_post_meta($post_id, $meta_id, true);
+	
+	$output = '';
+	
+	if(isset($data[$key.'_top'])){
+		$output .= ($data[$key.'_top'] == '' ? '' : 'margin-top:'.$data[$key.'_top'].';' ); 
+	}
+	if(isset($data[$key.'_right'])){
+		$output .= ($data[$key.'_right'] == '' ? '' : 'margin-right:'.$data[$key.'_right'].';' );
+	}
+	if(isset($data[$key.'_bottom'])){
+		$output .= ($data[$key.'_bottom'] == '' ? '' : 'margin-bottom:'.$data[$key.'_bottom'].';' );
+	}
+	if(isset($data[$key.'_left'])){
+		$output .= ($data[$key.'_left'] == '' ? '' : 'margin-left:'.$data[$key.'_left'].';' );
+	}
+	if($output != ''){
+		$css =  $css_selector.'{ '.$output.' }';
+		
+		return $css;
+	}
+}
+
+
+function tallybuilder_meta_fontStyle_css($css_selector, $meta_id, $key, $post_id = NULL, $sanitize = 'wp_kses'){
+	if($post_id == NULL){
+		$post_id = get_the_ID();
+	}
+	
+	$data = get_post_meta($post_id, $meta_id, true);
+	
+	$output = '';
+	
+	if(isset($data[$key.'_size'])){
+		$output .= ($data[$key.'_size'] == '' ? '' : 'font-size:'.$data[$key.'_size'].';' ); 
+	}
+	if(isset($data[$key.'_color'])){
+		$output .= ($data[$key.'_color'] == '' ? '' : 'color:'.$data[$key.'_color'].';' );
+	}
+	if(isset($data[$key.'_lineheight'])){
+		$output .= ($data[$key.'_lineheight'] == '' ? '' : 'line-height:'.$data[$key.'_lineheight'].';' );
+	}
+	if(isset($data[$key.'_fontweight'])){
+		$output .= ($data[$key.'_fontweight'] == '' ? '' : 'font-weight:'.$data[$key.'_fontweight'].';' );
+	}
+	if($output != ''){
+		$css =  $css_selector.'{ '.$output.' }';
+		
+		return $css;
+	}
+}
+
+
+
+function tallybuilder_meta_linkColor_css($css_selector, $meta_id, $key, $post_id = NULL, $sanitize = 'wp_kses'){
+	if($post_id == NULL){
+		$post_id = get_the_ID();
+	}
+	
+	$data = get_post_meta($post_id, $meta_id, true);
+	
+	$output = '';
+	
+	if(isset($data[$key.'_link'])){
+		$output .= ($data[$key.'_link'] == '' ? '' : 'color:'.$data[$key.'_link'].';' ); 
+	}
+	if(isset($data[$key.'_hover'])){
+		$output .= ($data[$key.'_hover'] == '' ? '' : 'color:'.$data[$key.'_hover'].';' );
+	}
+	if($output != ''){
+		$css =  $css_selector.'{ '.$output.' }';
+		
+		return $css;
+	}
+}
+
+
+function tallybuilder_meta_bgVideo_content($meta_id, $key, $post_id = NULL){
+	if($post_id == NULL){
+		$post_id = get_the_ID();
+	}
+	
+	$data = get_post_meta($post_id, $meta_id, true);
+	
+	$data_vide_bg = '';
+	$enable_video = '';
+	$is_mp4 = '';
+	
+	if(isset($data[$key.'_enable'])){
+		$enable_video .= $data[$key.'_enable']; 
+	}
+	
+	if(isset($data[$key.'_mp4'])){
+		$data_vide_bg .= ($data[$key.'_mp4'] == '' ? '' : 'mp4:'.$data[$key.'_mp4'].', ' ); 
+		$is_mp4 = ($data[$key.'_mp4'] != '' ? true : false ); 
+	}
+	if(isset($data[$key.'_webm'])){
+		$data_vide_bg .= ($data[$key.'_webm'] == '' ? '' : 'webm:'.$data[$key.'_webm'].', ' ); 
+	}
+	if(isset($data[$key.'_ogv'])){
+		$data_vide_bg .= ($data[$key.'_ogv'] == '' ? '' : 'ogv:'.$data[$key.'_ogv'].', ' ); 
+	}
+	if(isset($data[$key.'_poster'])){
+		$data_vide_bg .= ($data[$key.'_poster'] == '' ? '' : 'poster:'.$data[$key.'_poster'].', ' ); 
+	}
+	
+	if(($enable_video == 'yes') && ($is_mp4 == true)){
+		$video_bg = 'data-vide-bg="'.$data_vide_bg.'" ';
+		$video_bg .= 'data-vide-options="posterType: jpg, loop: false, muted: false, position: 0% 0%, autoplay: true,  loop: true"';
+	}
+}
+
+
+function tallybuilder_meta_animation_content($meta_id, $key, $show_class = true, $post_id = NULL){
+	if($post_id == NULL){
+		$post_id = get_the_ID();
+	}
+	
+	$data = get_post_meta($post_id, $meta_id, true);
+	
+	$type = '';
+	$duration = '';
+	$delay = '';
+	
+	if(isset($data[$key.'_type'])){
+		$type = $data[$key.'_type']; 
+	}
+	if(isset($data[$key.'_duration'])){
+		$duration = ($data[$key.'_duration'] == '' ? '' : ' data-wow-duration="'.$data[$key.'_duration'].'" ' ); 
+	}
+	if(isset($data[$key.'_delay'])){
+		$delay = ($data[$key.'_delay'] == '' ? '' : ' data-wow-delay="'.$data[$key.'_delay'].'" ' ); 
+	}
+	
+	if($show_class == true){
+		return $type;
+	}else{
+		return $duration.$delay;
 	}
 }
