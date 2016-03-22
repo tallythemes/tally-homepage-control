@@ -487,7 +487,7 @@ function tallybuilder_metabox_form_animation($settings = array()){
 
 function tallybuilder_metabox_form_background($bg = array()){	
 	$bg = array_merge( array(
-		'bg_base' => '',
+		'base_id' => '',
 		'data' => '',
 		'title' => 'Background',
 		'value' => '',
@@ -500,7 +500,7 @@ function tallybuilder_metabox_form_background($bg = array()){
 		echo '<div class="clear clearfix"></div>';
 
 		$settings = array(
-			'key' => $bg['bg_base'].'_image',
+			'key' => $bg['base_id'].'_image',
 			'title' => 'Image',
 			'meta_id' => $bg['meta_id'],
 			'data' => $bg['data'],
@@ -511,7 +511,7 @@ function tallybuilder_metabox_form_background($bg = array()){
 		tallybuilder_metabox_form_image($settings);
 				
 		$settings = array(
-			'key' => $bg['bg_base'].'_color',
+			'key' => $bg['base_id'].'_color',
 			'title' => 'Color',
 			'meta_id' => $bg['meta_id'],
 			'data' => $bg['data'],
@@ -528,7 +528,7 @@ function tallybuilder_metabox_form_background($bg = array()){
 			array('title' => 'repeat-y', 'value' => 'repeat-y'),
 		);
 		$settings = array(
-			'key' => $bg['bg_base'].'_repeat',
+			'key' => $bg['base_id'].'_repeat',
 			'title' => 'Repeat',
 			'meta_id' => $bg['meta_id'],
 			'data' => $bg['data'],
@@ -546,7 +546,7 @@ function tallybuilder_metabox_form_background($bg = array()){
 		);
 		$settings = array(
 			'title' => 'Attachment',
-			'key' => $bg['bg_base'].'_attachment',
+			'key' => $bg['base_id'].'_attachment',
 			'meta_id' => $bg['meta_id'],
 			'data' => $bg['data'],
 			'value' => '',
@@ -570,7 +570,7 @@ function tallybuilder_metabox_form_background($bg = array()){
 		);
 		$settings = array(
 			'title' => 'Repeat',
-			'key' => $bg['bg_base'].'_repeat',
+			'key' => $bg['base_id'].'_repeat',
 			'meta_id' => $bg['meta_id'],
 			'data' => $bg['data'],
 			'value' => '',
@@ -588,7 +588,7 @@ function tallybuilder_metabox_form_background($bg = array()){
 		$settings = array(
 			'title' => 'Background Size',
 			'title' => 'Size',
-			'key' => $bg['bg_base'].'_size',
+			'key' => $bg['base_id'].'_size',
 			'meta_id' => $bg['meta_id'],
 			'data' => $bg['data'],
 			'value' => '',
@@ -604,7 +604,7 @@ function tallybuilder_metabox_form_background($bg = array()){
 
 function tallybuilder_metabox_form_fontStyle($font = array()){	
 	$font = array_merge( array(
-		'bg_base' => '',
+		'base_id' => '',
 		'data' => '',
 		'title' => 'Font Style',
 		'value' => '',
@@ -617,7 +617,7 @@ function tallybuilder_metabox_form_fontStyle($font = array()){
 		echo '<div class="clear clearfix"></div>';
 
 		$settings = array(
-			'key' => $font['bg_base'].'_size',
+			'key' => $font['base_id'].'_size',
 			'title' => 'Font Size',
 			'meta_id' => $font['meta_id'],
 			'data' => $font['data'],
@@ -628,7 +628,7 @@ function tallybuilder_metabox_form_fontStyle($font = array()){
 		tallybuilder_metabox_form_text($settings);
 				
 		$settings = array(
-			'key' => $font['bg_base'].'_color',
+			'key' => $font['base_id'].'_color',
 			'title' => 'Font Color',
 			'meta_id' => $font['meta_id'],
 			'data' => $font['data'],
@@ -639,7 +639,7 @@ function tallybuilder_metabox_form_fontStyle($font = array()){
 		tallybuilder_metabox_form_color($settings);
 		
 		$settings = array(
-			'key' => $font['bg_base'].'_lineheight',
+			'key' => $font['base_id'].'_lineheight',
 			'title' => 'Line Height',
 			'meta_id' => $font['meta_id'],
 			'data' => $font['data'],
@@ -651,7 +651,7 @@ function tallybuilder_metabox_form_fontStyle($font = array()){
 				
 		$settings = array(
 			'title' => 'Font Weight',
-			'key' => $font['bg_base'].'_fontweight',
+			'key' => $font['base_id'].'_fontweight',
 			'meta_id' => $font['meta_id'],
 			'data' => $font['data'],
 			'value' => '',
@@ -668,7 +668,7 @@ function tallybuilder_metabox_form_fontStyle($font = array()){
 
 function tallybuilder_metabox_form_videoBackground($font = array()){	
 	$font = array_merge( array(
-		'bg_base' => '',
+		'base_id' => '',
 		'data' => '',
 		'title' => 'Video Background',
 		'value' => '',
@@ -685,7 +685,7 @@ function tallybuilder_metabox_form_videoBackground($font = array()){
 			array('title' => 'yes', 'value' => 'yes'),
 		);
 		$settings = array(
-			'key' => $font['bg_base'].'_enable',
+			'key' => $font['base_id'].'_enable',
 			'title' => 'Enable Video Background',
 			'meta_id' => $font['meta_id'],
 			'data' => $font['data'],
@@ -698,7 +698,7 @@ function tallybuilder_metabox_form_videoBackground($font = array()){
 		
 		$settings = array(
 			'title' => 'MP4 Video',
-			'key' => $font['bg_base'].'_mp4',
+			'key' => $font['base_id'].'_mp4',
 			'meta_id' => $font['meta_id'],
 			'data' => $font['data'],
 			'value' => '',
@@ -709,7 +709,7 @@ function tallybuilder_metabox_form_videoBackground($font = array()){
 				
 		$settings = array(
 			'title' => 'WEBM Video',
-			'key' => $font['bg_base'].'_webm',
+			'key' => $font['base_id'].'_webm',
 			'meta_id' => $font['meta_id'],
 			'data' => $font['data'],
 			'value' => '',
@@ -720,7 +720,7 @@ function tallybuilder_metabox_form_videoBackground($font = array()){
 				
 		$settings = array(
 			'title' => 'OGV Video',
-			'key' => $font['bg_base'].'_ogv',
+			'key' => $font['base_id'].'_ogv',
 			'meta_id' => $font['meta_id'],
 			'data' => $font['data'],
 			'value' => '',
@@ -731,7 +731,7 @@ function tallybuilder_metabox_form_videoBackground($font = array()){
 		
 		$settings = array(
 			'title' => 'Video Poster Image',
-			'key' => $font['bg_base'].'_poster',
+			'key' => $font['base_id'].'_poster',
 			'meta_id' => $font['meta_id'],
 			'data' => $font['data'],
 			'value' => '',
@@ -747,7 +747,7 @@ function tallybuilder_metabox_form_videoBackground($font = array()){
 
 function tallybuilder_metabox_form_animation2($ani = array()){	
 	$ani = array_merge( array(
-		'bg_base' => '',
+		'base_id' => '',
 		'data' => '',
 		'title' => 'Animation',
 		'value' => '',
@@ -795,7 +795,7 @@ function tallybuilder_metabox_form_animation2($ani = array()){
 			array('title' => 'rollIn', 'value' => 'wow rollIn'),
 		);
 		$settings = array(
-			'key' => $ani['bg_base'].'_type',
+			'key' => $ani['base_id'].'_type',
 			'title' => 'Type',
 			'meta_id' => $ani['meta_id'],
 			'data' => $ani['data'],
@@ -820,7 +820,7 @@ function tallybuilder_metabox_form_animation2($ani = array()){
 		);
 		$settings = array(
 			'title' => 'Duration',
-			'key' => $ani['bg_base'].'_duration',
+			'key' => $ani['base_id'].'_duration',
 			'meta_id' => $ani['meta_id'],
 			'data' => $ani['data'],
 			'value' => '',
@@ -844,7 +844,7 @@ function tallybuilder_metabox_form_animation2($ani = array()){
 		);
 		$settings = array(
 			'title' => 'Delay',
-			'key' => $ani['bg_base'].'_delay',
+			'key' => $ani['base_id'].'_delay',
 			'meta_id' => $ani['meta_id'],
 			'data' => $ani['data'],
 			'value' => '',
@@ -861,7 +861,7 @@ function tallybuilder_metabox_form_animation2($ani = array()){
 
 function tallybuilder_metabox_form_padding($ani = array()){	
 	$ani = array_merge( array(
-		'bg_base' => '',
+		'base_id' => '',
 		'data' => '',
 		'title' => 'Padding',
 		'value' => '',
@@ -874,7 +874,7 @@ function tallybuilder_metabox_form_padding($ani = array()){
 		echo '<div class="clear clearfix"></div>';
 
 		$settings = array(
-			'key' => $ani['bg_base'].'_top',
+			'key' => $ani['base_id'].'_top',
 			'title' => 'Top Padding',
 			'meta_id' => $ani['meta_id'],
 			'data' => $ani['data'],
@@ -886,7 +886,7 @@ function tallybuilder_metabox_form_padding($ani = array()){
 		
 		$settings = array(
 			'title' => 'Right Padding',
-			'key' => $ani['bg_base'].'_right',
+			'key' => $ani['base_id'].'_right',
 			'meta_id' => $ani['meta_id'],
 			'data' => $ani['data'],
 			'value' => '',
@@ -897,7 +897,7 @@ function tallybuilder_metabox_form_padding($ani = array()){
 				
 		$settings = array(
 			'title' => 'Bottom Padding',
-			'key' => $ani['bg_base'].'_bottom',
+			'key' => $ani['base_id'].'_bottom',
 			'meta_id' => $ani['meta_id'],
 			'data' => $ani['data'],
 			'value' => '',
@@ -908,7 +908,7 @@ function tallybuilder_metabox_form_padding($ani = array()){
 		
 		$settings = array(
 			'title' => 'Left Padding',
-			'key' => $ani['bg_base'].'_left',
+			'key' => $ani['base_id'].'_left',
 			'meta_id' => $ani['meta_id'],
 			'data' => $ani['data'],
 			'value' => '',
@@ -924,7 +924,7 @@ function tallybuilder_metabox_form_padding($ani = array()){
 
 function tallybuilder_metabox_form_margin($ani = array()){	
 	$ani = array_merge( array(
-		'bg_base' => '',
+		'base_id' => '',
 		'data' => '',
 		'title' => 'Padding',
 		'value' => '',
@@ -937,7 +937,7 @@ function tallybuilder_metabox_form_margin($ani = array()){
 		echo '<div class="clear clearfix"></div>';
 
 		$settings = array(
-			'key' => $ani['bg_base'].'_top',
+			'key' => $ani['base_id'].'_top',
 			'title' => 'Top Margin',
 			'meta_id' => $ani['meta_id'],
 			'data' => $ani['data'],
@@ -949,7 +949,7 @@ function tallybuilder_metabox_form_margin($ani = array()){
 		
 		$settings = array(
 			'title' => 'Right Margin',
-			'key' => $ani['bg_base'].'_right',
+			'key' => $ani['base_id'].'_right',
 			'meta_id' => $ani['meta_id'],
 			'data' => $ani['data'],
 			'value' => '',
@@ -960,7 +960,7 @@ function tallybuilder_metabox_form_margin($ani = array()){
 				
 		$settings = array(
 			'title' => 'Bottom Margin',
-			'key' => $ani['bg_base'].'_bottom',
+			'key' => $ani['base_id'].'_bottom',
 			'meta_id' => $ani['meta_id'],
 			'data' => $ani['data'],
 			'value' => '',
@@ -971,7 +971,7 @@ function tallybuilder_metabox_form_margin($ani = array()){
 		
 		$settings = array(
 			'title' => 'Left Margin',
-			'key' => $ani['bg_base'].'_left',
+			'key' => $ani['base_id'].'_left',
 			'meta_id' => $ani['meta_id'],
 			'data' => $ani['data'],
 			'value' => '',
@@ -987,7 +987,7 @@ function tallybuilder_metabox_form_margin($ani = array()){
 
 function tallybuilder_metabox_form_linkColor($ani = array()){	
 	$ani = array_merge( array(
-		'bg_base' => '',
+		'base_id' => '',
 		'data' => '',
 		'title' => 'Link Colors',
 		'value' => '',
@@ -1000,7 +1000,7 @@ function tallybuilder_metabox_form_linkColor($ani = array()){
 		echo '<div class="clear clearfix"></div>';
 
 		$settings = array(
-			'key' => $ani['bg_base'].'_link',
+			'key' => $ani['base_id'].'_link',
 			'title' => 'Link Color',
 			'meta_id' => $ani['meta_id'],
 			'data' => $ani['data'],
@@ -1012,7 +1012,7 @@ function tallybuilder_metabox_form_linkColor($ani = array()){
 		
 		$settings = array(
 			'title' => 'Hover Color',
-			'key' => $ani['bg_base'].'_hover',
+			'key' => $ani['base_id'].'_hover',
 			'meta_id' => $ani['meta_id'],
 			'data' => $ani['data'],
 			'value' => '',
@@ -1173,6 +1173,7 @@ function tallybuilder_meta_fontStyle_css($css_selector, $meta_id, $key, $post_id
 		
 		return $css;
 	}
+	
 }
 
 
