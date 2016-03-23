@@ -1,4 +1,13 @@
 <?php
+function tallybuilder_registered_sections(){
+	$builtin_sections = array(
+		'threeColumns' => TALLYBUILDER__SECTIONS_DIR,
+	);
+	$sections = apply_filters('tallybuilder_sections_list', $builtin_sections);
+	
+	return $sections;
+}
+
 function tallybuilder_get_section_file($file, $alt_file = NULL ){
 	$child = get_stylesheet_directory().'/inc/tallybuilder-sections/'.$file;
 	$parent = get_template_directory().'/inc/tallybuilder-sections/'.$file;

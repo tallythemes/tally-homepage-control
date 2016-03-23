@@ -20,7 +20,7 @@ function tallybuilder_section_common_metaBox_html( $post ) {
 		$active_it = apply_filters('tallybuilder_active_meta_section_type', false);
 		$disabled = ($active_it ? NULL : 'disabled');
 		
-		$section_items = apply_filters('tallybuilder_sections_list', NULL);
+		$section_items = tallybuilder_registered_sections();
 		?>
         <label style="min-width:150px;display:inline-block; font-weight:bold;vertical-align: top;" for="<?php echo $id_name; ?>"><?php _e('Section Type', 'tally-builder'); ?></label>
         <select name="<?php echo $id_name; ?>" id="<?php echo $id_name; ?>" <?php echo $disabled; ?>>

@@ -1,5 +1,5 @@
 <?php
-$sections = apply_filters('tallybuilder_sections_list', NULL);
+$sections = tallybuilder_registered_sections();
 if(is_array($sections)){
 	foreach($sections as $name => $location){
 		
@@ -11,7 +11,7 @@ if(is_array($sections)){
 
 
 function tallybuilder_single_section_html($n){
-	$sections = apply_filters('tallybuilder_sections_list', NULL);
+	$sections = tallybuilder_registered_sections();
 	
 	if(is_array($sections)){
 		foreach($sections as $name => $location){
@@ -26,7 +26,7 @@ function tallybuilder_single_section_html($n){
 
 
 function tallybuilder_single_section_css($n){
-	$sections = apply_filters('tallybuilder_sections_list', NULL);
+	$sections = tallybuilder_registered_sections();
 	
 	if(is_array($sections)){
 		foreach($sections as $name => $location){

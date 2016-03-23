@@ -58,6 +58,7 @@ function tallybuilder_init(){
 		require_once('builder/builder-admin-pages.php');
 		require_once('builder/builder-metabox-help.php');
 		require_once('builder/builder-metabox.php');
+		require_once('builder/section-generator.class.php');
 		require_once('builder/builder-sections.php');
 		require_once('builder/builder-frontend.php');
 	}
