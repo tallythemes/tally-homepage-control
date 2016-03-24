@@ -243,6 +243,12 @@ div[id*="tbSection_"]{
 	margin-left: 1%;
     margin-right: 1%;
 }
+.tbmb_col_0{
+	display:none;	
+}
 .tbmb_col_6{
 	width: 46%;
+}
+.tbmb_col_12{
+	width: 96%;
 }
