@@ -49,8 +49,15 @@ class tallybuilder_section_metabox_generator{
 				foreach($this->rows as $row){
 					echo '<div class="tbmb_row tbmb_row_'.$row_i.'">';
 						$this->row_settings_html($meta_data, $post_id, $row, $row_i);
-						
-						
+						if(is_array($row['columns'])){
+							echo '<div class="clear clearfix"></div>';
+							$column_i = 1;
+							foreach($row['columns'] as $column){
+								$this->column_html($meta_data, $post_id, $row, $row_i, $column, $column_i);
+								$column_i++;
+							}
+							echo '<div class="clear clearfix"></div>';
+						}
 					echo '</div>';
 					$row_i++;
 				}
@@ -80,7 +87,9 @@ class tallybuilder_section_metabox_generator{
 	
 	function row_settings_html($meta_data, $post_id, $row, $row_i){
 		if($row['show_settings'] == true){
-			echo '<select name="">';
+			echo 'Layout';
+			echo '<select name="'.$this->meta_id.'[row'.$row_i.'_layout]">';
+				echo '<option value="none">Disable</option>';
 				echo '<option value="12">Full</option>';
 				echo '<option value="6,6">1/2 and 1/2</option>';
 				echo '<option value="4,4,4">1/3 + 1/3 + 1/3</option>';
@@ -95,6 +104,38 @@ class tallybuilder_section_metabox_generator{
 				echo '</div>';
 			echo '</div>';
 		}
+	}
+	
+	function column_settings_html($meta_data, $post_id, $row, $row_i, $column, $column_i){
+		if($row['show_settings'] == true){
+			echo '<a href="" class="tbmb_edit_column_setting" rel=".tbmb_column'.$row_i.$column_i.'_settings">Customize Column</a>';
+			echo '<div style="display:none">';
+				echo '<div class="tbmb_column'.$row_i.$column_i.'_settings">';
+					//Content will be here
+				echo '</div>';
+			echo '</div>';
+		}
+	}
+	
+	
+	function column_html($meta_data, $post_id, $row, $row_i, $column, $column_i){
+		
+		$meta_data['row'.$row_i.'_layout'] = '6,6,6';
+		
+		$grid_class = 'tbmb_col tbmb_col_';
+		$column_position = $column_i - 1;
+		if(isset($meta_data['row'.$row_i.'_layout'])){
+			$div_cols =  explode(",", $meta_data['row'.$row_i.'_layout']);
+		}
+		if(isset($div_cols[$column_position])){
+			$grid_class = 'tbmb_col tbmb_col_'.$div_cols[$column_position];
+		}
+		
+		echo '<div class="tbmb_column tbmb_column_'.$row_i.$column_i.' '.$grid_class.'">';
+								
+			$this->column_settings_html($meta_data, $post_id, $row, $row_i, $column, $column_i);
+								
+		echo '</div>';
 	}
 	
 }
