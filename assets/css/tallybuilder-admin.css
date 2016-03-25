@@ -126,9 +126,15 @@ div[id*="tbSection_"]{
 }
 .tallybuilder_mb_item_bg > .tallybuilder_mb_item{
     float: left;
-    width: 19%;
+    width: 18%;
     margin-right: 1%;	
 	padding:1%;
+}
+.tallybuilder_mb_item_bg > .tallybuilder_mb_item.mb_select{
+	width: 8%;
+}
+.tallybuilder_mb_item_bg > .tallybuilder_mb_item.mb_color{
+	width: 21%;
 }
 .tallybuilder_mb_item_bg > .tallybuilder_mb_item img{
 	max-width:100%;	
@@ -246,9 +252,45 @@ div[id*="tbSection_"]{
 .tbmb_col_0{
 	display:none;	
 }
+.tbmb_col_3{
+	width: 21%;
+}
+.tbmb_col_4{
+	width: 29.333%;
+}
 .tbmb_col_6{
 	width: 46%;
 }
 .tbmb_col_12{
 	width: 96%;
+}
+
+.tbmb_showhide_close{
+	position:absolute;
+	right: 10px;
+	top: 10px;
+}
+.tbmb_showhide_close.foot{
+	bottom:10px;
+	top:auto;
+}
+.tbmb_popup{
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    z-index: 9999;
+    background: rgba(0, 0, 0, 0.73);
+    left: 0;
+    top: 0;
+}
+.tbmb_popup_in{
+	position: fixed;
+    background: #F7F7F7;
+    z-index: 999999;
+    top: 6%;
+    width: 86%;
+    left: 5%;
+    padding: 2%;
+    overflow-y: scroll;
+    height: 80%;
 }

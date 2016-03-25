@@ -42,7 +42,7 @@ function tallybuilder_metabox_form_text($settings = array()){
 	
 	$pp = false; if(($p == 'y') && !tallybuilder_tc()){ $pp = true; }
 	
-	echo '<div class="tallybuilder_mb_item item-warning-'.$pp.'">';
+	echo '<div class="tallybuilder_mb_item mb_text item-warning-'.$pp.'">';
 		echo '<label for="'. $name.'">'.$title.'</label>';
 		if($pp){
 			echo '<input type="hidden" name="'. $name.'" id="'. $div_id.'" value="'. $value.'"  />';
@@ -79,7 +79,7 @@ function tallybuilder_metabox_form_textarea($settings = array()){
 	
 	$pp = false; if(($p == 'y') && !tallybuilder_tc()){ $pp = true; }
 	
-	echo '<div class="tallybuilder_mb_item item-warning-'.$pp.'">';
+	echo '<div class="tallybuilder_mb_item mb_textarea item-warning-'.$pp.'">';
 		echo '<label for="'. $name.'">'.$title.'</label>';
 		if($pp){
 			echo '<input type="hidden" name="'. $name.'" id="'. $div_id.'" value="'. $value.'"  />';
@@ -112,7 +112,7 @@ function tallybuilder_metabox_form_editor($settings = array()){
 	$div_id = $meta_id.'__'.$key;
 	$name = $meta_id.'['.$key.']';
 	
-	echo '<div class="tallybuilder_mb_item">';
+	echo '<div class="tallybuilder_mb_item mb_editor">';
 		echo '<label for="'. $name.'">'.$title.'</label>';
 		 wp_editor( $value, $div_id, array('textarea_name' => $name, 'wpautop' => true) );
 	echo '</div>';
@@ -146,7 +146,7 @@ function tallybuilder_metabox_form_select($settings = array()){
 	$pp = false; if(($p == 'y') && !tallybuilder_tc()){ $pp = true; }
 	
 	if(is_array($items)){
-		echo '<div class="tallybuilder_mb_item item-warning-'.$pp.'">';
+		echo '<div class="tallybuilder_mb_item mb_select item-warning-'.$pp.'">';
 			echo '<label for="'. $name.'">'.$title.'</label>';
 			if($pp){
 				echo '<input type="hidden" name="'. $name.'" id="'. $div_id.'" value="'. $value.'"  />';
@@ -190,7 +190,7 @@ function tallybuilder_metabox_form_post_select($settings = array()){
 	
 	$pp = false; if(($p == 'y') && !tallybuilder_tc()){ $pp = true; }
 	
-	echo '<div class="tallybuilder_mb_item item-warning-'.$pp.'">';
+	echo '<div class="tallybuilder_mb_item mb_post_select item-warning-'.$pp.'">';
 		echo '<label for="'. $name.'">'.$title.'</label>';
 		if($pp){
 			echo '<input type="hidden" name="'. $name.'" id="'. $div_id.'" value="'. $value.'"  />';
@@ -237,7 +237,7 @@ function tallybuilder_metabox_form_color($settings = array()){
 	
 	$pp = false; if(($p == 'y') && !tallybuilder_tc()){ $pp = true; }
 	
-	echo '<div class="tallybuilder_mb_item item-warning-'.$pp.'">';
+	echo '<div class="tallybuilder_mb_item mb_color item-warning-'.$pp.'">';
 		echo '<label for="'. $name.'">'.$title.'</label>';
 		if($pp){
 			echo '<input type="hidden" name="'. $name.'" id="'. $div_id.'" value="'. $value.'"  />';
@@ -271,7 +271,7 @@ function tallybuilder_metabox_form_image($settings = array()){
 	$div_id = $meta_id.'__'.$key;
 	$name = $meta_id.'['.$key.']';
 	
-	echo '<div class="tallybuilder_mb_item">';
+	echo '<div class="tallybuilder_mb_item mb_image">';
 		echo '<label for="'. $name.'">'.$title.'</label>';
 		echo '<img id="'. $div_id.'-img" src="'. $value.'" width="200" /><br />';
 		echo '<input type="text" name="'. $name.'" id="'. $div_id.'" value="'. $value.'" />';
@@ -326,7 +326,7 @@ function tallybuilder_metabox_form_upload($settings = array()){
 	
 	$pp = false; if(($p == 'y') && !tallybuilder_tc()){ $pp = true; }
 		
-	echo '<div class="tallybuilder_mb_item item-warning-'.$pp.'">';
+	echo '<div class="tallybuilder_mb_item mb_upload item-warning-'.$pp.'">';
 		echo '<label for="'. $name.'">'.$title.'</label>';
 		
 		if($pp){

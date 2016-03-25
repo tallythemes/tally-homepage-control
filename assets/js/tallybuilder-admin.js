@@ -23,3 +23,73 @@ $(function() {
 
 });
 })(jQuery);
+
+
+
+(function($){
+$(function() {
+	
+	$('.tbmb_showhide').click(function(){
+		var tbmb_showhide_div = $(this).attr('rel');
+		$(tbmb_showhide_div).css('display', 'block');
+		
+		return false;
+	});
+	$('.tbmb_showhide_close').click(function(){
+		$(this).parent().parent().css('display', 'none');
+		
+		return false;
+	});
+	
+	
+	
+	function tbRow_layout( row_i ){
+		var row_id = '#tbmb_row'+row_i+'_layout';
+		var col_1 = '.tbmb_column_'+row_i+'1';
+		var col_2 = '.tbmb_column_'+row_i+'2';
+		var col_3 = '.tbmb_column_'+row_i+'3';
+		var col_4 = '.tbmb_column_'+row_i+'4';
+		
+		$(row_id).change(function() {
+			
+			var tbRow_layout = $(this).val();
+			var tbRow_layout_array = tbRow_layout.split(",");
+			
+			$(col_1).removeClass('tbmb_col_0');
+			$(col_1).removeClass('tbmb_col_3');
+			$(col_1).removeClass('tbmb_col_4');
+			$(col_1).removeClass('tbmb_col_6');
+			$(col_1).removeClass('tbmb_col_12');
+			$(col_1).addClass('tbmb_col_'+tbRow_layout_array[0]);
+			
+			$(col_2).removeClass('tbmb_col_0');
+			$(col_2).removeClass('tbmb_col_3');
+			$(col_2).removeClass('tbmb_col_4');
+			$(col_2).removeClass('tbmb_col_6');
+			$(col_2).removeClass('tbmb_col_12');
+			$(col_2).addClass('tbmb_col_'+tbRow_layout_array[1]);
+			
+			$(col_3).removeClass('tbmb_col_0');
+			$(col_3).removeClass('tbmb_col_3');
+			$(col_3).removeClass('tbmb_col_4');
+			$(col_3).removeClass('tbmb_col_6');
+			$(col_3).removeClass('tbmb_col_12');
+			$(col_3).addClass('tbmb_col_'+tbRow_layout_array[2]);
+			
+			$(col_4).removeClass('tbmb_col_0');
+			$(col_4).removeClass('tbmb_col_3');
+			$(col_4).removeClass('tbmb_col_4');
+			$(col_4).removeClass('tbmb_col_6');
+			$(col_4).removeClass('tbmb_col_12');
+			$(col_4).addClass('tbmb_col_'+tbRow_layout_array[3]);
+			
+		}).change();
+	}
+	
+	tbRow_layout( 1 );
+	tbRow_layout( 2 );
+	tbRow_layout( 3 );
+	tbRow_layout( 4 );
+	tbRow_layout( 5 );
+});
+})(jQuery);

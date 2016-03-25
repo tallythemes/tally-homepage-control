@@ -44,14 +44,6 @@ $section_config = array(
 						),
 					),
 				),
-			),//columns
-		),
-		array(
-			'div_class' => '',
-			'show_settings' => true,
-			'columns_limit' => '',
-			'layout' => '',
-			'columns' => array(
 				array(
 					'div_class' => '',
 					'show_settings' => true,
@@ -92,6 +84,110 @@ $section_config = array(
 			'columns_limit' => '',
 			'layout' => '',
 			'columns' => array(
+				array(
+					'div_class' => '',
+					'show_settings' => true,
+					'contents' => array(
+						array(
+							'div_class' => '',
+							'function' => '',
+							'arguments' => '',
+						),
+						array(
+							'div_class' => '',
+							'function' => '',
+							'arguments' => '',
+						),
+					),
+				),
+				array(
+					'div_class' => '',
+					'show_settings' => true,
+					'contents' => array(
+						array(
+							'div_class' => '',
+							'function' => '',
+							'arguments' => '',
+						),
+						array(
+							'div_class' => '',
+							'function' => '',
+							'arguments' => '',
+						),
+					),
+				),
+				array(
+					'div_class' => '',
+					'show_settings' => true,
+					'contents' => array(
+						array(
+							'div_class' => '',
+							'function' => '',
+							'arguments' => '',
+						),
+						array(
+							'div_class' => '',
+							'function' => '',
+							'arguments' => '',
+						),
+					),
+				),
+				array(
+					'div_class' => '',
+					'show_settings' => true,
+					'contents' => array(
+						array(
+							'div_class' => '',
+							'function' => '',
+							'arguments' => '',
+						),
+						array(
+							'div_class' => '',
+							'function' => '',
+							'arguments' => '',
+						),
+					),
+				),
+			),//columns
+		),
+		array(
+			'div_class' => '',
+			'show_settings' => true,
+			'columns_limit' => '',
+			'layout' => '',
+			'columns' => array(
+				array(
+					'div_class' => '',
+					'show_settings' => true,
+					'contents' => array(
+						array(
+							'div_class' => '',
+							'function' => '',
+							'arguments' => '',
+						),
+						array(
+							'div_class' => '',
+							'function' => '',
+							'arguments' => '',
+						),
+					),
+				),
+				array(
+					'div_class' => '',
+					'show_settings' => true,
+					'contents' => array(
+						array(
+							'div_class' => '',
+							'function' => '',
+							'arguments' => '',
+						),
+						array(
+							'div_class' => '',
+							'function' => '',
+							'arguments' => '',
+						),
+					),
+				),
 				array(
 					'div_class' => '',
 					'show_settings' => true,
