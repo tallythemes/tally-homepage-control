@@ -206,8 +206,12 @@ class tallybuilder_section_metabox_generator{
 				echo '<option '.selected( $row_layout, '3,3,3,3', false ).' value="3,3,3,3">1/4 + 1/4 + 1/4 + 1/4</option>';
 				echo '<option '.selected( $row_layout, '6,3,3,0', false ).' value="6,3,3,0">1/2 + 1/4 + 1/4 </option>';
 				echo '<option '.selected( $row_layout, '3,3,6,0', false ).' value="3,3,6,0">1/4 + 1/4 + 1/2</option>';
+				echo '<option '.selected( $row_layout, '4,8,0,0', false ).' value="4,8,0,0">1/4 + 3/4</option>';
+				echo '<option '.selected( $row_layout, '8,4,0,0', false ).' value="8,4,0,0">3/4 + 1/4</option>';
+				echo '<option '.selected( $row_layout, '6,3,3,0', false ).' value="6,3,3,0">1/2 + 1/3 + 1/3</option>';
+				echo '<option '.selected( $row_layout, '3,3,6,0', false ).' value="3,3,6,0">1/3 + 1/3 + 1/2</option>';
 			echo '</select>';
-			echo '<a href="" class="tbmb_edit_row_setting tbmb_showhide" rel=".tbmb_row'.$row_i.'_settings">Customize Row</a>';
+			echo '<a href="" class="tbmb_edit_row_setting tbmb_edit_row'.$row_i.'_setting tbmb_edit_row_setting_'.($row_layout == "0,0,0,0"?'none':'show').' tbmb_showhide" rel=".tbmb_row'.$row_i.'_settings">Customize Row</a>';
 			echo '<div class="tbmb_popup tbmb_row'.$row_i.'_settings"  style="display:none;">';
 				echo '<div class="tbmb_popup_in">';
 					echo '<a href="#" class="tbmb_showhide_close button-primary">Close</a>';

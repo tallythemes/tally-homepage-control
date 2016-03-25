@@ -261,8 +261,15 @@ div[id*="tbSection_"]{
 .tbmb_col_6{
 	width: 46%;
 }
+.tbmb_col_8{
+	width: 62.666%;
+}
 .tbmb_col_12{
 	width: 96%;
+}
+
+.tbmb_edit_row_setting_none{
+	display:none;	
 }
 
 .tbmb_showhide_close{
