@@ -217,6 +217,7 @@ class tallybuilder_section_metabox_generator{
 					echo '<a href="#" class="tbmb_showhide_close button-primary">Close</a>';
 					echo '<h3>Row #'.$row_i.' <small>Settings</small></h3>';
 					$prefix = 'row'.$row_i.'_';
+					
 					$settings = array(
 						'base_id' => $prefix.'padding',
 						'title' => 'Padding',
@@ -225,6 +226,15 @@ class tallybuilder_section_metabox_generator{
 						'value' => '',
 					);
 					tallybuilder_metabox_form_padding($settings);
+					
+					$settings = array(
+						'base_id' => $prefix.'margin',
+						'title' => 'Margin',
+						'meta_id' => $meta_id,
+						'data' => $meta_data,
+						'value' => '',
+					);
+					tallybuilder_metabox_form_margin($settings);
 					
 					$settings = array(
 					'base_id' => $prefix.'bg',
@@ -237,7 +247,7 @@ class tallybuilder_section_metabox_generator{
 					
 					$settings = array(
 						'base_id' => $prefix.'video_bg',
-						'title' => 'Section Video Background',
+						'title' => 'Video Background',
 						'meta_id' => $meta_id,
 						'data' => $meta_data,
 						'value' => '',
@@ -311,13 +321,70 @@ class tallybuilder_section_metabox_generator{
 	}
 	
 	function column_settings_html($meta_data, $post_id, $row, $row_i, $column, $column_i){
+		$meta_id = $this->meta_id;
+		
 		if($row['show_settings'] == true){
 			echo '<a href="" class="tbmb_edit_column_setting tbmb_showhide" rel=".tbmb_column'.$row_i.$column_i.'_settings">Customize Column</a>';
 			echo '<div class="tbmb_popup tbmb_column'.$row_i.$column_i.'_settings"  style="display:none;">';
 				echo '<div class="tbmb_popup_in">';
 					echo '<a href="#" class="tbmb_showhide_close button-primary">Close</a>';
 					
-					echo 'Settings will b here!';
+					$prefix = 'col'.$row_i.$column_i.'_';
+					$settings = array(
+						'base_id' => $prefix.'padding',
+						'title' => 'Padding',
+						'meta_id' => $meta_id,
+						'data' => $meta_data,
+						'value' => '',
+					);
+					tallybuilder_metabox_form_padding($settings);
+					
+					$settings = array(
+						'base_id' => $prefix.'margin',
+						'title' => 'Margin',
+						'meta_id' => $meta_id,
+						'data' => $meta_data,
+						'value' => '',
+					);
+					tallybuilder_metabox_form_margin($settings);
+					
+					$settings = array(
+					'base_id' => $prefix.'bg',
+						'title' => 'Background',
+						'meta_id' => $meta_id,
+						'data' => $meta_data,
+						'value' => '',
+					);
+					tallybuilder_metabox_form_background($settings);
+					
+					$settings = array(
+						'base_id' => $prefix.'video_bg',
+						'title' => 'Video Background',
+						'meta_id' => $meta_id,
+						'data' => $meta_data,
+						'value' => '',
+					);
+					tallybuilder_metabox_form_videoBackground($settings);
+					
+					$settings = array(
+						'key' => $prefix.'class',
+						'title' => 'CSS Class',
+						'meta_id' => $meta_id,
+						'data' => $meta_data,
+						'value' => '',
+						'sanitize' => 'sanitize_text_field',
+						'p' => 'y',
+					);
+					$settings = array(
+						'key' => $prefix.'id',
+						'title' => 'CSS ID',
+						'meta_id' => $meta_id,
+						'data' => $meta_data,
+						'value' => '',
+						'sanitize' => 'sanitize_text_field',
+						'p' => 'y',
+					);
+					tallybuilder_metabox_form_text($settings) ;
 					
 					echo '<a href="#" class="tbmb_showhide_close foot button-primary">Close</a>';
 				echo '</div>';
@@ -327,6 +394,7 @@ class tallybuilder_section_metabox_generator{
 	
 	
 	function column_html($meta_data, $post_id, $row, $row_i, $column, $column_i){
+		$meta_id = $this->meta_id;
 		
 		$grid_class = 'tbmb_col tbmb_col_';
 		$column_position = $column_i - 1;
@@ -340,6 +408,30 @@ class tallybuilder_section_metabox_generator{
 		echo '<div class="tbmb_column tbmb_column_'.$row_i.$column_i.' '.$grid_class.'">';
 								
 			$this->column_settings_html($meta_data, $post_id, $row, $row_i, $column, $column_i);
+			
+			if(is_array($column['contents'])){
+				$content_i = 1;
+				foreach($column['contents'] as $content){
+					echo '<div class="tbmb_content tbmb_content_'.$row_i.$column_i.$content_i.'">';
+						$content_function = 'tallybuilder_SContent_MB__'.$content['function'];
+						if(function_exists($content_function)){
+							$prefix = 'con'.$row_i.$column_i.$content_i.'_';
+							echo '<a href="" class="tbmb_edit_content_setting tbmb_showhide" rel=".tbmb_content'.$row_i.$column_i.$content_i.'_settings">'.$content['label'].'</a>';
+							
+							echo '<div class="tbmb_popup tbmb_content_in tbmb_content'.$row_i.$column_i.$content_i.'_settings" style="display:none;">';
+								echo '<div class="tbmb_popup_in">';
+									echo '<a href="#" class="tbmb_showhide_close button-primary">Close</a>';
+									
+									$content_function($meta_data, $meta_id, $post_id, $prefix, $content['arguments']);
+									
+									echo '<a href="#" class="tbmb_showhide_close foot button-primary">Close</a>';
+								echo '</div>';
+							echo '</div>';
+						}
+					echo '</div>';
+					$content_i++;
+				}
+			}
 								
 		echo '</div>';
 	}

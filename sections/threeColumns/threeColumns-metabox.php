@@ -17,13 +17,33 @@ $section_config = array(
 					'show_settings' => true,
 					'contents' => array(
 						array(
+							'label' => 'Text',
 							'div_class' => '',
-							'function' => '',
+							'function' => 'text',
+							'arguments' => '',
+						),
+						array(
+							'label' => 'Blog',
+							'div_class' => '',
+							'function' => 'text',
+							'arguments' => '',
+						),
+					),
+				),
+				array(
+					'div_class' => '',
+					'show_settings' => true,
+					'contents' => array(
+						array(
+							'label' => 'Label',
+							'div_class' => '',
+							'function' => 'text',
 							'arguments' => '',
 						),
 						array(
 							'div_class' => '',
-							'function' => '',
+							'label' => 'Label',
+							'function' => 'text',
 							'arguments' => '',
 						),
 					),
@@ -34,28 +54,14 @@ $section_config = array(
 					'contents' => array(
 						array(
 							'div_class' => '',
-							'function' => '',
+							'label' => 'Label',
+							'function' => 'text',
 							'arguments' => '',
 						),
 						array(
 							'div_class' => '',
-							'function' => '',
-							'arguments' => '',
-						),
-					),
-				),
-				array(
-					'div_class' => '',
-					'show_settings' => true,
-					'contents' => array(
-						array(
-							'div_class' => '',
-							'function' => '',
-							'arguments' => '',
-						),
-						array(
-							'div_class' => '',
-							'function' => '',
+							'label' => 'Label',
+							'function' => 'text',
 							'arguments' => '',
 						),
 					),
@@ -66,84 +72,14 @@ $section_config = array(
 					'contents' => array(
 						array(
 							'div_class' => '',
-							'function' => '',
+							'label' => 'Label',
+							'function' => 'text',
 							'arguments' => '',
 						),
 						array(
 							'div_class' => '',
-							'function' => '',
-							'arguments' => '',
-						),
-					),
-				),
-			),//columns
-		),
-		array(
-			'div_class' => '',
-			'show_settings' => true,
-			'columns_limit' => '',
-			'layout' => '',
-			'columns' => array(
-				array(
-					'div_class' => '',
-					'show_settings' => true,
-					'contents' => array(
-						array(
-							'div_class' => '',
-							'function' => '',
-							'arguments' => '',
-						),
-						array(
-							'div_class' => '',
-							'function' => '',
-							'arguments' => '',
-						),
-					),
-				),
-				array(
-					'div_class' => '',
-					'show_settings' => true,
-					'contents' => array(
-						array(
-							'div_class' => '',
-							'function' => '',
-							'arguments' => '',
-						),
-						array(
-							'div_class' => '',
-							'function' => '',
-							'arguments' => '',
-						),
-					),
-				),
-				array(
-					'div_class' => '',
-					'show_settings' => true,
-					'contents' => array(
-						array(
-							'div_class' => '',
-							'function' => '',
-							'arguments' => '',
-						),
-						array(
-							'div_class' => '',
-							'function' => '',
-							'arguments' => '',
-						),
-					),
-				),
-				array(
-					'div_class' => '',
-					'show_settings' => true,
-					'contents' => array(
-						array(
-							'div_class' => '',
-							'function' => '',
-							'arguments' => '',
-						),
-						array(
-							'div_class' => '',
-							'function' => '',
+							'label' => 'Label',
+							'function' => 'text',
 							'arguments' => '',
 						),
 					),
@@ -162,28 +98,14 @@ $section_config = array(
 					'contents' => array(
 						array(
 							'div_class' => '',
-							'function' => '',
+							'label' => 'Label',
+							'function' => 'text',
 							'arguments' => '',
 						),
 						array(
 							'div_class' => '',
-							'function' => '',
-							'arguments' => '',
-						),
-					),
-				),
-				array(
-					'div_class' => '',
-					'show_settings' => true,
-					'contents' => array(
-						array(
-							'div_class' => '',
-							'function' => '',
-							'arguments' => '',
-						),
-						array(
-							'div_class' => '',
-							'function' => '',
+							'label' => 'Label',
+							'function' => 'text',
 							'arguments' => '',
 						),
 					),
@@ -194,12 +116,14 @@ $section_config = array(
 					'contents' => array(
 						array(
 							'div_class' => '',
-							'function' => '',
+							'label' => 'Label',
+							'function' => 'text',
 							'arguments' => '',
 						),
 						array(
 							'div_class' => '',
-							'function' => '',
+							'label' => 'Label',
+							'function' => 'text',
 							'arguments' => '',
 						),
 					),
@@ -210,12 +134,112 @@ $section_config = array(
 					'contents' => array(
 						array(
 							'div_class' => '',
-							'function' => '',
+							'label' => 'Label',
+							'function' => 'text',
 							'arguments' => '',
 						),
 						array(
 							'div_class' => '',
-							'function' => '',
+							'label' => 'Label',
+							'function' => 'text',
+							'arguments' => '',
+						),
+					),
+				),
+				array(
+					'div_class' => '',
+					'show_settings' => true,
+					'contents' => array(
+						array(
+							'div_class' => '',
+							'label' => 'Label',
+							'function' => 'text',
+							'arguments' => '',
+						),
+						array(
+							'div_class' => '',
+							'label' => 'Label',
+							'function' => 'text',
+							'arguments' => '',
+						),
+					),
+				),
+			),//columns
+		),
+		array(
+			'div_class' => '',
+			'show_settings' => true,
+			'columns_limit' => '',
+			'layout' => '',
+			'columns' => array(
+				array(
+					'div_class' => '',
+					'show_settings' => true,
+					'contents' => array(
+						array(
+							'div_class' => '',
+							'label' => 'Label',
+							'function' => 'text',
+							'arguments' => '',
+						),
+						array(
+							'div_class' => '',
+							'label' => 'Label',
+							'function' => 'text',
+							'arguments' => '',
+						),
+					),
+				),
+				array(
+					'div_class' => '',
+					'show_settings' => true,
+					'contents' => array(
+						array(
+							'div_class' => '',
+							'label' => 'Label',
+							'function' => 'text',
+							'arguments' => '',
+						),
+						array(
+							'div_class' => '',
+							'label' => 'Label',
+							'function' => 'text',
+							'arguments' => '',
+						),
+					),
+				),
+				array(
+					'div_class' => '',
+					'show_settings' => true,
+					'contents' => array(
+						array(
+							'div_class' => '',
+							'label' => 'Label',
+							'function' => 'text',
+							'arguments' => '',
+						),
+						array(
+							'div_class' => '',
+							'label' => 'Label',
+							'function' => 'text',
+							'arguments' => '',
+						),
+					),
+				),
+				array(
+					'div_class' => '',
+					'show_settings' => true,
+					'contents' => array(
+						array(
+							'div_class' => '',
+							'label' => 'Label',
+							'function' => 'text',
+							'arguments' => '',
+						),
+						array(
+							'div_class' => '',
+							'label' => 'Label',
+							'function' => 'text',
 							'arguments' => '',
 						),
 					),

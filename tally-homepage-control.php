@@ -42,6 +42,7 @@ if ( !function_exists( 'add_action' ) ) {
 	if(!defined('TALLYBUILDER__SECTIONS_DIR'))define( 'TALLYBUILDER__SECTIONS_DIR', TALLYBUILDER__PLUGIN_DIR.'sections/' );
 	if(!defined('TALLYBUILDER__RAW_DIR'))define( 'TALLYBUILDER__RAW_DIR', TALLYBUILDER__PLUGIN_DIR.'raw/' );
 	if(!defined('TALLYBUILDER__SHORTCODE_DIR'))define( 'TALLYBUILDER__SHORTCODE_DIR', TALLYBUILDER__PLUGIN_DIR.'shortcodes/' );
+	if(!defined('TALLYBUILDER__SCONTENT_DIR'))define( 'TALLYBUILDER__SCONTENT_DIR', TALLYBUILDER__PLUGIN_DIR.'scontent/' );
 	
 	require_once('builder/builder-post-type.php');
 	
@@ -58,6 +59,7 @@ function tallybuilder_init(){
 		require_once('builder/builder-admin-pages.php');
 		require_once('builder/builder-metabox-help.php');
 		require_once('builder/builder-metabox.php');
+		require_once('builder/builder-scontent.php');
 		require_once('builder/section-generator.class.php');
 		require_once('builder/builder-sections.php');
 		require_once('builder/builder-frontend.php');

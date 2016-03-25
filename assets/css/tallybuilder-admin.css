@@ -301,3 +301,10 @@ div[id*="tbSection_"]{
     overflow-y: scroll;
     height: 80%;
 }
+.tbmb_edit_content_setting{
+	display:block;
+	padding:15px;	
+	background:#fff;
+	margin-top:4px;
+	margin-bottom:4px;
+}
