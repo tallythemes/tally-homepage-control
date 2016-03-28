@@ -16,7 +16,7 @@ function tallybuilder_SContent_MB__text($meta_data, $meta_id, $post_id, $prefix)
 		'sanitize' => 'wp_kses',
 		'p' => 'n',
 	);
-	tallybuilder_metabox_form_editor2($settings);
+	tallybuilder_metabox_form_editor($settings);
 	
 	$settings = array(
 		'key' => $prefix.'class',

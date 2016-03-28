@@ -44,6 +44,8 @@ class tallybuilder_section_metabox_generator{
 		$meta_data = get_post_meta( $post->ID, $meta_id, true );
 		$post_id = $post->ID;
 		
+		//print_r($meta_data);
+		
 		echo '<div class="tallybuilder_metabox '.$this->div_id.' tbmb_box">';
 			$this->section_settings_html($meta_data, $post_id);
 			
@@ -66,9 +68,6 @@ class tallybuilder_section_metabox_generator{
 				}
 				
 			}
-			echo '<textarea id="tbmb_all_meta_data" style="display:none;">'.$this->encode( serialize( $meta_data ) ).'</textarea>';
-			echo '<input type="hidden" id="tbmb_all_meta_id" value="'.$meta_id.'">';
-			echo '<input type="hidden" id="tbmb_all_post_id" value="'.$post_id.'">';
 		echo '</div>';
 	}
 	
@@ -414,35 +413,9 @@ class tallybuilder_section_metabox_generator{
 			if(is_array($column['contents'])){
 				$content_i = 1;
 				foreach($column['contents'] as $content){
-					echo '<div class="tbmb_content tbmb_content_'.$row_i.$column_i.$content_i.'">';
-						
-						echo '<a href="" class="tbmb_edit_content_setting tbmb_showhide" rel=".tbmb_content'.$row_i.$column_i.$content_i.'_settings">'.$content['label'].'</a>';
-							
-						echo '<div class="tbmb_popup tbmb_content_in tbmb_content'.$row_i.$column_i.$content_i.'_settings" style="display:none;">';
-							echo '<div class="tbmb_popup_in">';
-								echo '<a href="#" class="tbmb_showhide_close button-primary">Close</a>';
-								
-								$the_con_type =(isset($meta_data['the_con'.$row_i.$column_i.$content_i.'_type'])) ? $meta_data['the_con'.$row_i.$column_i.$content_i.'_type'] : '';
-								$content_function = 'tallybuilder_SContent_MB__'.$the_con_type;
-								$prefix = 'con'.$row_i.$column_i.$content_i.'_';
-								
-								echo '<strong>Content Type</strong>: ';								
-								echo '<select  name="'.$this->meta_id.'[the_con'.$row_i.$column_i.$content_i.'_type]" class="tbmb_content_type" rel=".tbmb_content'.$row_i.$column_i.$content_i.'_holder" data-prefix="'.$prefix.'">';
-									echo '<option '.selected( $the_con_type, 'text', false ).' value="text">Text</option>';
-									echo '<option '.selected( $the_con_type, 'image', false ).' value="image">Image</option>';
-									echo '<option '.selected( $the_con_type, 'grid', false ).' value="grid">Grid</option>';
-								echo '</select>';
-								
-								echo '<div class="tbmb_content_holder tbmb_content'.$row_i.$column_i.$content_i.'_holder">';
-									if(function_exists($content_function)){
-										$content_function($meta_data, $meta_id, $post_id, $prefix);
-									}
-								echo '</div>';
-								
-								echo '<a href="#" class="tbmb_showhide_close foot button-primary">Close</a>';
-							echo '</div>';
-						echo '</div>';
-					echo '</div>';
+					
+					$this->content_html($meta_data, $post_id, $row, $row_i, $column, $column_i, $content, $content_i);
+					
 					$content_i++;
 				}
 			}
@@ -451,37 +424,62 @@ class tallybuilder_section_metabox_generator{
 	}
 	
 	
-	function content_ajax_process(){
+	function content_html($meta_data, $post_id, $row, $row_i, $column, $column_i, $content, $content_i){
+		$meta_id = $this->meta_id;
+		$db_type =(isset($meta_data['the_con'.$row_i.$column_i.$content_i.'_type'])) ? $meta_data['the_con'.$row_i.$column_i.$content_i.'_type'] : '';
+		$admin_label =(isset($meta_data['the_con'.$row_i.$column_i.$content_i.'_label'])) ? $meta_data['the_con'.$row_i.$column_i.$content_i.'_label'] : '';
 		
-		$meta_data = unserialize($this->decode($_POST['meta_data']));
-		$con_type = $_POST['con_type'];
-		$prefix = $_POST['prefix'];
-		$post_id = $_POST['post_id'];
-		$meta_id = $_POST['meta_id'];
-		$content_function = 'tallybuilder_SContent_MB__'.$con_type;
+		echo '<div class="tbmb_content tbmb_content_'.$row_i.$column_i.$content_i.'">';
+						
+			echo '<a href="" class="tbmb_edit_content_setting tbmb_showhide" rel=".tbmb_content'.$row_i.$column_i.$content_i.'_settings">';
+				echo '<strong>'.$db_type.':</strong><em>'.$admin_label.'</em>';
+			echo '</a>';
+							
+			echo '<div class="tbmb_popup tbmb_content_in tbmb_content'.$row_i.$column_i.$content_i.'_settings" style="display:none;">';
+				echo '<div class="tbmb_popup_in">';
+					echo '<a href="#" class="tbmb_showhide_close button-primary">Close</a>';
+								
+					
+					echo '<div class="tbmb_content_type">';	
+						echo '<strong>Content Type</strong>: ';								
+						echo '<select  name="'.$this->meta_id.'[the_con'.$row_i.$column_i.$content_i.'_type]" class="tbmb_content_type" rel="'.$row_i.$column_i.$content_i.'">';
+							echo '<option '.selected( $db_type, 'text', false ).' value="text">Text</option>';
+							echo '<option '.selected( $db_type, 'image', false ).' value="image">Image</option>';
+							echo '<option '.selected( $db_type, 'grid', false ).' value="grid">Grid</option>';
+						echo '</select>';
+					echo '</div>';
+					
+					echo '<div class="tbmb_admin_label">';
+						echo '<label for="'.$this->meta_id.'[the_con'.$row_i.$column_i.$content_i.'_label]">Admin label</label>';
+						echo '<input type="text" name="'.$this->meta_id.'[the_con'.$row_i.$column_i.$content_i.'_label]" value="'.$admin_label.'">';
+					echo '</div>';
+								
+					echo '<div class="tbmb_content_holder tbmb_content'.$row_i.$column_i.$content_i.'_holder">';
+						$this->content_item($meta_data, $post_id, $row, $row_i, $column, $column_i, $content, $content_i, 'text');
+						$this->content_item($meta_data, $post_id, $row, $row_i, $column, $column_i, $content, $content_i, 'image');
+						$this->content_item($meta_data, $post_id, $row, $row_i, $column, $column_i, $content, $content_i, 'grid');
+					echo '</div>';
+						
+					echo '<a href="#" class="tbmb_showhide_close foot button-primary">Close</a>';
+				echo '</div>';
+			echo '</div>';
+		echo '</div>';
+	}
+	
+	
+	function content_item($meta_data, $post_id, $row, $row_i, $column, $column_i, $content, $content_i, $type){
+		$meta_id = $this->meta_id;
 		
+		$db_type =(isset($meta_data['the_con'.$row_i.$column_i.$content_i.'_type'])) ? $meta_data['the_con'.$row_i.$column_i.$content_i.'_type'] : '';
+		$content_function = 'tallybuilder_SContent_MB__'.$type;
+		$prefix = 'con'.$row_i.$column_i.$content_i.'_';
+		$disabled = ( $type == $db_type ) ? '' : 'disabled';
+				
 		if(function_exists($content_function)){
-			$content_function($meta_data, $meta_id, $post_id, $prefix);
-		}else{
-			echo 'Sorry No content found';	
+			echo '<div class="tbmb_content_item '.$disabled.' tbmb_content_item'.$row_i.$column_i.$content_i.'__'.$type.' tbmb_content_item'.$row_i.$column_i.$content_i.'">';
+				$content_function($meta_data, $meta_id, $post_id, $prefix);
+			echo '</div>';
 		}
-		
-		wp_die();
-	}
-	
-	
-	function encode( $value ) {
-	
-	  $func = 'base64' . '_encode';
-	  return $func( $value );
-	  
-	}
-	
-	function decode( $value ) {
-	
-	  $func = 'base64' . '_decode';
-	  return $func( $value );
-	  
 	}
 	
 }

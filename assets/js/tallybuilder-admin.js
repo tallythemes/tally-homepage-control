@@ -113,36 +113,20 @@ $(function() {
 
 jQuery(document).ready(function($) {
 	
-	tinymce.init({
-            //selector: 'customEditor-' + nextPlusSignId,
-            editor_selector: 'tb_mb_editor_textarea',
-            mode: "specific_textareas",
-            media_buttons: false,
-            menubar: false,
-            //content_css: nw.baseurl + '/skins/wordpress/wp-content.css',
-            body_class: 'mceContentBody webkit wp-editor wp-autoresize html4-captions has-focus',
-
-        });
+	$(".tbmb_content_item.disabled :input").attr("disabled", true);
+	$(".tbmb_content_item.disabled").css("display", 'none');
 	
 	$('.tbmb_content_type').change(function() {    
 	
-		var data = {
-			'action': 'tbmb_metabox_content',
-			'meta_data': $('#tbmb_all_meta_data').val(),
-			'meta_id': $('#tbmb_all_meta_id').val(),
-			'post_id': $('#tbmb_all_post_id').val(),
-			'prefix' : $(this).attr('data-prefix'),
-			'con_type' : $(this).val(),
-		};
+		var selected_item_class = '.tbmb_content_item'+$(this).attr('rel')+'__'+$(this).val();
+		var all_item_class = '.tbmb_content_item'+$(this).attr('rel');
 		
-		var result_div = $(this).attr('rel');
-		
-		// We can also pass the url value separately from ajaxurl for front end AJAX implementations
-		jQuery.post(tbmb_object.ajax_url, data, function(response) {
-			$(result_div).html(response);
-			
-			tinymce.init(tinyMCEPreInit.mceInit['tb_mb_editor_textarea']);
-		});
+		$(all_item_class+" :input").attr("disabled", true);
+		$(all_item_class).addClass("disabled");
+		$(all_item_class).css("display", 'none');
+		$(selected_item_class+" :input").attr("disabled", false);
+		$(selected_item_class).removeClass("disabled");
+		$(selected_item_class).css("display", 'block');
 	
 	}).change();
 });
