@@ -1,7 +1,7 @@
 <?php
 function tallybuilder_registered_sections(){
 	$builtin_sections = array(
-		'threeColumns' => TALLYBUILDER__SECTIONS_DIR,
+		'advance' => TALLYBUILDER__SECTIONS_DIR,
 	);
 	$sections = apply_filters('tallybuilder_sections_list', $builtin_sections);
 	

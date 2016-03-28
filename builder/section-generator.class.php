@@ -44,7 +44,7 @@ class tallybuilder_section_metabox_generator{
 		$meta_data = get_post_meta( $post->ID, $meta_id, true );
 		$post_id = $post->ID;
 		
-		//print_r($meta_data);
+		print_r($meta_data);
 		
 		echo '<div class="tallybuilder_metabox '.$this->div_id.' tbmb_box">';
 			$this->section_settings_html($meta_data, $post_id);
@@ -428,40 +428,52 @@ class tallybuilder_section_metabox_generator{
 		$meta_id = $this->meta_id;
 		$db_type =(isset($meta_data['the_con'.$row_i.$column_i.$content_i.'_type'])) ? $meta_data['the_con'.$row_i.$column_i.$content_i.'_type'] : '';
 		$admin_label =(isset($meta_data['the_con'.$row_i.$column_i.$content_i.'_label'])) ? $meta_data['the_con'.$row_i.$column_i.$content_i.'_label'] : '';
+		$enable_content =(isset($meta_data['the_con'.$row_i.$column_i.$content_i.'_enable'])) ? $meta_data['the_con'.$row_i.$column_i.$content_i.'_enable'] : '';
 		
 		echo '<div class="tbmb_content tbmb_content_'.$row_i.$column_i.$content_i.'">';
-						
-			echo '<a href="" class="tbmb_edit_content_setting tbmb_showhide" rel=".tbmb_content'.$row_i.$column_i.$content_i.'_settings">';
-				echo '<strong>'.$db_type.':</strong><em>'.$admin_label.'</em>';
-			echo '</a>';
+			
+			echo '<div class="tbmb_content_head">';			
+				echo '<a href="#" class="tbmb_edit_content_setting tbmb_content_head'.$row_i.$column_i.$content_i.' tbmb_showhide" rel=".tbmb_content'.$row_i.$column_i.$content_i.'_settings" style="'.(($enable_content == 1)?'display:block;':'display:none;').'">';
+					echo '<strong>'.$db_type.':</strong><em>'.$admin_label.'</em>';
+				echo '</a>';
+				echo '<input type="checkbox" class="tbmb_enable_content" rel=".tbmb_content_head'.$row_i.$column_i.$content_i.'" name="'.$this->meta_id.'[the_con'.$row_i.$column_i.$content_i.'_enable]" '.checked( $enable_content, 1, false ).' value="1"  >';
+			echo '</div>';
 							
-			echo '<div class="tbmb_popup tbmb_content_in tbmb_content'.$row_i.$column_i.$content_i.'_settings" style="display:none;">';
-				echo '<div class="tbmb_popup_in">';
-					echo '<a href="#" class="tbmb_showhide_close button-primary">Close</a>';
-								
-					
-					echo '<div class="tbmb_content_type">';	
-						echo '<strong>Content Type</strong>: ';								
-						echo '<select  name="'.$this->meta_id.'[the_con'.$row_i.$column_i.$content_i.'_type]" class="tbmb_content_type" rel="'.$row_i.$column_i.$content_i.'">';
-							echo '<option '.selected( $db_type, 'text', false ).' value="text">Text</option>';
-							echo '<option '.selected( $db_type, 'image', false ).' value="image">Image</option>';
-							echo '<option '.selected( $db_type, 'grid', false ).' value="grid">Grid</option>';
-						echo '</select>';
-					echo '</div>';
-					
-					echo '<div class="tbmb_admin_label">';
-						echo '<label for="'.$this->meta_id.'[the_con'.$row_i.$column_i.$content_i.'_label]">Admin label</label>';
-						echo '<input type="text" name="'.$this->meta_id.'[the_con'.$row_i.$column_i.$content_i.'_label]" value="'.$admin_label.'">';
-					echo '</div>';
-								
-					echo '<div class="tbmb_content_holder tbmb_content'.$row_i.$column_i.$content_i.'_holder">';
-						$this->content_item($meta_data, $post_id, $row, $row_i, $column, $column_i, $content, $content_i, 'text');
-						$this->content_item($meta_data, $post_id, $row, $row_i, $column, $column_i, $content, $content_i, 'image');
-						$this->content_item($meta_data, $post_id, $row, $row_i, $column, $column_i, $content, $content_i, 'grid');
-					echo '</div>';
-						
-					echo '<a href="#" class="tbmb_showhide_close foot button-primary">Close</a>';
+			$this->content_popup_html($meta_data, $post_id, $row, $row_i, $column, $column_i, $content, $content_i);
+		echo '</div>';
+	}
+	
+	
+	function content_popup_html($meta_data, $post_id, $row, $row_i, $column, $column_i, $content, $content_i){
+		$meta_id = $this->meta_id;
+		$db_type =(isset($meta_data['the_con'.$row_i.$column_i.$content_i.'_type'])) ? $meta_data['the_con'.$row_i.$column_i.$content_i.'_type'] : '';
+		$admin_label =(isset($meta_data['the_con'.$row_i.$column_i.$content_i.'_label'])) ? $meta_data['the_con'.$row_i.$column_i.$content_i.'_label'] : '';
+							
+		echo '<div class="tbmb_popup tbmb_content_in tbmb_content'.$row_i.$column_i.$content_i.'_settings" style="display:none;">';
+			echo '<div class="tbmb_popup_in">';
+				echo '<a href="#" class="tbmb_showhide_close button-primary">Close</a>';
+											
+				echo '<div class="tbmb_content_type">';	
+					echo '<strong>Content Type</strong>: ';								
+					echo '<select  name="'.$this->meta_id.'[the_con'.$row_i.$column_i.$content_i.'_type]" class="tbmb_content_type" rel="'.$row_i.$column_i.$content_i.'">';
+						echo '<option '.selected( $db_type, 'text', false ).' value="text">Text</option>';
+						echo '<option '.selected( $db_type, 'image', false ).' value="image">Image</option>';
+						echo '<option '.selected( $db_type, 'grid', false ).' value="grid">Grid</option>';
+					echo '</select>';
 				echo '</div>';
+					
+				echo '<div class="tbmb_admin_label">';
+					echo '<label for="'.$this->meta_id.'[the_con'.$row_i.$column_i.$content_i.'_label]">Admin label</label>';
+					echo '<input type="text" name="'.$this->meta_id.'[the_con'.$row_i.$column_i.$content_i.'_label]" value="'.$admin_label.'">';
+				echo '</div>';
+								
+				echo '<div class="tbmb_content_holder tbmb_content'.$row_i.$column_i.$content_i.'_holder">';
+					$this->content_item($meta_data, $post_id, $row, $row_i, $column, $column_i, $content, $content_i, 'text');
+					$this->content_item($meta_data, $post_id, $row, $row_i, $column, $column_i, $content, $content_i, 'image');
+					$this->content_item($meta_data, $post_id, $row, $row_i, $column, $column_i, $content, $content_i, 'grid');
+				echo '</div>';
+						
+				echo '<a href="#" class="tbmb_showhide_close foot button-primary">Close</a>';
 			echo '</div>';
 		echo '</div>';
 	}

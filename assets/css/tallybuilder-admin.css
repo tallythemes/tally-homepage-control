@@ -308,3 +308,14 @@ div[id*="tbSection_"]{
 	margin-top:4px;
 	margin-bottom:4px;
 }
+
+
+.tbmb_content_head{
+    position: relative;
+    min-height: 18px;
+}
+.tbmb_enable_content{
+    position: absolute;
+    top: 8px;
+    right: 0px;
+}

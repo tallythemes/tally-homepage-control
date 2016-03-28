@@ -129,4 +129,16 @@ jQuery(document).ready(function($) {
 		$(selected_item_class).css("display", 'block');
 	
 	}).change();
+	
+	
+	
+	$( ".tbmb_enable_content" ).on( "click", function() {
+		var tbmb_enable_content = $(this).attr('rel');
+		if($(this).is(":checked")){
+			$(tbmb_enable_content).css("display", 'block');
+		}
+		else if($(this).is(":not(:checked)")){
+			$(tbmb_enable_content).css("display", 'none');
+		}
+	});
 });
