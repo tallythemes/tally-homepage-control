@@ -29,6 +29,8 @@ class tallybuilder_section_metabox_generator{
 		
 		add_action( 'add_meta_boxes', array($this, 'register_metabox') );
 		add_action( 'save_post', array($this, 'metabox_save') );
+		
+		add_action( 'wp_ajax_tbmb_metabox_content', array($this, 'content_ajax_process') );
 	}
 	
 	
@@ -64,6 +66,9 @@ class tallybuilder_section_metabox_generator{
 				}
 				
 			}
+			echo '<textarea id="tbmb_all_meta_data" style="display:none;">'.$this->encode( serialize( $meta_data ) ).'</textarea>';
+			echo '<input type="hidden" id="tbmb_all_meta_id" value="'.$meta_id.'">';
+			echo '<input type="hidden" id="tbmb_all_post_id" value="'.$post_id.'">';
 		echo '</div>';
 	}
 	
@@ -80,7 +85,6 @@ class tallybuilder_section_metabox_generator{
 			return;
 		}
 		
-		
 		tallybuilder_metabox_form_save($post_id, $meta_id, 'wp_kses');
 	}
 	
@@ -88,9 +92,7 @@ class tallybuilder_section_metabox_generator{
 		$meta_id = $this->meta_id;
 		
 		if($this->show_settings == true){
-			
-			
-			
+
 			echo '<a href="" class="tbmb_edit_section_setting tbmb_showhide" rel=".tbmb_section_settings">Customize Section</a>';
 			echo '<div class="tbmb_popup tbmb_section_settings"  style="display:none;">';
 				echo '<div class="tbmb_popup_in">';
@@ -413,27 +415,73 @@ class tallybuilder_section_metabox_generator{
 				$content_i = 1;
 				foreach($column['contents'] as $content){
 					echo '<div class="tbmb_content tbmb_content_'.$row_i.$column_i.$content_i.'">';
-						$content_function = 'tallybuilder_SContent_MB__'.$content['function'];
-						if(function_exists($content_function)){
-							$prefix = 'con'.$row_i.$column_i.$content_i.'_';
-							echo '<a href="" class="tbmb_edit_content_setting tbmb_showhide" rel=".tbmb_content'.$row_i.$column_i.$content_i.'_settings">'.$content['label'].'</a>';
+						
+						echo '<a href="" class="tbmb_edit_content_setting tbmb_showhide" rel=".tbmb_content'.$row_i.$column_i.$content_i.'_settings">'.$content['label'].'</a>';
 							
-							echo '<div class="tbmb_popup tbmb_content_in tbmb_content'.$row_i.$column_i.$content_i.'_settings" style="display:none;">';
-								echo '<div class="tbmb_popup_in">';
-									echo '<a href="#" class="tbmb_showhide_close button-primary">Close</a>';
-									
-									$content_function($meta_data, $meta_id, $post_id, $prefix, $content['arguments']);
-									
-									echo '<a href="#" class="tbmb_showhide_close foot button-primary">Close</a>';
+						echo '<div class="tbmb_popup tbmb_content_in tbmb_content'.$row_i.$column_i.$content_i.'_settings" style="display:none;">';
+							echo '<div class="tbmb_popup_in">';
+								echo '<a href="#" class="tbmb_showhide_close button-primary">Close</a>';
+								
+								$the_con_type =(isset($meta_data['the_con'.$row_i.$column_i.$content_i.'_type'])) ? $meta_data['the_con'.$row_i.$column_i.$content_i.'_type'] : '';
+								$content_function = 'tallybuilder_SContent_MB__'.$the_con_type;
+								$prefix = 'con'.$row_i.$column_i.$content_i.'_';
+								
+								echo '<strong>Content Type</strong>: ';								
+								echo '<select  name="'.$this->meta_id.'[the_con'.$row_i.$column_i.$content_i.'_type]" class="tbmb_content_type" rel=".tbmb_content'.$row_i.$column_i.$content_i.'_holder" data-prefix="'.$prefix.'">';
+									echo '<option '.selected( $the_con_type, 'text', false ).' value="text">Text</option>';
+									echo '<option '.selected( $the_con_type, 'image', false ).' value="image">Image</option>';
+									echo '<option '.selected( $the_con_type, 'grid', false ).' value="grid">Grid</option>';
+								echo '</select>';
+								
+								echo '<div class="tbmb_content_holder tbmb_content'.$row_i.$column_i.$content_i.'_holder">';
+									if(function_exists($content_function)){
+										$content_function($meta_data, $meta_id, $post_id, $prefix);
+									}
 								echo '</div>';
+								
+								echo '<a href="#" class="tbmb_showhide_close foot button-primary">Close</a>';
 							echo '</div>';
-						}
+						echo '</div>';
 					echo '</div>';
 					$content_i++;
 				}
 			}
 								
 		echo '</div>';
+	}
+	
+	
+	function content_ajax_process(){
+		
+		$meta_data = unserialize($this->decode($_POST['meta_data']));
+		$con_type = $_POST['con_type'];
+		$prefix = $_POST['prefix'];
+		$post_id = $_POST['post_id'];
+		$meta_id = $_POST['meta_id'];
+		$content_function = 'tallybuilder_SContent_MB__'.$con_type;
+		
+		if(function_exists($content_function)){
+			$content_function($meta_data, $meta_id, $post_id, $prefix);
+		}else{
+			echo 'Sorry No content found';	
+		}
+		
+		wp_die();
+	}
+	
+	
+	function encode( $value ) {
+	
+	  $func = 'base64' . '_encode';
+	  return $func( $value );
+	  
+	}
+	
+	function decode( $value ) {
+	
+	  $func = 'base64' . '_decode';
+	  return $func( $value );
+	  
 	}
 	
 }

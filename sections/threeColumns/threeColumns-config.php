@@ -1,46 +1,61 @@
 <?php
-$section_config = array(
-	'meta_id' => '',
-	'title' => '',
+$tb_section_threeColumns_config = array(
+	'meta_id' => 'tbsf_3columns',
+	'title' => 'Three Columns',
 	'context' => 'normal',
 	'priority' => 'high',
-	'structure' => '',
-	'div_id' => '',
-	'show_settings' => '',
+	'div_id' => 'tbSection_threeColumns_metabox',
+	'show_settings' => true,
 	'rows' => array(
 		array(
 			'div_class' => '',
-			'show_settings' => '',
+			'show_settings' => true,
 			'layout' => '',
 			'columns' => array(
 				array(
 					'div_class' => '',
-					'settings' => '',
+					'show_settings' => true,
 					'contents' => array(
 						array(
+							'label' => 'Title',
 							'div_class' => '',
-							'function' => '',
-							'arguments' => '',
-						),
-						array(
-							'div_class' => '',
-							'function' => '',
+							'function' => 'text',
 							'arguments' => '',
 						),
 					),
 				),
 				array(
 					'div_class' => '',
-					'settings' => '',
+					'show_settings' => true,
 					'contents' => array(
 						array(
 							'div_class' => '',
-							'function' => '',
+							'label' => 'Text Content',
+							'function' => 'text',
 							'arguments' => '',
 						),
+					),
+				),
+				array(
+					'div_class' => '',
+					'show_settings' => true,
+					'contents' => array(
 						array(
 							'div_class' => '',
-							'function' => '',
+							'label' => 'Text Content',
+							'function' => 'text',
+							'arguments' => '',
+						),
+					),
+				),
+				array(
+					'div_class' => '',
+					'show_settings' => true,
+					'contents' => array(
+						array(
+							'div_class' => '',
+							'label' => 'Text Content',
+							'function' => 'text',
 							'arguments' => '',
 						),
 					),
@@ -49,83 +64,60 @@ $section_config = array(
 		),
 		array(
 			'div_class' => '',
-			'show_settings' => '',
+			'show_settings' => true,
 			'columns_limit' => '',
 			'layout' => '',
 			'columns' => array(
 				array(
 					'div_class' => '',
-					'settings' => '',
+					'show_settings' => true,
 					'contents' => array(
 						array(
 							'div_class' => '',
-							'function' => '',
-							'arguments' => '',
-						),
-						array(
-							'div_class' => '',
-							'function' => '',
+							'label' => 'Text Content',
+							'function' => 'text',
 							'arguments' => '',
 						),
 					),
 				),
 				array(
 					'div_class' => '',
-					'settings' => '',
+					'show_settings' => true,
 					'contents' => array(
 						array(
 							'div_class' => '',
-							'function' => '',
+							'label' => 'Contact Form',
+							'function' => 'text',
 							'arguments' => '',
 						),
+					),
+				),
+				array(
+					'div_class' => '',
+					'show_settings' => true,
+					'contents' => array(
 						array(
 							'div_class' => '',
-							'function' => '',
+							'label' => 'Text Content',
+							'function' => 'text',
+							'arguments' => '',
+						),
+					),
+				),
+				array(
+					'div_class' => '',
+					'show_settings' => true,
+					'contents' => array(
+						array(
+							'div_class' => '',
+							'label' => 'Text Content',
+							'function' => 'text',
 							'arguments' => '',
 						),
 					),
 				),
 			),//columns
 		),
-		array(
-			'div_class' => '',
-			'show_settings' => '',
-			'columns_limit' => '',
-			'layout' => '',
-			'columns' => array(
-				array(
-					'div_class' => '',
-					'settings' => '',
-					'contents' => array(
-						array(
-							'div_class' => '',
-							'function' => '',
-							'arguments' => '',
-						),
-						array(
-							'div_class' => '',
-							'function' => '',
-							'arguments' => '',
-						),
-					),
-				),
-				array(
-					'div_class' => '',
-					'settings' => '',
-					'contents' => array(
-						array(
-							'div_class' => '',
-							'function' => '',
-							'arguments' => '',
-						),
-						array(
-							'div_class' => '',
-							'function' => '',
-							'arguments' => '',
-						),
-					),
-				),
-			),//columns
-		),
+		
 	),//rows
 );

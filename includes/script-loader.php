@@ -1,12 +1,15 @@
 <?php
 function tallybuilder_load_admin_script() {
 	wp_enqueue_style( 'tallybuilder-admin', TALLYBUILDER__PLUGIN_URL . '/assets/css/tallybuilder-admin.css');
-	wp_enqueue_style('wp-color-picker');
+	wp_enqueue_style('wp-color-picker');	
+	wp_enqueue_media();
+	
 	
 	wp_enqueue_script( 'tallybuilder-admin', TALLYBUILDER__PLUGIN_URL.'/assets/js/tallybuilder-admin.js', array( 'wp-color-picker', 'jquery-ui-core', 'jquery-ui-sortable',
 	"jquery-ui-tabs" ), false, true ); 
 	
-	wp_enqueue_media();
+	wp_localize_script( 'tallybuilder-admin', 'tbmb_object',
+            array( 'ajax_url' => admin_url( 'admin-ajax.php' ) ) );
 }
 
 add_action( 'admin_enqueue_scripts', 'tallybuilder_load_admin_script' );

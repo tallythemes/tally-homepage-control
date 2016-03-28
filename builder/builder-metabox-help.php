@@ -118,6 +118,37 @@ function tallybuilder_metabox_form_editor($settings = array()){
 	echo '</div>';
 }
 
+function tallybuilder_metabox_form_editor2($settings = array()){
+	extract( array_merge( array(
+		'meta_id' => '',
+		'data' => '',
+		'key' => '',
+		'title' => '',
+		'value' => '',
+		'sanitize' => 'wp_kses',
+		'p' => 'n',
+	), $settings ));
+
+	if ( isset ( $data[$key] ) ) { $value = $data[$key]; }
+	
+	if($sanitize == 'wp_kses'){
+       $value = $sanitize($value, tallybuilder_wp_kses_allowed_html());
+	}else{
+		$value = $sanitize($value);
+	}
+	
+	$div_id = $meta_id.'__'.$key;
+	$name = $meta_id.'['.$key.']';
+	
+	echo '<div class="tallybuilder_mb_item mb_editor">';
+		echo '<label for="'. $name.'">'.$title.'</label>';
+		echo '<div class="tb_mb_editor">';
+			//wp_editor( $value, $div_id, array('textarea_name' => $name, 'wpautop' => true, 'editor_class' => 'tb_mb_editor_textarea') );
+		 	echo '<textarea name="'. $name.'" id="'. $div_id.'" class="tb_mb_editor_textarea">'. $value.'</textarea>';
+		echo '</div>';
+	echo '</div>';
+}
+
 function tallybuilder_metabox_form_select($settings = array()){
 	extract( array_merge( array(
 		'meta_id' => '',
