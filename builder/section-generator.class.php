@@ -44,7 +44,7 @@ class tallybuilder_section_metabox_generator{
 		$meta_data = get_post_meta( $post->ID, $meta_id, true );
 		$post_id = $post->ID;
 		
-		print_r($meta_data);
+		//print_r($meta_data);
 		
 		echo '<div class="tallybuilder_metabox '.$this->div_id.' tbmb_box">';
 			$this->section_settings_html($meta_data, $post_id);
@@ -491,6 +491,111 @@ class tallybuilder_section_metabox_generator{
 			echo '<div class="tbmb_content_item '.$disabled.' tbmb_content_item'.$row_i.$column_i.$content_i.'__'.$type.' tbmb_content_item'.$row_i.$column_i.$content_i.'">';
 				$content_function($meta_data, $meta_id, $post_id, $prefix);
 			echo '</div>';
+		}
+	}
+	
+}
+
+
+
+
+
+
+class tallybuilder_section_html_generator{
+	public $meta_id;
+	public $rows;
+	
+	function __construct($settings){
+		$settings = array_merge(array(
+			'meta_id' => '',
+			'rows' => '',
+		), $settings);
+		
+		$this->meta_id = $settings['meta_id'];
+		$this->rows = $settings['rows'];
+		
+		$this->html();
+	}
+	
+	
+	function html(){
+		$meta_id = $this->meta_id;
+		$meta_data = get_post_meta( get_the_ID(), $meta_id, true );
+		$post_id = get_the_ID();
+		$unique_class = 'tb_section_'.$post_id;
+		
+		if(get_post_meta(get_the_ID(), 'section_disable', true) != 'yes'){
+			echo '<div class="tallybuilder_section '.$unique_class.'">';
+				echo '<div class="tallybuilder_section_inner">';
+					if(is_array($this->rows)){
+						$row_i = 1;
+						foreach($this->rows as $row){
+							$this->row_html($meta_data, $meta_id, $post_id, $row, $row_i);
+							$row_i++;
+						}
+					}
+				echo '</div>';	
+			echo '</div>';
+		}
+	}
+	
+	
+	function row_html($meta_data, $meta_id, $post_id, $row, $row_i){
+		$unique_class = 'tb_row_'.$post_id.$row_i;
+		$row_layout = (isset($meta_data['row'.$row_i.'_layout'])) ? $meta_data['row'.$row_i.'_layout'] : '';
+		
+		if($row_layout != '0,0,0,0'){
+			echo '<div class="tallybuilder_row '.$unique_class.' container-fluid">';
+				echo '<div class="tallybuilder_row_inner row">';
+					if(is_array($row['columns'])){
+						$column_i = 1;
+						foreach($row['columns'] as $column){
+							$this->column_html($meta_data, $meta_id, $post_id, $row, $row_i, $column, $column_i);
+							$column_i++;
+						}
+					}
+				echo '</div>';
+			echo '</div>';
+		}
+	}
+	
+	
+	function column_html($meta_data, $meta_id, $post_id, $row, $row_i, $column, $column_i){
+		$unique_class = 'tb_column_'.$post_id.$row_i.$column_i;
+		$row_layout = (isset($meta_data['row'.$row_i.'_layout'])) ? $meta_data['row'.$row_i.'_layout'] : '';
+		$row_layout_array = explode(",", $row_layout);
+		$column_layout = $row_layout_array[$column_i - 1];
+		
+		if($column_layout != '0'){
+			echo '<div class="tallybuilder_column '.$unique_class.' col-md-'.$column_layout.'">';
+				echo '<div class="tallybuilder_column_inner">';
+					if(is_array($column['contents'])){
+						$content_i = 1;
+						foreach($column['contents'] as $content){
+							$this->content_html($meta_data, $meta_id, $post_id, $row, $row_i, $column, $column_i, $content, $content_i);
+							$content_i++;
+						}
+					}
+				echo '</div>';
+			echo '</div>';
+		}
+	}
+	
+	function content_html($meta_data, $meta_id, $post_id, $row, $row_i, $column, $column_i, $content, $content_i){
+		$unique_class = 'tb_content_'.$post_id.$row_i.$column_i.$content_i;
+		$type =(isset($meta_data['the_con'.$row_i.$column_i.$content_i.'_type'])) ? $meta_data['the_con'.$row_i.$column_i.$content_i.'_type'] : '';
+		$content_function = 'tallybuilder_SContent_HTML__'.$type;
+		$prefix = 'con'.$row_i.$column_i.$content_i.'_';
+		$enable_content =(isset($meta_data['the_con'.$row_i.$column_i.$content_i.'_enable'])) ? $meta_data['the_con'.$row_i.$column_i.$content_i.'_enable'] : '';
+		
+		if($enable_content == true){
+			if(function_exists($content_function)){
+				echo '<div class="tallybuilder_content '.$unique_class.' tb_content_'.$type.'">';
+					echo '<div class="tallybuilder_content_inner">';
+						$content_function($meta_data, $meta_id, $post_id, $prefix);
+					echo '</div>';
+				echo '</div>';
+			}
 		}
 	}
 	

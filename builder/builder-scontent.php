@@ -1,6 +1,13 @@
 <?php
-function tallybuilder_SContent_HTML__text(){
+function tallybuilder_SContent_HTML__text($meta_data, $meta_id, $post_id, $prefix){
+	$content = ( isset($meta_data[$prefix.'content']) ) ? $meta_data[$prefix.'content'] : '';
+	$class = ( isset($meta_data[$prefix.'class']) ) ? $meta_data[$prefix.'class'] : '';
+	$id = ( isset($meta_data[$prefix.'id']) ) ? $meta_data[$prefix.'id'] : '';
+	$id = ( $id == '' ) ? '' : 'id="'.$id.'"';
 	
+	echo '<div class="tbhtml_text '.$class.'" '.$id.'>';
+		echo $content;
+	echo '</div>';
 }
 function tallybuilder_SContent_CSS__text(){
 	
