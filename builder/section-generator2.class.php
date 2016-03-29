@@ -122,6 +122,15 @@ class tallybuilder_section_metabox_generator2{
 					tallybuilder_metabox_form_videoBackground($settings);
 					
 					$settings = array(
+						'base_id' => 'section_bg_overlay',
+						'title' => 'Background Overlay',
+						'meta_id' => $meta_id,
+						'data' => $meta_data,
+						'value' => '',
+					);
+					tallybuilder_metabox_form_OverlayBackground($settings);
+					
+					$settings = array(
 						'key' => 'section_class',
 						'title' => 'CSS Class',
 						'meta_id' => $meta_id,
@@ -631,6 +640,8 @@ class tallybuilder_section_css_generator2{
 			if($video_bg != ''){ echo $unique_class.'{ background:none; }'; }
 			tallybuilder_css_style($unique_class.' .tallybuilder_section_inner', tallybuilder_meta($meta_id, 'section_width', $post_id), 'width:%s%;');
 			tallybuilder_css_style($unique_class.' .tallybuilder_section_inner', tallybuilder_meta($meta_id, 'section_max_width', $post_id), 'max-width:%s%;');
+			
+			echo tallybuilder_meta_OverlayBackground_css($unique_class, $meta_id, 'section_bg_overlay', $post_id);
 			echo ''."\n";
 
 			if(is_array($this->rows)){

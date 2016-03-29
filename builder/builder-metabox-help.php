@@ -570,8 +570,8 @@ function tallybuilder_metabox_form_background($bg = array()){
 			array('title' => 'initial', 'value' => 'initial'),
 		);
 		$settings = array(
-			'title' => 'Repeat',
-			'key' => $bg['base_id'].'_repeat',
+			'title' => 'Position',
+			'key' => $bg['base_id'].'_position',
 			'meta_id' => $bg['meta_id'],
 			'data' => $bg['data'],
 			'value' => '',
@@ -599,6 +599,60 @@ function tallybuilder_metabox_form_background($bg = array()){
 		);
 		tallybuilder_metabox_form_select($settings);
 		
+		echo '<div class="clear clearfix"></div>';
+	echo '</div>';
+}
+
+
+function tallybuilder_metabox_form_OverlayBackground($bg = array()){	
+	$bg = array_merge( array(
+		'base_id' => '',
+		'data' => '',
+		'title' => 'Background Overlay',
+		'value' => '',
+		'meta_id' => '',
+	), $bg );
+	
+	echo '<div class="tallybuilder_mb_item tallybuilder_mb_item_overlay">';
+	
+		echo '<h3>'.$bg['title'].'</h3>';
+		echo '<div class="clear clearfix"></div>';
+
+		$settings = array(
+			'key' => $bg['base_id'].'_color',
+			'title' => 'Color',
+			'meta_id' => $bg['meta_id'],
+			'data' => $bg['data'],
+			'value' => '',
+			'sanitize' => 'sanitize_text_field',
+			'p' => 'n',
+		);
+		tallybuilder_metabox_form_color($settings);
+		
+		$select_items = array(
+			array('title' => '0', 'value' => '0'),
+			array('title' => '0.1', 'value' => '0.1'),
+			array('title' => '0.2', 'value' => '0.2'),
+			array('title' => '0.3', 'value' => '0.3'),
+			array('title' => '0.4', 'value' => '0.4'),
+			array('title' => '0.5', 'value' => '0.5'),
+			array('title' => '0.6', 'value' => '0.6'),
+			array('title' => '0.7', 'value' => '0.7'),
+			array('title' => '0.8', 'value' => '0.8'),
+			array('title' => '0.9', 'value' => '0.9'),
+		);
+		$settings = array(
+			'key' => $bg['base_id'].'_opacity',
+			'title' => 'Ppacity',
+			'meta_id' => $bg['meta_id'],
+			'data' => $bg['data'],
+			'value' => '',
+			'sanitize' => 'sanitize_text_field',
+			'p' => 'n',
+			'select_items' => $select_items,
+		);
+		tallybuilder_metabox_form_select($settings);
+
 		echo '<div class="clear clearfix"></div>';
 	echo '</div>';
 }
@@ -810,6 +864,7 @@ function tallybuilder_metabox_form_animation2($ani = array()){
 		$select_items = array(
 			array('title' => 'None', 'value' => ''),
 			array('title' => '0.5s', 'value' => '0.5s'),
+			array('title' => '1s', 'value' => '1s'),
 			array('title' => '1.5s', 'value' => '1.5s'),
 			array('title' => '2s', 'value' => '2s'),
 			array('title' => '2.5s', 'value' => '2.5s'),
@@ -834,6 +889,7 @@ function tallybuilder_metabox_form_animation2($ani = array()){
 		$select_items = array(
 			array('title' => 'None', 'value' => ''),
 			array('title' => '0.5s', 'value' => '0.5s'),
+			array('title' => '1s', 'value' => '1s'),
 			array('title' => '1.5s', 'value' => '1.5s'),
 			array('title' => '2s', 'value' => '2s'),
 			array('title' => '2.5s', 'value' => '2.5s'),
@@ -1085,6 +1141,36 @@ function tallybuilder_meta_background_css($css_selector, $meta_id, $key, $post_i
 	}
 	if($output != ''){
 		$css =  $css_selector.'{ '.$output.' }';
+		
+		return $css;
+	}
+}
+
+function tallybuilder_meta_OverlayBackground_css($css_selector, $meta_id, $key, $post_id = NULL, $sanitize = 'wp_kses'){
+	if($post_id == NULL){
+		$post_id = get_the_ID();
+	}
+	
+	$data = get_post_meta($post_id, $meta_id, true);
+	
+	$output = '';
+	
+	if(isset($data[$key.'_color'])){
+		$output .= ($data[$key.'_color'] == '' ? '' : 'background-color:'.$data[$key.'_color'].';' ); 
+	}
+	if(isset($data[$key.'_opacity'])){
+		$output .= ($data[$key.'_opacity'] == '' ? '' : ' opacity: '.$data[$key.'_opacity'].';' );
+	}
+	
+	if($output != ''){
+		$css =  $css_selector.':before{     
+			content: " ";
+			position: absolute;
+			height: 100%;
+			width: 100%;
+			left: 0;
+			top: 0;
+			'.$output.' }';
 		
 		return $css;
 	}

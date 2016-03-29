@@ -1,10 +1,10 @@
 <?php
-$tb_section_hero_config = array(
-	'meta_id' => 'tbsf_hero',
-	'title' => 'Hero',
+$tb_section_grid_config = array(
+	'meta_id' => 'tbsf_grid',
+	'title' => 'Grid',
 	'context' => 'normal',
 	'priority' => 'high',
-	'div_id' => 'tbSection_hero_metabox',
+	'div_id' => 'tbSection_grid_metabox',
 	'show_settings' => true,
 	'rows' => array(
 		array(
@@ -19,7 +19,8 @@ $tb_section_hero_config = array(
 					'show_settings' => true,
 					'contents' => array(
 						array( 'div_class' => '', 'type' => 'title', 'label' => 'Title'),
-						array( 'div_class' => '', 'type' => 'text', 'label' => 'Content'),
+						array( 'div_class' => '', 'type' => 'text', 'label' => 'Description'),
+						array( 'div_class' => '', 'type' => 'grid', 'label' => 'Grid Content'),
 						array( 'div_class' => '', 'type' => 'button', 'label' => 'Buttons'),
 					),
 				),

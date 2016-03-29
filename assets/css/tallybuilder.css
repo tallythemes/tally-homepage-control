@@ -411,6 +411,9 @@
 /*
 	Advance Section
 ---------------------------------------------------------------*/
+.tallybuilder_section{
+	position:relative;	
+}
 .tallybuilder_section_inner {
     width: 90%;
     max-width: 1100px;
