@@ -417,3 +417,20 @@
     margin: 0 auto;
     position: relative;
 }
+.tb_row_align_center .tallybuilder_row_inner {
+	margin:0 auto;	
+}
+.tb_row_align_left .tallybuilder_row_inner {
+	float:left;
+}
+.tb_row_align_right .tallybuilder_row_inner {
+	float:right;
+}
+.tallybuilder_column{
+    padding-right:0;
+    padding-left:0;
+}
+.tallybuilder_column_inner{
+	padding-left:15px;
+	padding-right:15px;
+}

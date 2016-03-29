@@ -1212,9 +1212,10 @@ function tallybuilder_meta_bgVideo_content($meta_id, $key, $post_id = NULL){
 	$data_vide_bg = '';
 	$enable_video = '';
 	$is_mp4 = '';
+	$video_bg = '';
 	
 	if(isset($data[$key.'_enable'])){
-		$enable_video .= $data[$key.'_enable']; 
+		$enable_video = $data[$key.'_enable']; 
 	}
 	
 	if(isset($data[$key.'_mp4'])){
@@ -1235,6 +1236,8 @@ function tallybuilder_meta_bgVideo_content($meta_id, $key, $post_id = NULL){
 		$video_bg = 'data-vide-bg="'.$data_vide_bg.'" ';
 		$video_bg .= 'data-vide-options="posterType: jpg, loop: false, muted: false, position: 0% 0%, autoplay: true,  loop: true"';
 	}
+	
+	return $video_bg;
 }
 
 

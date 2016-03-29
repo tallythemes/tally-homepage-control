@@ -132,6 +132,8 @@ class tallybuilder_section_metabox_generator{
 						'sanitize' => 'sanitize_text_field',
 						'p' => 'y',
 					);
+					tallybuilder_metabox_form_text($settings) ;
+					
 					$settings = array(
 						'key' => 'section_id',
 						'title' => 'CSS ID',
@@ -143,27 +145,9 @@ class tallybuilder_section_metabox_generator{
 					);
 					tallybuilder_metabox_form_text($settings) ;
 					
-					
-					$select_items = array(
-						array('title' => 'Center', 'value' => 'center'),
-						array('title' => 'Left', 'value' => 'left'),
-						array('title' => 'Right', 'value' => 'right'),
-					);
 					$settings = array(
-						'key' => 'section_content_align',
-						'title' => 'Content Align',
-						'meta_id' => $meta_id,
-						'data' => $meta_data,
-						'value' => '',
-						'sanitize' => 'sanitize_text_field',
-						'p' => 'y',
-						'select_items' => $select_items,
-					);
-					tallybuilder_metabox_form_select($settings);
-					
-					$settings = array(
-						'key' => 'section_content_width',
-						'title' => 'Content Width',
+						'key' => 'section_width',
+						'title' => 'Section Width',
 						'meta_id' => $meta_id,
 						'data' => $meta_data,
 						'value' => '',
@@ -173,8 +157,8 @@ class tallybuilder_section_metabox_generator{
 					tallybuilder_metabox_form_text($settings) ;
 					
 					$settings = array(
-						'key' => 'section_width',
-						'title' => 'Section Width',
+						'key' => 'section_max_width',
+						'title' => 'Section Max Width',
 						'meta_id' => $meta_id,
 						'data' => $meta_data,
 						'value' => '',
@@ -264,6 +248,8 @@ class tallybuilder_section_metabox_generator{
 						'sanitize' => 'sanitize_text_field',
 						'p' => 'y',
 					);
+					tallybuilder_metabox_form_text($settings) ;
+					
 					$settings = array(
 						'key' => $prefix.'id',
 						'title' => 'CSS ID',
@@ -294,8 +280,8 @@ class tallybuilder_section_metabox_generator{
 					tallybuilder_metabox_form_select($settings);
 					
 					$settings = array(
-						'key' => $prefix.'content_width',
-						'title' => 'Content Width',
+						'key' => $prefix.'width',
+						'title' => 'Width',
 						'meta_id' => $meta_id,
 						'data' => $meta_data,
 						'value' => '',
@@ -305,8 +291,8 @@ class tallybuilder_section_metabox_generator{
 					tallybuilder_metabox_form_text($settings) ;
 					
 					$settings = array(
-						'key' => $prefix.'width',
-						'title' => 'Section Width',
+						'key' => $prefix.'max_width',
+						'title' => 'Max Width',
 						'meta_id' => $meta_id,
 						'data' => $meta_data,
 						'value' => '',
@@ -376,6 +362,8 @@ class tallybuilder_section_metabox_generator{
 						'sanitize' => 'sanitize_text_field',
 						'p' => 'y',
 					);
+					tallybuilder_metabox_form_text($settings);
+					
 					$settings = array(
 						'key' => $prefix.'id',
 						'title' => 'CSS ID',
@@ -385,7 +373,7 @@ class tallybuilder_section_metabox_generator{
 						'sanitize' => 'sanitize_text_field',
 						'p' => 'y',
 					);
-					tallybuilder_metabox_form_text($settings) ;
+					tallybuilder_metabox_form_text($settings);
 					
 					echo '<a href="#" class="tbmb_showhide_close foot button-primary">Close</a>';
 				echo '</div>';
@@ -524,8 +512,13 @@ class tallybuilder_section_html_generator{
 		$post_id = get_the_ID();
 		$unique_class = 'tb_section_'.$post_id;
 		
+		$section_class = 'tallybuilder_section '.$unique_class.' '.tallybuilder_meta($meta_id, 'section_class', $post_id).' ';
+		$section_div_id = (tallybuilder_meta($meta_id, 'section_id', $post_id) == '') ? '' : 'id="'.tallybuilder_meta($meta_id, 'section_id', $post_id).'"' ;
+		$section_video_content = tallybuilder_meta_bgVideo_content($meta_id, 'section_video_bg', $post_id);
+		
+		
 		if(get_post_meta(get_the_ID(), 'section_disable', true) != 'yes'){
-			echo '<div class="tallybuilder_section '.$unique_class.'">';
+			echo '<div class="'.$section_class.'" '.$section_div_id.' '.$section_video_content.'>';
 				echo '<div class="tallybuilder_section_inner">';
 					if(is_array($this->rows)){
 						$row_i = 1;
@@ -543,9 +536,14 @@ class tallybuilder_section_html_generator{
 	function row_html($meta_data, $meta_id, $post_id, $row, $row_i){
 		$unique_class = 'tb_row_'.$post_id.$row_i;
 		$row_layout = (isset($meta_data['row'.$row_i.'_layout'])) ? $meta_data['row'.$row_i.'_layout'] : '';
+		$prefix = 'row'.$row_i.'_';
+		$row_video_content = tallybuilder_meta_bgVideo_content($meta_id, $prefix.'video_bg', $post_id);
+		$row_div_class = 'tallybuilder_row '.$unique_class.' container-fluid tb_row_align_'.tallybuilder_meta($meta_id, $prefix.'content_align', $post_id).' ';
+		$row_div_class .= tallybuilder_meta($meta_id, $prefix.'class', $post_id);
+		$row_div_id = (tallybuilder_meta($meta_id, 'id', $post_id) == '') ? '' : 'id="'.tallybuilder_meta($meta_id, 'id', $post_id).'"' ;
 		
 		if($row_layout != '0,0,0,0'){
-			echo '<div class="tallybuilder_row '.$unique_class.' container-fluid">';
+			echo '<div class="'.$row_div_class.'" '.$row_video_content.' '.$row_div_id.'>';
 				echo '<div class="tallybuilder_row_inner row">';
 					if(is_array($row['columns'])){
 						$column_i = 1;
@@ -566,9 +564,15 @@ class tallybuilder_section_html_generator{
 		$row_layout_array = explode(",", $row_layout);
 		$column_layout = $row_layout_array[$column_i - 1];
 		
+		$prefix = 'col'.$row_i.$column_i.'_';
+		$col_video_content = tallybuilder_meta_bgVideo_content($meta_id, $prefix.'video_bg', $post_id);
+		$col_div_class = 'tallybuilder_column '.$unique_class.' col-md-'.$column_layout.' ';
+		$col_div_class .= tallybuilder_meta($meta_id, $prefix.'class', $post_id);
+		$col_div_id = (tallybuilder_meta($meta_id, 'id', $post_id) == '') ? '' : 'id="'.tallybuilder_meta($meta_id, 'id', $post_id).'"' ;
+		
 		if($column_layout != '0'){
-			echo '<div class="tallybuilder_column '.$unique_class.' col-md-'.$column_layout.'">';
-				echo '<div class="tallybuilder_column_inner">';
+			echo '<div class="'.$col_div_class.'" '.$col_div_id.' >';
+				echo '<div class="tallybuilder_column_inner" '.$col_video_content.'>';
 					if(is_array($column['contents'])){
 						$content_i = 1;
 						foreach($column['contents'] as $content){
@@ -595,6 +599,128 @@ class tallybuilder_section_html_generator{
 						$content_function($meta_data, $meta_id, $post_id, $prefix);
 					echo '</div>';
 				echo '</div>';
+			}
+		}
+	}
+	
+}
+
+
+
+
+class tallybuilder_section_css_generator{
+	public $meta_id;
+	public $rows;
+	
+	function __construct($settings){
+		$settings = array_merge(array(
+			'meta_id' => '',
+			'rows' => '',
+		), $settings);
+		
+		$this->meta_id = $settings['meta_id'];
+		$this->rows = $settings['rows'];
+		
+		$this->css();
+	}
+	
+	
+	function css(){
+		$meta_id = $this->meta_id;
+		$meta_data = get_post_meta( get_the_ID(), $meta_id, true );
+		$post_id = get_the_ID();
+		$unique_class = '.tb_section_'.$post_id;
+		
+		if(get_post_meta(get_the_ID(), 'section_disable', true) != 'yes'){
+			
+			echo ''."\n";
+			echo tallybuilder_meta_padding_css($unique_class, $meta_id, 'section_padding', $post_id);
+			echo tallybuilder_meta_margin_css($unique_class, $meta_id, 'section_margin', $post_id);
+			echo tallybuilder_meta_background_css($unique_class, $meta_id, 'section_bg', $post_id);
+			$video_bg = tallybuilder_meta_bgVideo_content($meta_id, 'section_video_bg', $post_id);
+			if($video_bg != ''){ echo $unique_class.'{ background:none; }'; }
+			tallybuilder_css_style($unique_class.' .tallybuilder_section_inner', tallybuilder_meta($meta_id, 'section_width', $post_id), 'width:%s%;');
+			tallybuilder_css_style($unique_class.' .tallybuilder_section_inner', tallybuilder_meta($meta_id, 'section_max_width', $post_id), 'max-width:%s%;');
+			echo ''."\n";
+
+			if(is_array($this->rows)){
+				$row_i = 1;
+				foreach($this->rows as $row){
+					$this->row_css($meta_data, $meta_id, $post_id, $row, $row_i);
+					$row_i++;
+				}
+			}
+				
+		}
+	}
+	
+	
+	function row_css($meta_data, $meta_id, $post_id, $row, $row_i){
+		$unique_class = '.tb_row_'.$post_id.$row_i;
+		$row_layout = (isset($meta_data['row'.$row_i.'_layout'])) ? $meta_data['row'.$row_i.'_layout'] : '';
+		$prefix = 'row'.$row_i.'_';
+		
+		if($row_layout != '0,0,0,0'){
+			echo ''."\n";
+			echo tallybuilder_meta_padding_css($unique_class, $meta_id, $prefix.'padding', $post_id);
+			echo tallybuilder_meta_margin_css($unique_class, $meta_id, $prefix.'margin', $post_id);
+			echo tallybuilder_meta_background_css($unique_class, $meta_id, $prefix.'bg', $post_id);
+			$video_bg = tallybuilder_meta_bgVideo_content($meta_id, $prefix.'video_bg', $post_id);
+			if($video_bg != ''){ echo $unique_class.'{ background:none; }'; }
+			tallybuilder_css_style($unique_class.' .tallybuilder_row_inner', tallybuilder_meta($meta_id, $prefix.'width', $post_id), 'width:%s%;');
+			tallybuilder_css_style($unique_class.' .tallybuilder_row_inner', tallybuilder_meta($meta_id, $prefix.'max_width', $post_id), 'max-width:%s%;');
+			echo ''."\n";
+			
+			if(is_array($row['columns'])){
+				$column_i = 1;
+				foreach($row['columns'] as $column){
+					$this->column_css($meta_data, $meta_id, $post_id, $row, $row_i, $column, $column_i);
+					$column_i++;
+				}
+			}
+		}
+	}
+	
+	
+	function column_css($meta_data, $meta_id, $post_id, $row, $row_i, $column, $column_i){
+		$unique_class = '.tb_column_'.$post_id.$row_i.$column_i;
+		$row_layout = (isset($meta_data['row'.$row_i.'_layout'])) ? $meta_data['row'.$row_i.'_layout'] : '';
+		$row_layout_array = explode(",", $row_layout);
+		$column_layout = $row_layout_array[$column_i - 1];
+		$prefix = 'col'.$row_i.$column_i.'_';
+		
+		if($column_layout != '0'){
+			
+			echo ''."\n";
+			echo tallybuilder_meta_padding_css($unique_class.' .tallybuilder_column_inner', $meta_id, $prefix.'padding', $post_id);
+			echo tallybuilder_meta_margin_css($unique_class.' .tallybuilder_column_inner', $meta_id, $prefix.'margin', $post_id);
+			echo tallybuilder_meta_background_css($unique_class.' .tallybuilder_column_inner', $meta_id, $prefix.'bg', $post_id);
+			$video_bg = tallybuilder_meta_bgVideo_content($meta_id, $prefix.'video_bg', $post_id);
+			if($video_bg != ''){ echo $unique_class.' .tallybuilder_column_inner{ background:none; }'; }
+			echo ''."\n";
+			
+			if(is_array($column['contents'])){
+				$content_i = 1;
+				foreach($column['contents'] as $content){
+					$this->content_css($meta_data, $meta_id, $post_id, $row, $row_i, $column, $column_i, $content, $content_i);
+					$content_i++;
+				}
+			}
+		}
+	}
+	
+	function content_css($meta_data, $meta_id, $post_id, $row, $row_i, $column, $column_i, $content, $content_i){
+		$unique_class = 'tb_content_'.$post_id.$row_i.$column_i.$content_i;
+		$type =(isset($meta_data['the_con'.$row_i.$column_i.$content_i.'_type'])) ? $meta_data['the_con'.$row_i.$column_i.$content_i.'_type'] : '';
+		$content_function = 'tallybuilder_SContentCSS__'.$type;
+		$prefix = 'con'.$row_i.$column_i.$content_i.'_';
+		$enable_content =(isset($meta_data['the_con'.$row_i.$column_i.$content_i.'_enable'])) ? $meta_data['the_con'.$row_i.$column_i.$content_i.'_enable'] : '';
+		
+		if($enable_content == true){
+			if(function_exists($content_function)){
+
+				$content_function($meta_data, $meta_id, $post_id, $prefix);
+
 			}
 		}
 	}
