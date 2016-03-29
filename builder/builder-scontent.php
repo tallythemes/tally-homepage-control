@@ -53,13 +53,19 @@ function tallybuilder_SContent_MB__text($meta_data, $meta_id, $post_id, $prefix)
 /*
 	Image
 --------------------------------------------------*/
-function tallybuilder_SContent_HTML__image(){
+function tallybuilder_SContent_HTML__image($meta_data, $meta_id, $post_id, $prefix){
+	$image_src = ( isset($meta_data[$prefix.'image']) ) ? $meta_data[$prefix.'image'] : '';
+	$alt_text = ( isset($meta_data[$prefix.'alt']) ) ? $meta_data[$prefix.'alt'] : '';
+	$class = ( isset($meta_data[$prefix.'class']) ) ? $meta_data[$prefix.'class'] : '';
+	$id = ( isset($meta_data[$prefix.'id']) ) ? $meta_data[$prefix.'id'] : '';
+	$id = ( $id == '' ) ? '' : 'id="'.$id.'"';
+	
+	echo '<img src="'.$image_src.'" alt="'.$alt_text.'" class="tbhtml_image '.$class.'" '.$id.' >' ;
+}
+function tallybuilder_SContent_CSS__image( $meta_data, $meta_id, $post_id, $prefix ){
 	
 }
-function tallybuilder_SContent_CSS__image(){
-	
-}
-function tallybuilder_SContent_MB__image($meta_data, $meta_id, $post_id, $prefix){
+function tallybuilder_SContent_MB__image( $meta_data, $meta_id, $post_id, $prefix ){
 	
 	$settings = array(
 		'key' => $prefix.'image',
