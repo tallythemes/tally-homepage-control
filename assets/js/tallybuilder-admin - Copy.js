@@ -112,7 +112,26 @@ $(function() {
 
 
 jQuery(document).ready(function($) {
+	
+	$(".tbmb_content_item.disabled :input").attr("disabled", true);
+	$(".tbmb_content_item.disabled").css("display", 'none');
+	
+	$('.tbmb_content_type').change(function() {    
+	
+		var selected_item_class = '.tbmb_content_item'+$(this).attr('rel')+'__'+$(this).val();
+		var all_item_class = '.tbmb_content_item'+$(this).attr('rel');
 		
+		$(all_item_class+" :input").attr("disabled", true);
+		$(all_item_class).addClass("disabled");
+		$(all_item_class).css("display", 'none');
+		$(selected_item_class+" :input").attr("disabled", false);
+		$(selected_item_class).removeClass("disabled");
+		$(selected_item_class).css("display", 'block');
+	
+	}).change();
+	
+	
+	
 	$( ".tbmb_enable_content" ).on( "click", function() {
 		var tbmb_enable_content = $(this).attr('rel');
 		if($(this).is(":checked")){
