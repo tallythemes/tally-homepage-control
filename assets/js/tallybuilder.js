@@ -21,3 +21,13 @@ wow.init();
 jQuery(document).ready(function($) {
 	$('#myBlock').vide({ mp4: 'http://vodkabears.github.io/vide/video/ocean.mp4', poster: 'http://vodkabears.github.io/vide/video/ocean.jpg'});
 });
+
+
+jQuery(document).ready(function($) {
+	
+	$( '.equal_columns_height_yes .tallybuilder_column' ).each(function(index, element) {
+		var equal_columns_height = $( this ).height();
+		$(this).children( ".tallybuilder_column_inner" ).css('height', equal_columns_height)
+		//alert(equal_columns_height);
+	});
+});

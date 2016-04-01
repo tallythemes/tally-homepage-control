@@ -1,5 +1,6 @@
 <?php
 class tallybuilder_section_metabox_generator2{
+	public $name;
 	public $meta_id;
 	public $title;
 	public $context;
@@ -9,16 +10,7 @@ class tallybuilder_section_metabox_generator2{
 	public $show_settings;
 	
 	function __construct($settings){
-		$settings = array_merge(array(
-			'meta_id' => '',
-			'title' => '',
-			'context' => 'normal',
-			'priority' => 'high',
-			'rows' => '',
-			'div_id' => '',
-			'show_settings' => true,
-		), $settings);
-		
+		$this->name = $settings['name'];
 		$this->meta_id = $settings['meta_id'];
 		$this->title = $settings['title'];
 		$this->context = $settings['context'];
@@ -33,56 +25,64 @@ class tallybuilder_section_metabox_generator2{
 	
 	
 	function register_metabox(){
-		add_meta_box( $this->div_id, $this->title, array($this, 'metabox_html'), 'tally_builder_c', $this->context, $this->priority );
+		 global $post;
+		 if(!empty($post)){
+			if( get_post_meta( $post->ID, 'section_type', true ) == $this->name ){
+				add_meta_box( $this->div_id, $this->title, array($this, 'metabox_html'), 'tally_builder_c', $this->context, $this->priority );
+			}
+		 }
 	}
 	
 	function metabox_html($post){
-		wp_nonce_field( basename( __FILE__ ), $this->div_id.'_nonce' );
-		$meta_id = $this->meta_id;
-		$meta_data = get_post_meta( $post->ID, $meta_id, true );
-		$post_id = $post->ID;
 		
-		echo '<div class="tallybuilder_metabox '.$this->div_id.' tbmb_box">';
+			wp_nonce_field( basename( __FILE__ ), $this->div_id.'_nonce' );
+			$meta_id = $this->meta_id;
+			$meta_data = get_post_meta( $post->ID, $meta_id, true );
+			$post_id = $post->ID;
 			
-			
-			$this->section_settings_html($meta_data, $post_id);
-			
-			if(is_array($this->rows)){
-				$row_i = 1;
-				foreach($this->rows as $row){
-					echo '<div class="tbmb_row tbmb_row_'.$row_i.'">';
-						$this->row_settings_html($meta_data, $post_id, $row, $row_i);
-						if(is_array($row['columns'])){
-							echo '<div class="clear clearfix"></div>';
-							$column_i = 1;
-							foreach($row['columns'] as $column){
-								$this->column_html($meta_data, $post_id, $row, $row_i, $column, $column_i);
-								$column_i++;
-							}
-							echo '<div class="clear clearfix"></div>';
-						}
-					echo '</div>';
-					$row_i++;
-				}
+			echo '<div class="tallybuilder_metabox '.$this->div_id.' tbmb_box">';
 				
-			}
-		echo '</div>';
+				
+				$this->section_settings_html($meta_data, $post_id);
+				
+				if(is_array($this->rows)){
+					$row_i = 1;
+					foreach($this->rows as $row){
+						echo '<div class="tbmb_row tbmb_row_'.$row_i.'">';
+							$this->row_settings_html($meta_data, $post_id, $row, $row_i);
+							if(is_array($row['columns'])){
+								echo '<div class="clear clearfix"></div>';
+								$column_i = 1;
+								foreach($row['columns'] as $column){
+									$this->column_html($meta_data, $post_id, $row, $row_i, $column, $column_i);
+									$column_i++;
+								}
+								echo '<div class="clear clearfix"></div>';
+							}
+						echo '</div>';
+						$row_i++;
+					}
+					
+				}
+			echo '</div>';
+		
 	}
 	
 	function metabox_save($post_id){
 		$meta_id = $this->meta_id;
- 
+	 
 		// Checks save status
 		$is_autosave = wp_is_post_autosave( $post_id );
 		$is_revision = wp_is_post_revision( $post_id );
 		$is_valid_nonce = ( isset( $_POST[ $this->div_id.'_nonce' ] ) && wp_verify_nonce( $_POST[ $this->div_id.'_nonce' ], basename( __FILE__ ) ) ) ? 'true' : 'false';
-	 
+		 
 		// Exits script depending on save status
 		if ( $is_autosave || $is_revision || !$is_valid_nonce ) {
 			return;
 		}
-		
+			
 		tallybuilder_metabox_form_save($post_id, $meta_id, 'wp_kses');
+
 	}
 	
 	function section_settings_html($meta_data, $post_id){
@@ -186,11 +186,21 @@ class tallybuilder_section_metabox_generator2{
 	function row_settings_html($meta_data, $post_id, $row, $row_i){
 		
 		$meta_id = $this->meta_id;
-		$get_row_layout = (isset($meta_data['row'.$row_i.'_layout'])) ? $meta_data['row'.$row_i.'_layout'] : $row['column_layout'];
+		$get_row_layout = (isset($meta_data['row'.$row_i.'_layout'])) ? $meta_data['row'.$row_i.'_layout'] : '';
 		$row_layout = ($get_row_layout == '') ? $row['column_layout'] : $get_row_layout;
 		
-		if($row['show_settings'] == true){
-			if($row['edit_layour'] == true){
+		$column_limit = $row['column_limit'];
+		$show_settings = $row['show_settings'];
+		$edit_layout = $row['edit_layout'];
+		
+		if($edit_layout == false){ $row_layout = $row['column_layout']; }
+		
+		$enable_row_settings = 'show';
+		if($row_layout == "0,0,0,0"){ $enable_row_settings = 'none'; }
+		if($show_settings == false){ $enable_row_settings = 'none'; }
+		
+		if($show_settings == true){
+			if($edit_layout == true){
 				echo 'Layout';
 				echo '<select name="'.$this->meta_id.'[row'.$row_i.'_layout]" id="tbmb_row'.$row_i.'_layout">';
 					echo '<option '.selected( $row_layout, '0,0,0,0', false ).' value="0,0,0,0">Disable</option>';
@@ -206,7 +216,7 @@ class tallybuilder_section_metabox_generator2{
 					echo '<option '.selected( $row_layout, '3,3,6,0', false ).' value="3,3,6,0">1/3 + 1/3 + 1/2</option>';
 				echo '</select>';
 			}
-			echo '<a href="" class="tbmb_edit_row_setting tbmb_edit_row'.$row_i.'_setting tbmb_edit_row_setting_'.($row_layout == "0,0,0,0"?'none':'show').' tbmb_showhide" rel=".tbmb_row'.$row_i.'_settings">Customize Row</a>';
+			echo '<a href="" class="tbmb_edit_row_setting tbmb_edit_row'.$row_i.'_setting tbmb_edit_row_setting_'.$enable_row_settings.' tbmb_showhide" rel=".tbmb_row'.$row_i.'_settings">Customize Row</a>';
 			echo '<div class="tbmb_popup tbmb_row'.$row_i.'_settings"  style="display:none;">';
 				echo '<div class="tbmb_popup_in">';
 					echo '<a href="#" class="tbmb_showhide_close button-primary">Close</a>';
@@ -273,6 +283,22 @@ class tallybuilder_section_metabox_generator2{
 					
 					
 					$select_items = array(
+						array('title' => 'No', 'value' => 'no'),
+						array('title' => 'Yes', 'value' => 'yes'),
+					);
+					$settings = array(
+						'key' => $prefix.'equal_columns_height',
+						'title' => 'Equal Columns Height',
+						'meta_id' => $meta_id,
+						'data' => $meta_data,
+						'value' => '',
+						'sanitize' => 'sanitize_text_field',
+						'p' => 'y',
+						'select_items' => $select_items,
+					);
+					tallybuilder_metabox_form_select($settings);					
+					
+					$select_items = array(
 						array('title' => 'Center', 'value' => 'center'),
 						array('title' => 'Left', 'value' => 'left'),
 						array('title' => 'Right', 'value' => 'right'),
@@ -314,6 +340,8 @@ class tallybuilder_section_metabox_generator2{
 					echo '<a href="#" class="tbmb_showhide_close foot button-primary">Close</a>';
 				echo '</div>';
 			echo '</div>';
+		}else{
+			echo 'show_settings -- '.$show_settings;	
 		}
 	}
 	
@@ -363,6 +391,22 @@ class tallybuilder_section_metabox_generator2{
 					);
 					tallybuilder_metabox_form_videoBackground($settings);
 					
+					$select_items = array(
+						array('title' => 'No', 'value' => 'no'),
+						array('title' => 'Yes', 'value' => 'yes'),
+					);
+					$settings = array(
+						'key' => $prefix.'full_bg',
+						'title' => 'Full Background',
+						'meta_id' => $meta_id,
+						'data' => $meta_data,
+						'value' => '',
+						'sanitize' => 'sanitize_text_field',
+						'p' => 'y',
+						'select_items' => $select_items,
+					);
+					tallybuilder_metabox_form_select($settings);
+					
 					$settings = array(
 						'key' => $prefix.'class',
 						'title' => 'CSS Class',
@@ -373,6 +417,8 @@ class tallybuilder_section_metabox_generator2{
 						'p' => 'y',
 					);
 					tallybuilder_metabox_form_text($settings);
+					
+					
 					
 					$settings = array(
 						'key' => $prefix.'id',
@@ -395,20 +441,27 @@ class tallybuilder_section_metabox_generator2{
 	function column_html($meta_data, $post_id, $row, $row_i, $column, $column_i){
 		$meta_id = $this->meta_id;
 		
-		$get_row_layout = (isset($meta_data['row'.$row_i.'_layout'])) ? $meta_data['row'.$row_i.'_layout'] : $row['column_layout'];
+		$get_row_layout = (isset($meta_data['row'.$row_i.'_layout'])) ? $meta_data['row'.$row_i.'_layout'] : '';
 		$row_layout = ($get_row_layout == '') ? $row['column_layout'] : $get_row_layout;
+		
+		$column_limit = $row['column_limit'];
+		$show_settings = $row['show_settings'];
+		$edit_layout = $row['edit_layout'];
+		
+		if($edit_layout == false){ $row_layout = $row['column_layout']; }
 		
 		$grid_class = 'tbmb_col tbmb_col_';
 		$column_position = $column_i - 1;
 		
 		$div_cols =  explode(",", $row_layout);
-		
+
 		if(isset($div_cols[$column_position])){
 			$grid_class = 'tbmb_col tbmb_col_'.$div_cols[$column_position];
+			
 		}
 		
 		echo '<div class="tbmb_column tbmb_column_'.$row_i.$column_i.' '.$grid_class.'">';
-								
+						
 			$this->column_settings_html($meta_data, $post_id, $row, $row_i, $column, $column_i);
 			
 			if(is_array($column['contents'])){
@@ -538,6 +591,7 @@ class tallybuilder_section_html_generator2{
 		$row_video_content = tallybuilder_meta_bgVideo_content($meta_id, $prefix.'video_bg', $post_id);
 		$row_div_class = 'tallybuilder_row '.$unique_class.' container-fluid tb_row_align_'.tallybuilder_meta($meta_id, $prefix.'content_align', $post_id).' ';
 		$row_div_class .= tallybuilder_meta($meta_id, $prefix.'class', $post_id);
+		$row_div_class .= ' equal_columns_height_'.tallybuilder_meta($meta_id, $prefix.'equal_columns_height', $post_id);
 		$row_div_id = (tallybuilder_meta($meta_id, 'id', $post_id) == '') ? '' : 'id="'.tallybuilder_meta($meta_id, 'id', $post_id).'"' ;
 		
 		if($row_layout != '0,0,0,0'){
@@ -567,6 +621,7 @@ class tallybuilder_section_html_generator2{
 		$col_video_content = tallybuilder_meta_bgVideo_content($meta_id, $prefix.'video_bg', $post_id);
 		$col_div_class = 'tallybuilder_column '.$unique_class.' col-md-'.$column_layout.' ';
 		$col_div_class .= tallybuilder_meta($meta_id, $prefix.'class', $post_id);
+		$col_div_class .= ' full_bg_'.tallybuilder_meta($meta_id, $prefix.'full_bg', $post_id);
 		$col_div_id = (tallybuilder_meta($meta_id, 'id', $post_id) == '') ? '' : 'id="'.tallybuilder_meta($meta_id, 'id', $post_id).'"' ;
 		
 		if($column_layout != '0'){

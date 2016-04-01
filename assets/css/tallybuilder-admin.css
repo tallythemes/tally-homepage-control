@@ -116,11 +116,6 @@
 
 
 
-div[id*="tbSection_"]{
-	display:none;
-}
-
-
 .tallybuilder_mb_item_bg h3{
 	margin-top:0;	
 }

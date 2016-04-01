@@ -1,10 +1,11 @@
 <?php
 function tallybuilder_registered_sections(){
 	$builtin_sections = array(
-		//'advance' => TALLYBUILDER__SECTIONS_DIR,
+		'columns' => TALLYBUILDER__SECTIONS_DIR,
 		'hero' => TALLYBUILDER__SECTIONS_DIR,
 		'grid' => TALLYBUILDER__SECTIONS_DIR,
-		'columns' => TALLYBUILDER__SECTIONS_DIR,
+		'text' => TALLYBUILDER__SECTIONS_DIR,
+		
 	);
 	$sections = apply_filters('tallybuilder_sections_list', $builtin_sections);
 	

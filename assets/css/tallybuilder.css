@@ -1,4 +1,30 @@
 /*	
+	Common
+---------------------------------------------------------------*/
+.tallybuilder_column:before, .tallybuilder_column:after,
+.tallybuilder_column_inner:before, .tallybuilder_column_inner:after {
+    content: " ";
+    clear: both;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    display: table;
+}
+.tallybuilder_row_inner .tallybuilder_column.full_bg_yes:first-child .tallybuilder_column_inner{
+	padding-left:1000px !important;
+	margin-left:-1000px !important;
+}
+.tallybuilder_row_inner .tallybuilder_column.full_bg_yes:last-child .tallybuilder_column_inner{
+	padding-right:1000px !important;
+	margin-right:-1000px !important;
+}
+.tallybuilder_row.equal_columns_height_yes .tallybuilder_row_inner{
+	display:flex;
+}
+
+
+
+/*	
 	GRID CSS style
 ---------------------------------------------------------------*/
 .tbr_grid:before,
